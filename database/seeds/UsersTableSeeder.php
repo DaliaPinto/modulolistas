@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     {
         $user = new \App\User();
         $user->email = 'prueba@gmail.com';
-        $user->username = 'prueba';
+        $user->name = 'prueba';
         $user->password = bcrypt('prueba1');
         $user->tipo_usuario_id = 'ADMIN';
         $user->save();
