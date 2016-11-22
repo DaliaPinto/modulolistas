@@ -17,7 +17,7 @@ class CreateGruposTable extends Migration
             $table->unsignedSmallInteger('id', true);
             $table->char('turno', 1);
             $table->tinyInteger('cuatrimestre');
-            $table->char('grupo', 1);
+            $table->char('grupo', 2);
             $table->integer('periodo_id');
         });
     }

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'tipo_usuario_id'
+        'email', 'password', 'tipo_usuario_id'
     ];
 
     /**
@@ -27,5 +27,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //para no pedir el dato dentro de un seed
     public $timestamps = false;
 }

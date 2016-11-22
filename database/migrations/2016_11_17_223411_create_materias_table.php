@@ -15,7 +15,7 @@ class CreateMateriasTable extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->unsignedSmallInteger('id', true);
-            $table->string('name', 70);
+            $table->string('name', 50);
         });
     }
 
