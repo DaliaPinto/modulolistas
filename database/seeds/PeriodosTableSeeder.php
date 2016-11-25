@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PeriodoTableSeeder extends Seeder
+class PeriodosTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class PeriodoTableSeeder extends Seeder
      */
     public function run()
     {
+        //
         $periodo = new \App\Periodo();
         $periodo->descripcion = 'septiembre-diciembre';
         $periodo->fecha_inicio ='2016-09-12';

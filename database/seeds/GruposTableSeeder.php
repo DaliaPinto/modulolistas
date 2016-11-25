@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class GrupoTableSeeder extends Seeder
+class GruposTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,7 @@ class GrupoTableSeeder extends Seeder
      */
     public function run()
     {
+        //
         $grupo = new \App\Grupo();
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
