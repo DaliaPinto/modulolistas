@@ -14,7 +14,7 @@ class CreateAsistenciasTable extends Migration
     public function up()
     {
         Schema::create('asistencias', function (Blueprint $table) {
-            $table->integer('lista_id');
+            $table->integer('itinerario_id');
             $table->char('alumno_id',10);
             $table->char('estatus_asistencia', 2);
             $table->date('fecha_asistencia');

@@ -4,11 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Docente extends Model
+class Itinerario extends Model
 {
-    //
     protected $fillable = [
-        'nombre', 'apellido_paterno', 'apellido_materno', 'user_id'
+        'hora_id', 'docente_id', 'materia_id', 'grupo_id', 'periodo_id', 'fecha'
     ];
 
     public $timestamps = false;
