@@ -1,0 +1,10 @@
+.txt-center{
+    text-align: center;
+}
+.color-div{
+    color:#fff;
+    background: #009688;
+}
+.border-div{
+    border-right: 1px solid #00796B;
+}

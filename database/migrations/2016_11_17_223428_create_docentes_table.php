@@ -18,7 +18,6 @@ class CreateDocentesTable extends Migration
             $table->string('nombre', 70);
             $table->string('apellido_paterno', 40);
             $table->string('apellido_materno',40)->nullable();
-            $table->integer('user_id');
         });
     }
 

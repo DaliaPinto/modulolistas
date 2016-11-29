@@ -19,3 +19,8 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index');
+
+/**
+ * Itinerario route index
+*/
+Route::resource('/itinerario', 'ItinerarioController');

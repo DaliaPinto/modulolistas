@@ -17,7 +17,8 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email', 40);
             $table->char('password',100);
-            $table->char('tipo_usuario_id', 5)->default('DOC');
+            $table->char('tipo_id')->default(2);
+            $table->integer('docente_id');
             $table->rememberToken();
         });
     }

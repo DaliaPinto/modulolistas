@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class GruposTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Default groups values, it contains groups from 1A to 11E
      *
      * @return void
      */
@@ -16,35 +16,42 @@ class GruposTableSeeder extends Seeder
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
         $grupo->grupo = 'A';
-        $grupo->periodo_id = 1;
         $grupo->save();
 
         $grupo = new \App\Grupo();
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
         $grupo->grupo = 'B';
-        $grupo->periodo_id = 1;
         $grupo->save();
 
         $grupo = new \App\Grupo();
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
         $grupo->grupo = 'C';
-        $grupo->periodo_id = 1;
         $grupo->save();
 
         $grupo = new \App\Grupo();
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
         $grupo->grupo = 'D';
-        $grupo->periodo_id = 1;
         $grupo->save();
 
         $grupo = new \App\Grupo();
         $grupo->turno = 'M';
         $grupo->cuatrimestre = 1;
         $grupo->grupo = 'E';
-        $grupo->periodo_id = 1;
+        $grupo->save();
+
+        $grupo = new \App\Grupo();
+        $grupo->turno = 'V';
+        $grupo->cuatrimestre = 7;
+        $grupo->grupo = 'A';
+        $grupo->save();
+
+        $grupo = new \App\Grupo();
+        $grupo->turno = 'V';
+        $grupo->cuatrimestre = 7;
+        $grupo->grupo = 'B';
         $grupo->save();
     }
 }

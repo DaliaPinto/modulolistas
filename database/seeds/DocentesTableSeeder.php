@@ -15,7 +15,6 @@ class DocentesTableSeeder extends Seeder
         $docente->nombre = 'John';
         $docente->apellido_paterno = 'Smith';
         $docente->apellido_materno = 'G.';
-        $docente->user_id = 1;
         $docente->save();
     }
 }

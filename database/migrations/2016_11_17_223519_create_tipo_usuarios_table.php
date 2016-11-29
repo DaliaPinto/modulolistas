@@ -14,7 +14,7 @@ class CreateTipoUsuariosTable extends Migration
     public function up()
     {
         Schema::create('tipo_usuarios', function (Blueprint $table) {
-            $table->char('id', 5);
+            $table->unsignedTinyInteger('id', true);
             $table->string('descripcion', 20);
         });
     }
