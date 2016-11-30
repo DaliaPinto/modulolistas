@@ -9,13 +9,18 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    /*
+     * Identify table migration database
+     */
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'tipo_usuario_id'
+        'email', 'password', 'tipo_usuario_id', 'docente_id'
     ];
 
     /**
@@ -27,6 +32,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //para no pedir el dato dentro de un seed
+    /*
+     * Quit the timestamp default
+     */
     public $timestamps = false;
+
+    /*
+     * Docente and TipoUsuario table relationships
+     */
+    public function users(){
+        return $this->hasManyThrough('App\TipoUsuario', 'App\Docente');
+    }
 }

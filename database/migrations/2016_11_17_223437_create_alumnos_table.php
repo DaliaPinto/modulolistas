@@ -18,7 +18,7 @@ class CreateAlumnosTable extends Migration
             $table->string('nombre', 70);
             $table->string('apellido_paterno', 50);
             $table->string('apellido_materno', 50)->nullable();
-            $table->smallInteger('grupo_id');
+            $table->tinyInteger('grupo_id');
         });
     }
 

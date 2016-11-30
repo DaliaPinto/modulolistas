@@ -6,11 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hora extends Model
 {
-    //Method, it feed the seeders
+    /*
+     * Identify table migration database
+     */
+    protected $table = 'horas';
+
+    /*
+     * Method, it fill the seeders
+     */
     protected $fillable = [
         'hora_inicio','hora_fin'
     ];
 
-    //para no pedir el dato dentro de un seed
+    /*
+     * Quit the timestamp default
+     */
     public $timestamps = false;
 }
