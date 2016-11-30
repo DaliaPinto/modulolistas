@@ -29,6 +29,6 @@ class CreateJustificacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('justificacions');
+        Schema::dropIfExists('justificaciones');
     }
 }
