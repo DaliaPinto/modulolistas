@@ -17,7 +17,7 @@ class CreateActividadsTable extends Migration
             $table->increments('id');
             $table->string('nombre', 20);
             $table->string('descripcion', 100);
-            $table->integer('id_evento');
+            $table->integer('id_justificacion');
         });
     }
 

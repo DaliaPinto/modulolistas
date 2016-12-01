@@ -14,7 +14,7 @@ class Actividad extends Model
     /*
      * justificacion table relationships
      */
-    public function alumnos(){
+    public function actividades(){
         return $this->hasOne('App\Justificacion');
     }
 }
