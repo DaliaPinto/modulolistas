@@ -1,3 +1,5 @@
+@if(isset($schedule))
+
 @extends('layouts.app')
 @section('content')
 <div class="container">

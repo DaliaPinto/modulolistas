@@ -31,3 +31,5 @@ Route::resource('/itinerario', 'ItinerarioController');
 Route::group(['middleware' => ['web']], function (){
     Route::resource('schedule', 'ItinerarioController');
 });
+/*
+Route::resource('/noticias', 'Noticias');*/

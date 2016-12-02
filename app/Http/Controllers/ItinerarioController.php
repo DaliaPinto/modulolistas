@@ -50,7 +50,7 @@ class ItinerarioController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('show');
     }
 
     /**
@@ -84,6 +84,8 @@ class ItinerarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Itinerario::destroy(id);
+        return back();
+
     }
 }
