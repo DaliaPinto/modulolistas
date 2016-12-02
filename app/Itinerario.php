@@ -29,14 +29,14 @@ class Itinerario extends Model
     public $timestamps = false;
 
     /*
-     * Hora, Docente, Mayeria, Grupo, Periodo
+     * Hora, Docente, Materia, Grupo, Periodo
      *      Docente and TipoUsuario table relationships
      */
     public function itinerarios(){
         return $this->hasManyThrough(
             'App\Hora',
             'App\Docente',
-            'App\Mayeria',
+            'App\Materia',
             'App\Grupo',
             'App\Periodo'
         );

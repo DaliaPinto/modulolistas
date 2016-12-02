@@ -25,11 +25,3 @@ Route::get('/home', 'HomeController@index');
 */
 Route::resource('/itinerario', 'ItinerarioController');
 
-/**
- * Itinerario Route index as a schedule view
- */
-Route::group(['middleware' => ['web']], function (){
-    Route::resource('schedule', 'ItinerarioController');
-});
-/*
-Route::resource('/noticias', 'Noticias');*/

@@ -1,14 +1,13 @@
-@if(isset($schedule))
-
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                @include('schedule.index')
-            </div>
-        </div>
-    </div>
+    <!--search bar nav-->
+    @include('schedule.include_views.search')
+   <div class="row">
+       <div class="col-md-12">
+           <!--Schedule container-->
+           @include('schedule.index')
+       </div>
+   </div>
 </div>
 @endsection

@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $horario = Itinerario::all();
-        return view('home')->with(['horario' =>$horario]);
+        $schedules = Itinerario::all();
+        return view('home')->with(['horario' =>$schedules]);
     }
 }
