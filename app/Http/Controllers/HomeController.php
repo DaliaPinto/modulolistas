@@ -18,13 +18,14 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the teachers schedule
+     * param: period and teacher id
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $horario = Itinerario::all();
-        return view('home')->with(['horario' =>$horario]);
+        $schedules = Itinerario::all();
+        return view('home')->with(['schedules' =>$schedules]);
     }
 }

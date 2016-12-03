@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+//add the model
 use App\Itinerario;
 
 class ItinerarioController extends Controller
@@ -15,8 +16,8 @@ class ItinerarioController extends Controller
     public function index()
     {
         //show data
-        $schedule = Itinerario::all();
-        return view('schedule.index', ['schedules' => $schedule]);
+        $schedules = Itinerario::all();
+        return view('schedule.index', ['schedules' => $schedules]);
 
     }
 
@@ -50,7 +51,7 @@ class ItinerarioController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('show');
     }
 
     /**
@@ -84,6 +85,8 @@ class ItinerarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Itinerario::destroy(id);
+        return back();
+
     }
 }
