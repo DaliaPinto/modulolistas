@@ -23,5 +23,5 @@ Route::get('/home', 'HomeController@index');
 /**
  * Itinerario route index
 */
-Route::resource('/itinerario', 'ItinerarioController');
+Route::resource('/schedules', 'ItinerarioController');
 
