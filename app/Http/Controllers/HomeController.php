@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Itinerario;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -20,12 +22,17 @@ class HomeController extends Controller
     /**
      * Show the teachers schedule
      * param: period and teacher id
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $schedules = Itinerario::all();
+        $docente = Auth::user()->docente;
+        $schedules = Itinerario::
+            where('docente_id', $docente->id)
+            ->where('periodo_id', 1)->get();
+
+        //return response()->json(['schedules' => $schedules], 200);
+
         return view('home')->with(['schedules' =>$schedules]);
     }
 }

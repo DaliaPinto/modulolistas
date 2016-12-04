@@ -15,7 +15,12 @@ class UsersTableSeeder extends Seeder
         $user->email = 'prueba@uttijuana.edu.mx';
         $user->password = bcrypt('prueba1');
         $user->tipo_id = 1;
-        $user->docente_id =1;
+        $user->save();
+
+        $user = new \App\User();
+        $user->email = 'd@a.com';
+        $user->password = bcrypt('1234567');
+        $user->tipo_id = 2;
         $user->save();
     }
 }

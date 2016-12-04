@@ -14,11 +14,19 @@ class Docente extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'nombre', 'apellido_paterno', 'apellido_materno'
+        'nombre', 'apellido_paterno', 'apellido_materno', 'user_id'
     ];
 
     /*
      * Quit the timestamp default
      */
     public $timestamps = false;
+
+    public function itinerarios() {
+        return $this->hasMany('App\Itinerario');
+    }
+
+    public function user() {
+        return $this->hasOne('App\User');
+    }
 }

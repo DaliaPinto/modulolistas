@@ -14,12 +14,17 @@ class Periodo extends Model
     /*
      * Method, it fill the seeders
      */
-    protected $hidden = [
+    protected $fillable = [
         'descripcion', 'fecha_inicio', 'fecha_fin'
     ];
+
 
     /*
      * Quit the timestamp default
      */
     public $timestamps = false;
+
+    public function itinerario() {
+        return $this->hasMany('App\Itinerario');
+    }
 }

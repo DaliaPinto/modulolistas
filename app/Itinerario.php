@@ -32,7 +32,7 @@ class Itinerario extends Model
      * Hora, Docente, Materia, Grupo, Periodo
      *      Docente and TipoUsuario table relationships
      */
-    public function itinerarios(){
+    /*public function itinerarios(){
         return $this->hasManyThrough(
             'App\Hora',
             'App\Docente',
@@ -40,5 +40,26 @@ class Itinerario extends Model
             'App\Grupo',
             'App\Periodo'
         );
+    }*/
+
+    public function docente() {
+        return $this->belongsTo('App\Docente');
     }
+
+    public function periodo() {
+        return $this->belongsTo('App\Periodo');
+    }
+
+    public function materia() {
+        return $this->belongsTo('App\Materia');
+    }
+
+    public function grupo() {
+        return $this->belongsTo('App\Grupo');
+    }
+
+    public function hora() {
+        return $this->belongsTo('App\Hora');
+    }
+
 }

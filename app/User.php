@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'tipo_usuario_id', 'docente_id'
+        'email', 'password', 'tipo_usuario_id'
     ];
 
     /**
@@ -42,5 +42,9 @@ class User extends Authenticatable
      */
     public function users(){
         return $this->hasManyThrough('App\TipoUsuario', 'App\Docente');
+    }
+
+    public function docente() {
+        return $this->hasOne('App\Docente');
     }
 }

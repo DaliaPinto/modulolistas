@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //add the model
 use App\Itinerario;
+use Psy\Util\Json;
 
 class ItinerarioController extends Controller
 {
@@ -16,8 +17,13 @@ class ItinerarioController extends Controller
     public function index()
     {
         //show data
-        $schedules = Itinerario::all();
-        return view('schedule.index', ['schedules' => $schedules]);
+        /*$schedules = Itinerario::with('docente', 'periodo', 'materia', 'hora', 'grupo')
+            ->where('docente_id', '=', '1')->get();
+
+
+        //return response()->json(['schedules' => $schedules], 200);
+
+        return view('schedule.index', ['schedules' => $schedules]);*/
 
     }
 

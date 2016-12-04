@@ -22,4 +22,8 @@ class Hora extends Model
      * Quit the timestamp default
      */
     public $timestamps = false;
+
+    public function itinerarios() {
+        return $this->hasMany('App\Itinerario');
+    }
 }

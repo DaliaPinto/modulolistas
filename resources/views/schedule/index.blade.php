@@ -14,15 +14,15 @@
     <div class="panel-body panel-div">
         <div class="row">
             <!--Schedule View-->
-            @if(isset($schedules))
-                @foreach($schedules as $s)
-                    <div id="cont" class="col-md-2">
-                        {{$s->hora_id}}
-                        {{$s->docente_id}}
-                        {{$s->materia_id}}
-                    </div>
-                @endforeach
-            @endif
+            @foreach($schedules as $s)
+                <div id="cont" class="col-md-2">
+                    {{$s->id}}
+                    {{$s->docente->id}}
+                    {{$s->docente->nombre}}
+                    {{$s->grupo->cuatrimestre}}
+                    {{$s->grupo->grupo}}
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
