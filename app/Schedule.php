@@ -20,7 +20,7 @@ class Schedule extends Model
         'subject_id',
         'group_id',
         'period_id',
-        'date'
+        'day'
     ];
 
     /*

@@ -25,6 +25,20 @@ class LoginController extends Controller
      *
      * @var string
      */
+    public function getInitView()
+    {
+        $type = Auth::user()->userType()->id;
+
+        if($type == 1)
+            return view('admin.dashboard');
+        if($type == 3)
+            return view('student.dashboard');
+        if($type == 4)
+            return view('instructor.dashboard');
+        else
+            return redirect()->route('home');
+
+    }
     protected $redirectTo = '/home';
 
     /**

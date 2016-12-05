@@ -44,7 +44,7 @@ class User extends Authenticatable
         return $this->hasOne('App\Teacher');
     }
     /*
-     * User has a user type relationship
+     * User has a userType relationship
      */
     public function userType(){
         return $this->hasOne('App\UserType');

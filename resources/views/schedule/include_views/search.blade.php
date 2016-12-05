@@ -10,7 +10,7 @@
             </select>
         </div>
         <div class="col-lg-3">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
         </div>
         <div class="col-lg-3">
         </div>

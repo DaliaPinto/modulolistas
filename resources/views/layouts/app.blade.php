@@ -57,10 +57,8 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     @php
-
                                         $teacher = Auth::user()->teacher;
-                                        echo $teacher->nombre. ' ' .$teacher->apellido_paterno
-
+                                        echo $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->second_name;
                                     @endphp
                                     <span class="caret"></span>
                                 </a>

@@ -20,7 +20,7 @@ class CreateSchedulesTable extends Migration
             $table->smallInteger('subject_id');
             $table->tinyInteger('group_id');
             $table->tinyInteger('period_id');
-            $table->date('date');
+            $table->string('day', 10);
         });
     }
 

@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 /**
- * Itinerario route index
+ * List view index
 */
-Route::get('/schedules', ['uses' => 'ItinerarioController@index']);
+Route::get('/list', ['uses' => 'ScheduleController@index']);
 

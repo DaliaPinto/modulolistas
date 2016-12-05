@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Itinerario;
+use App\Schedule;
+use App\Hour;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -26,13 +27,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $docente = Auth::user()->docente;
-        $schedules = Itinerario::
-            where('docente_id', $docente->id)
-            ->where('periodo_id', 1)->get();
+        $teacher = Auth::user()->teacher;
 
+        $schedules = Schedule::
+            where('teacher_id', $teacher->id)
+            ->where('period_id', 1)->get();
+
+        $hours = Hour::all();
+
+        //return a json api
         //return response()->json(['schedules' => $schedules], 200);
 
-        return view('home')->with(['schedules' =>$schedules]);
+        return view('home')->with(['schedules' =>$schedules])->with(['hours'=>$hours]);
     }
 }
