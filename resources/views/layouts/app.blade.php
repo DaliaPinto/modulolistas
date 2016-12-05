@@ -56,11 +56,10 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-
                                     @php
 
-                                        $docente = Auth::user()->docente;
-                                        echo $docente->nombre. ' ' .$docente->apellido_paterno
+                                        $teacher = Auth::user()->teacher;
+                                        echo $teacher->nombre. ' ' .$teacher->apellido_paterno
 
                                     @endphp
                                     <span class="caret"></span>

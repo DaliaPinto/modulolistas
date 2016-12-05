@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'tipo_usuario_id'
+        'email', 'password', 'user_type_id'
     ];
 
     /**
@@ -38,13 +38,15 @@ class User extends Authenticatable
     public $timestamps = false;
 
     /*
-     * Docente and TipoUsuario table relationships
+     * Bidirecional teacher relationship
      */
-    public function users(){
-        return $this->hasManyThrough('App\TipoUsuario', 'App\Docente');
+    public function teacher() {
+        return $this->hasOne('App\Teacher');
     }
-
-    public function docente() {
-        return $this->hasOne('App\Docente');
+    /*
+     * User has a user type relationship
+     */
+    public function userType(){
+        return $this->hasOne('App\UserType');
     }
 }

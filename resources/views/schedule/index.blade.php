@@ -16,11 +16,10 @@
             <!--Schedule View-->
             @foreach($schedules as $s)
                 <div id="cont" class="col-md-2">
-                    {{$s->id}}
-                    {{$s->docente->id}}
-                    {{$s->docente->nombre}}
-                    {{$s->grupo->cuatrimestre}}
-                    {{$s->grupo->grupo}}
+                    {{$s->subject->nombre }}
+                    {{$s->teacher->nombre}}
+                    {{$s->group->cuatrimestre}}
+                    {{$s->group->grupo}}
                 </div>
             @endforeach
         </div>
