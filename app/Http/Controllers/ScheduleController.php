@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //add the model
-use App\Schedule;
+use Psy\Util\Json;
 use Illuminate\Support\Facades\Auth;
+
 use App\Subject;
 use App\Group;
-use Psy\Util\Json;
+use App\Schedule;
+use App\Student;
 
 class ScheduleController extends Controller
 {

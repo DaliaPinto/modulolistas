@@ -24,7 +24,17 @@ class Period extends Model
      */
     public $timestamps = false;
 
+    /*
+     * Bidirectional relationship with Schedule class
+     */
     public function schedules() {
         return $this->hasMany('App\Schedule');
+    }
+
+    /*
+     * Bidirectional relationship with GroupStudent class
+     */
+    public function groupStudents() {
+        return $this->hasMany('App\GroupStudent');
     }
 }
