@@ -23,7 +23,10 @@ class Subject extends Model
      */
     public $timestamps = false;
 
+    /*
+     * Bidirectional relationship with Schedule class
+     */
     public function schedules() {
-        return $this->hasMany('App\Schedule');
+        return $this->hasOne('App\Schedule');
     }
 }

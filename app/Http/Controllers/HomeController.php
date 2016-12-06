@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Schedule;
 use App\Hour;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class HomeController extends Controller
@@ -18,6 +19,31 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    public function getInitView()
+    {
+        $type = Auth::user()->userType()->id;
+
+        switch ($type){
+            case 1:
+                return view('list.index');
+                break;
+            case 2:
+                return view('schedule.tutor');
+                break;
+            case 3:
+                return view('schedule.tutor');
+                break;
+            default:
+                return redirect()->route('home');
+                break;
+        }
     }
 
     /**

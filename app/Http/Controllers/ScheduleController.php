@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //add the model
 use App\Schedule;
+use Illuminate\Support\Facades\Auth;
+use App\Subject;
+use App\Group;
 use Psy\Util\Json;
 
 class ScheduleController extends Controller
@@ -46,9 +49,18 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showList($id)
     {
-        dd('show');
+        $list = Schedule::where('id', $id)->first();
+        $list->period;
+        $list->group;
+        $list->teacher;
+        $list->subject;
+
+        //return a json api
+        return response()->json(['schedule' => $list], 200);
+
+        //return view('home')->with(['schedules' =>$schedules]);
     }
 
     /**

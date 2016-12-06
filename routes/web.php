@@ -18,10 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', [
+    'uses' => 'HomeController@index',
+    'as' => 'home',
+    'middleware' => 'auth'
+]);
 
 /**
  * List view index
 */
-Route::get('/list', ['uses' => 'ScheduleController@index']);
+Route::get('/list/{id}', [
+    'uses' => 'ScheduleController@showList',
+    'as' => 'list',
+    'middleware' => 'auth'
+]);
 

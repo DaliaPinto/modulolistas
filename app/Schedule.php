@@ -29,36 +29,36 @@ class Schedule extends Model
     public $timestamps = false;
 
     /*
-     * docente function make a object to access
-     *      at the Docente attributes
+     * teacher function make a object to access
+     *      at the Teacher attributes
      */
     public function teacher() {
         return $this->belongsTo('App\Teacher');
     }
     /*
-    * periodo function make a object to access
-    *      at the periodo attributes
+    * period function make a object to access
+    *      at the Period attributes
     */
     public function period() {
         return $this->belongsTo('App\Period');
     }
     /*
-    * materia function make a object to access
-    *      at the Materia attributes
+    * subject function make a object to access
+    *      at the Subject attributes
     */
     public function subject() {
         return $this->belongsTo('App\Subject');
     }
     /*
-    * grupo function make a object to access
-    *      at the Grupo attributes
+    * group function make a object to access
+    *      at the Group attributes
     */
     public function group() {
         return $this->belongsTo('App\Group');
     }
     /*
-    * hora function make a object to access
-    *      at the Hora attributes
+    * hour function make a object to access
+    *      at the Hour attributes
     */
     public function hour() {
         return $this->belongsTo('App\Hour');
