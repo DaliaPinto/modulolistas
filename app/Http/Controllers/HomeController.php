@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
+
 use App\Schedule;
 use App\Hour;
 use App\Period;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+
+
+
 
 
 class HomeController extends Controller
@@ -25,6 +29,7 @@ class HomeController extends Controller
 
     /**
      * Where to redirect users after login.
+     *      it depends for the user type
      *
      * @var string
      */

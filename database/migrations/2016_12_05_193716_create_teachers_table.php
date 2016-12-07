@@ -17,7 +17,7 @@ class CreateTeachersTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('last_name', 50);
-            $table->string('second_name', 50);
+            $table->string('second_name', 50)->nullable();
             $table->integer('user_id');
         });
     }

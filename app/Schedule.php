@@ -63,5 +63,11 @@ class Schedule extends Model
     public function hour() {
         return $this->belongsTo('App\Hour');
     }
+    /*
+     * Bidirectional relationship with Attendance class
+     */
+    public function attendances() {
+        return $this->hasMany('App\Attendance');
+    }
 
 }

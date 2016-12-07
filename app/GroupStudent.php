@@ -12,21 +12,34 @@ class GroupStudent extends Model
     protected $table = 'group_students';
 
     /*
+     * Method, it fill the seeders
+     */
+    protected $fillable = [
+        'student_id', 'group_id', 'period_id'
+    ];
+
+    /*
      * Student table relationship
      */
-    public function student(){
-        return $this->belongsTo('App\Student');
+    public function students(){
+        return $this->hasOne('App\Student');
     }
     /*
      * Group table relationship
      */
-    public function group(){
-        return $this->belongsTo('App\Group');
+    public function groups(){
+        return $this->hasOne('App\Group');
     }
     /*
      * Group table relationship
      */
-    public function period(){
-        return $this->belongsTo('App\Period');
+    public function periods(){
+        return $this->hasOne('App\Period');
     }
+
+    /*
+     * Quit the timestamp default
+     */
+    public $timestamps = false;
+
 }

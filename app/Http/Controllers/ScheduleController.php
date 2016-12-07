@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-//add the model
-use Psy\Util\Json;
 use Illuminate\Support\Facades\Auth;
+
+use Psy\Util\Json;
 
 use App\Subject;
 use App\Group;
 use App\Schedule;
 use App\Student;
+use App\GroupStudent;
 
 class ScheduleController extends Controller
 {
@@ -46,21 +47,27 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show a schedule info, and student list by group id
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function showList($id)
     {
+        //obtain the schedule for id
         $list = Schedule::where('id', $id)->first();
         $list->period;
         $list->group;
         $list->teacher;
         $list->subject;
 
+        //obtain the students list by group id and period id
+        /*$students = GroupStudent::where('group_id', $list->group->id)
+                                ->where('period_id', $list->period->id)->get();
+        $students->students->name;*/
+
         //return a json api
-        return response()->json(['schedule' => $list], 200);
+        return response()->json(['schedules' =>$list, 'status' => 0], 200);
 
         //return view('home')->with(['schedules' =>$schedules]);
     }

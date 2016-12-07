@@ -17,15 +17,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
+/*
+ * Schedules home view
+ */
 Route::get('/home', [
     'uses' => 'HomeController@index',
     'as' => 'home',
     'middleware' => 'auth'
 ]);
 
-/**
- * List view index
+/*
+ * Attendance List index view
 */
 Route::get('/list/{id}', [
     'uses' => 'ScheduleController@showList',
