@@ -11,10 +11,16 @@
 |
 */
 
+/*
+ * Main view route
+ */
 Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+ * Includes all the routes about the login
+ */
 Auth::routes();
 
 /*

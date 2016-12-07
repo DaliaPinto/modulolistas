@@ -35,9 +35,12 @@ class HomeController extends Controller
      */
     public function getInitView()
     {
-        //permission about the user Type
+        //Access to user type
         $type = Auth::user()->userType()->id;
 
+        /* evaluate the user type, and return the
+        *  view.
+        */
         switch ($type){
             case 1:
                 return view('list.index');

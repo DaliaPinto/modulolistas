@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class GroupStudent extends Model
 {
     /*
-     * Identify table migration database
-     */
-    protected $table = 'group_students';
-
-    /*
      * Method, it fill the seeders
      */
     protected $fillable = [
@@ -21,20 +16,20 @@ class GroupStudent extends Model
     /*
      * Student table relationship
      */
-    public function students(){
-        return $this->hasOne('App\Student');
+    public function student(){
+        return $this->belongsTo('App\Student');
     }
     /*
      * Group table relationship
      */
-    public function groups(){
-        return $this->hasOne('App\Group');
+    public function group(){
+        return $this->belongsTo('App\Group');
     }
     /*
      * Group table relationship
      */
-    public function periods(){
-        return $this->hasOne('App\Period');
+    public function period(){
+        return $this->belongsTo('App\Period');
     }
 
     /*

@@ -23,7 +23,7 @@
         @endforeach
         <!--Schedule View-->
         @foreach($schedules as $s)
-            @include('schedule.include_views.subjects')
+            @include('schedule.include.subjects')
         @endforeach
     </div>
 </div>

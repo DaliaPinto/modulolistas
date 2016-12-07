@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <!--search bar nav-->
-    @include('schedule.include_views.search')
+    @include('schedule.include.search')
    <div class="row">
        <div class="col-md-12">
            <!--Schedule container-->
@@ -11,7 +11,3 @@
    </div>
 </div>
 @endsection
-
-<div>
-    <h1></h1>
-</div>

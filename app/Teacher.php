@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     /*
-     * Identify table migration database
-     */
-    protected $table = 'teachers';
-    /*
      * Method, it fill the seeders
      */
     protected $fillable = [

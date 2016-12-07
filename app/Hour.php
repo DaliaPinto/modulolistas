@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Hour extends Model
 {
     /*
-     * Identify table migration database
-     */
-    protected $table = 'hours';
-
-    /*
      * Method, it fill the seeders
      */
     protected $fillable = [

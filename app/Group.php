@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     /*
-     * Identify table migration database
-     */
-    protected $table = 'groups';
-
-    /*
      * Method, it fill the seeders
      */
     protected $fillable = [

@@ -7,11 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule extends Model
 {
     /*
-     * Identify table migration database
-     */
-    protected $table = 'schedules';
-
-    /*
      * Method, it fill the seeders
      */
     protected $fillable = [

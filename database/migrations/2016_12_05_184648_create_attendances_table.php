@@ -16,7 +16,7 @@ class CreateAttendancesTable extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->integer('schedule_id');
             $table->char('student_id',10);
-            $table->char('attendance_status', 2);
+            $table->char('attendance_status', 2)->default('B');
             $table->date('attendance_date');
             $table->timestamps();
         });
