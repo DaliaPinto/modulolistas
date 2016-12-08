@@ -9,7 +9,7 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th rowspan="2">#</th>
+                    <th rowspan="2">No.</th>
                     <th rowspan="2">Matrícula</th>
                     <th rowspan="2">Nombre</th>
                     <th colspan="5">Primer Semana</th>
@@ -19,15 +19,7 @@
                     <th colspan="5">Quinta semana</th>
                     <th colspan="2">Total</th>
                 </tr>
-                <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>A</th>
-                    <th>F</th>
-                </tr>
+                @include('list.include.days')
                 </thead>
                 <tbody>
                     @foreach($students as $i=>$s)
@@ -35,11 +27,22 @@
                             <td> {{ $i+1 }} </td>
                             <td>{{ $s->student_id }}</td>
                             <td>{{ $s->student->name }} {{ $s->student->last_name }} {{ $s->student->second_name }} </td>
+                            <td></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="row">
+        <div id="current-day" class="col-md-3"></div>
+    </div>
 </div>
+@endsection
+
+@section('javascript')
+    <script>
+
+    </script>
+    <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
 @endsection

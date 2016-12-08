@@ -18,7 +18,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 1;
         $s->group_id= 1;
         $s->period_id=1;
-        $s->day = 'Lunes';
+        $s->day = 1;
         $s->save();
 
         //save default test data
@@ -28,7 +28,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 1;
         $s->group_id= 1;
         $s->period_id=1;
-        $s->day = 'Martes';
+        $s->day = 2;
         $s->save();
 
         //save default test data
@@ -38,7 +38,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 1;
         $s->group_id= 1;
         $s->period_id=2;
-        $s->day = 'Miercoles';
+        $s->day = 3;
         $s->save();
 
         //save default test data
@@ -48,7 +48,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 2;
         $s->group_id= 1;
         $s->period_id=1;
-        $s->day = 'Lunes';
+        $s->day = 1;
         $s->save();
 
         //save default test data
@@ -58,7 +58,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 2;
         $s->group_id= 1;
         $s->period_id=1;
-        $s->day = 'Jueves';
+        $s->day = 4;
         $s->save();
 
         //save default test data
@@ -68,7 +68,7 @@ class SchedulesTableSeeder extends Seeder
         $s->subject_id = 2;
         $s->group_id= 1;
         $s->period_id=2;
-        $s->day = 'Martes';
+        $s->day = 2;
         $s->save();
     }
 }
