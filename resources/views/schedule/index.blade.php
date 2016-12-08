@@ -14,16 +14,14 @@
 
     <div class="panel-body panel-div">
         <!--Hour Panel-->
-        @foreach($hours as $h)
+        @foreach($hours as $i=>$h)
             <div class="row">
                 <div class="col-md-2">
                     {{$h->start_hour }} - {{ $h->end_hour }}
                 </div>
+                <!--Schedule include view-->
+                @include('schedule.include.subjects')
             </div>
-        @endforeach
-        <!--Schedule View-->
-        @foreach($schedules as $s)
-            @include('schedule.include.subjects')
         @endforeach
     </div>
 </div>
