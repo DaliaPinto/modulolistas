@@ -70,9 +70,6 @@ var objToday = new Date(),
 var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear;
 var month = curMonth;
 
-var divMonth = document.getElementById('curMonth');
-divMonth.innerHTML = 'MES: ' + month;
-
 //put into div the current date
 var date = document.getElementById('current-day');
 date.innerHTML = 'Lista de asistencia hasta el día: ' + today;

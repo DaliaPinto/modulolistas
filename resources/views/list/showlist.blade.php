@@ -22,12 +22,14 @@
                 @include('list.include.days')
                 </thead>
                 <tbody>
-                    @foreach($students->sortBy('last_name') as $i=>$s)
-                        <tr>
-                            <td> {{ $i+1 }} </td>
+                    @foreach($students->sortBy('student.last_name') as $i=>$s)
+                        <tr id="attendance-student">
+                            <td></td>
                             <td>{{ $s->student_id }}</td>
                             <td>{{ $s->student->last_name }} {{ $s->student->second_name }} {{ $s->student->name }} </td>
-                            <td></td>
+                            @for($i=0; $i<32; $i++)
+                                <th></th>
+                            @endfor
                         </tr>
                     @endforeach
                 </tbody>

@@ -12,6 +12,8 @@ use App\Group;
 use App\Schedule;
 use App\Student;
 use App\GroupStudent;
+use App\ListDetail;
+use App\Attendance;
 
 class ScheduleController extends Controller
 {
@@ -34,10 +36,12 @@ class ScheduleController extends Controller
         $students = GroupStudent::where('group_id', $list->group->id)
                                 ->where('period_id', $list->period->id)->get();
 
+        $list_dates = ListDetail::where('schedule_id', $list->id)->get();
+
         //return view with schedule info and students array
-        return view('list.showlist', ['schedule' =>$list, 'students' => $students]);
+        return view('list.showlist', ['schedule' =>$list, 'students' => $students, 'list_dates'=> $list_dates]);
 
         //return a json api for testing
-        //return response()->json(['schedules' =>$list, 'students' =>$students, 'status' => 0], 200);
+        //return response()->json(['schedules' =>$list, 'students' =>$students, 'list_dates'=> $list_dates, 'status' => 0], 200);
     }
 }

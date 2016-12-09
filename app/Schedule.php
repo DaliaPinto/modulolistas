@@ -64,5 +64,13 @@ class Schedule extends Model
     public function attendances() {
         return $this->hasMany('App\Attendance');
     }
+    /**
+     * Bidirectional relationship with ListDetail class
+     * cause one schedule, has many months to take attendance.
+     */
+    public function listDetails() {
+        return $this->hasMany('App\ListDetail');
+    }
+
 
 }
