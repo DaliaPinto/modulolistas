@@ -67,7 +67,11 @@ var objToday = new Date(),
                         'Diciembre'),
     curMonth = months[objToday.getMonth()],
     curYear = objToday.getFullYear();
-var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + ", " + curYear;
+var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear;
+var month = curMonth;
+
+var divMonth = document.getElementById('curMonth');
+divMonth.innerHTML = 'MES: ' + month;
 
 //put into div the current date
 var date = document.getElementById('current-day');

@@ -13,6 +13,7 @@
     <!-- Styles - Here can put all the styles references, this is the main page -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- Scripts - Here can put all the styles references, this is the main page -->
     <script>
@@ -37,7 +38,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Jerome') }}
+                        Jerome
                     </a>
                 </div>
 

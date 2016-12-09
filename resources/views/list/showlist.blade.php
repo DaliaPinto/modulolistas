@@ -12,21 +12,21 @@
                     <th rowspan="2">No.</th>
                     <th rowspan="2">Matrícula</th>
                     <th rowspan="2">Nombre</th>
-                    <th colspan="5">Primer Semana</th>
-                    <th colspan="5">Segunda Semana</th>
-                    <th colspan="5">Tercer Semana</th>
-                    <th colspan="5">Cuarta Semana</th>
-                    <th colspan="5">Quinta semana</th>
+                    <th colspan="6">Primer Semana</th>
+                    <th colspan="6">Segunda Semana</th>
+                    <th colspan="6">Tercer Semana</th>
+                    <th colspan="6">Cuarta Semana</th>
+                    <th colspan="6">Quinta semana</th>
                     <th colspan="2">Total</th>
                 </tr>
                 @include('list.include.days')
                 </thead>
                 <tbody>
-                    @foreach($students as $i=>$s)
+                    @foreach($students->sortBy('last_name') as $i=>$s)
                         <tr>
                             <td> {{ $i+1 }} </td>
                             <td>{{ $s->student_id }}</td>
-                            <td>{{ $s->student->name }} {{ $s->student->last_name }} {{ $s->student->second_name }} </td>
+                            <td>{{ $s->student->last_name }} {{ $s->student->second_name }} {{ $s->student->name }} </td>
                             <td></td>
                         </tr>
                     @endforeach
@@ -35,14 +35,13 @@
         </div>
     </div>
     <div class="row">
-        <div id="current-day" class="col-md-3"></div>
+        <div class="col-md-7"></div>
+        <div id="current-day" class="col-md-5"></div>
     </div>
 </div>
 @endsection
-
 @section('javascript')
     <script>
-
     </script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
 @endsection
