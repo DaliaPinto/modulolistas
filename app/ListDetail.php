@@ -12,7 +12,7 @@ class ListDetail extends Model
     protected $fillable = [
         'star_date',
         'end_date',
-        'schedule_id'
+        'period_id'
     ];
 
     /*
@@ -24,7 +24,7 @@ class ListDetail extends Model
      * teacher function make a object to access
      *      at the Teacher attributes
      */
-    public function schedule() {
-        return $this->belongsTo('App\Schedule');
+    public function period() {
+        return $this->belongsTo('App\Period');
     }
 }

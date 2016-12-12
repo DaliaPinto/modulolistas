@@ -36,7 +36,7 @@ class ScheduleController extends Controller
         $students = GroupStudent::where('group_id', $list->group->id)
                                 ->where('period_id', $list->period->id)->get();
 
-        $list_dates = ListDetail::where('schedule_id', $list->id)->get();
+        $list_dates = ListDetail::where('period_id', $list->period->id)->get();
 
         //return view with schedule info and students array
         return view('list.showlist', ['schedule' =>$list, 'students' => $students, 'list_dates'=> $list_dates]);

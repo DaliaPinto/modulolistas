@@ -31,4 +31,12 @@ class Period extends Model
     public function groupStudents() {
         return $this->hasMany('App\GroupStudent');
     }
+
+    /**
+     * Bidirectional relationship with ListDetail class
+     * cause one schedule, has many months to take attendance.
+     */
+    public function listDetails() {
+        return $this->hasMany('App\ListDetail');
+    }
 }

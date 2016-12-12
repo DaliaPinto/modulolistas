@@ -14,9 +14,10 @@ class CreateListDetailsTable extends Migration
     public function up()
     {
         Schema::create('list_details', function (Blueprint $table) {
+            $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('schedule_id');
+            $table->integer('period_id');
         });
     }
 
