@@ -21,7 +21,7 @@
     <div class="col-md-2">GRUPO: {{ $schedule->group->quarter }} {{ $schedule->group->group }}</div>
     <div class="col-md-3" id="month-name">
         MES:
-        @foreach($list_dates as $k=>$l)
+        {{--@foreach($list_dates as $k=>$l)
            @php
                 /*Pendiente*/
                 /*$end_date = $l->end_date;
@@ -33,7 +33,7 @@
                     }
                 }*/
            @endphp
-        @endforeach
+        @endforeach--}}
     </div>
     <div class="col-md-2">
         CUATRIMESTRE:

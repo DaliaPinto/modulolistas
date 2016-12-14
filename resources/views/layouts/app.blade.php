@@ -14,6 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    @yield('css')
 
     <!-- Scripts - Here can put all the styles references, this is the main page -->
     <script>

@@ -40,5 +40,6 @@
 </div>
 @endsection
 @section('javascript')
+    <script src="{{URL::to('/js/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
 @endsection

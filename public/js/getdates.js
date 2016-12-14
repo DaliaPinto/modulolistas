@@ -101,7 +101,7 @@ function filterWeekDays(dates, includeDays) {
     // cycle dates
     dates.forEach(function(day){
 
-        // cycle days to be included (so==0, mo==1, etc.)
+        // cycle days to be included (sunday==0, monday==1, etc.)
         includeDays.forEach(function(include) {
             if(day.getDay() == include) {
                 weekdays.push(day);
@@ -147,3 +147,8 @@ month.innerHTML = 'MES: ' + curMonth;
 //put into div the current date
 var date = document.getElementById('current-day');
 date.innerHTML = 'Lista de asistencia hasta el día: ' + today;
+
+
+/*
+* Receive all the date months in a period quarter
+*/

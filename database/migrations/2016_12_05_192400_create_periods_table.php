@@ -18,6 +18,8 @@ class CreatePeriodsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description',40);
+            $table->date('first_month_start')->nullable();
+            $table->date('last_month_end')->nullable();
         });
     }
 

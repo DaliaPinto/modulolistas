@@ -32,7 +32,7 @@ class ListDetailsTableSeeder extends Seeder
 
         $ld = new \App\ListDetail();
         $ld ->start_date = '2016-12-01';
-        $ld ->end_date = '2016-12-31';
+        $ld ->end_date = '2016-12-16';
         $ld ->period_id = 1;
         $ld ->save();
 

@@ -35,23 +35,26 @@ class ScheduleController extends Controller
         $list->subject;
         $list_start_date = '';
 
+        $schedule = json_encode($list);
+
             //obtain the students list by group id and period id
         $students = GroupStudent::where('group_id', $list->group->id)
                                 ->where('period_id', $list->period->id)->get();
 
         $list_detail = ListDetail::where('period_id', $list->period->id)->get();
-        $current_date = Carbon::now();
+        $list_dates = json_encode($list_detail);
+        /*$current_date = Carbon::now();
         $first_date = Carbon::createFromFormat('Y-m-d', $list_detail->start_date);
         $end_date = Carbon::createFromFormat('Y-m-d', $list_detail->end_date);
 
-        if($current_date > $first_date && $current_date < $end_date)
+        //if($current_date > $first_date && $current_date < $end_date)*/
 
 
 
         //return view with schedule info and students array
-        return view('list.showlist', ['schedule' =>$list, 'students' => $students, 'list_start_date'=> $list_start_date]);
+        return view('list.showlist', ['schedule' =>$list, 'students' => $students, 'list_detail' => $list_dates] /*'list_start_date'=> $list_start_date]*/);
 
         //return a json api for testing
-        //return response()->json(['schedules' =>$list, 'students' =>$students, 'list_dates'=> $list_dates, 'status' => 0], 200);
+        //return response()->json(['schedules' =>$list, 'students' =>$students, 'list_dates'=> $list_detail, 'status' => 0], 200);
     }
 }

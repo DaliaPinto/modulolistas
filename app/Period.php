@@ -10,7 +10,7 @@ class Period extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'description', 'start_date', 'end_date'
+        'description', 'start_date', 'end_date', 'first_month_start', 'last_month_end'
     ];
 
     /*
