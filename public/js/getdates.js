@@ -1,5 +1,15 @@
 /*Created by Dalia Pinto on 07 dec 2017*/
 
+
+//acces to tr students
+var tdNumber = document.getElementsByClassName('student-number');
+/**
+ * Add student list number
+ */
+for(i=0;i<tdNumber.length;i++){
+    tdNumber[i].innerHTML = i+1;
+}
+
 /**
 * This function make a days header <th> in a table list.
 */
@@ -49,7 +59,7 @@ tr.appendChild(absence);
 *Also td is createn in a loop. it contains a selects with
 *options to mark assistance (just the days when de subjects are impart)
 */
-//acces to tr students
+//access to trStudents
 var trStudents = document.getElementsByClassName('tr-students');
 //draw td in trStudents
 for(i=0;i<trStudents.length;i++){
@@ -59,7 +69,6 @@ for(i=0;i<trStudents.length;i++){
         trStudents[i].appendChild(tdAssistance);
     }
 }
-
 
 /**
 * this function count the dates in a period

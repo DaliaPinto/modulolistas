@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach($students->sortBy('student.last_name') as $s)
                         <tr class="tr-students">
-                            <td></td>
+                            <td class="student-number"></td>
                             <td>{{ $s->student_id }}</td>
                             <td>{{ $s->student->last_name }} {{ $s->student->second_name }} {{ $s->student->name }} </td>
                         </tr>
