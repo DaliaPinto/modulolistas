@@ -19,10 +19,11 @@
         PROFESOR: {{ $schedule->teacher->name }} {{ $schedule->teacher->last_name }} {{ $schedule->teacher->second_name }}
     </div>
     <div class="col-md-2">GRUPO: {{ $schedule->group->quarter }} {{ $schedule->group->group }}</div>
-    <div class="col-md-3">
+    <div class="col-md-3" id="month-name">
         MES:
         @foreach($list_dates as $k=>$l)
            @php
+                /*Pendiente*/
                 /*$end_date = $l->end_date;
                 $month = date("n",strtotime($end_date));
                 $months = array('', 'ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
@@ -31,7 +32,7 @@
                         echo $months[$i];
                     }
                 }*/
-            @endphp
+           @endphp
         @endforeach
     </div>
     <div class="col-md-2">

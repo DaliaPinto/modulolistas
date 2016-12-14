@@ -16,3 +16,15 @@
 .margin-div{
     margin-bottom: 20px;
 }
+.table{
+    table-layout: fixed;
+    width:100%;
+}
+.th-id{
+    width:8%;
+    text-align: center;
+}
+.th-name{
+    width:12%;
+    text-align: center;
+}
