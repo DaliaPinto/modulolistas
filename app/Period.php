@@ -10,7 +10,7 @@ class Period extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'description', 'start_date', 'end_date', 'first_month_start', 'last_month_end'
+         'start_date', 'end_date', 'description', 'first_month_end', 'last_month_start'
     ];
 
     /*
@@ -30,13 +30,5 @@ class Period extends Model
      */
     public function groupStudents() {
         return $this->hasMany('App\GroupStudent');
-    }
-
-    /**
-     * Bidirectional relationship with ListDetail class
-     * cause one schedule, has many months to take attendance.
-     */
-    public function listDetails() {
-        return $this->hasMany('App\ListDetail');
     }
 }

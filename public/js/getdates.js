@@ -148,7 +148,3 @@ month.innerHTML = 'MES: ' + curMonth;
 var date = document.getElementById('current-day');
 date.innerHTML = 'Lista de asistencia hasta el día: ' + today;
 
-
-/*
-* Receive all the date months in a period quarter
-*/

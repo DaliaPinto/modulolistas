@@ -12,10 +12,13 @@ Comming soon
         </select>-->
 
 @section('javascript')
+    <div>
+
+    </div>
     <script>
-        var dates = getDates(new Date("2016-08-29"),
-                new Date("2016-0-30")),
-                workDays = filterWeekDays(dates, [mon,fri]);
+        var dates = getDates(new Date("{{$list_start_date}}"),
+                new Date("{{$list_end_date}}")),
+                workDays = filterWeekDays(dates, [{{$s->day}}]);
         var assistance = document.getElementById('assistance-option');
         //document.writeln(workDays + " weekdays");
     </script>
