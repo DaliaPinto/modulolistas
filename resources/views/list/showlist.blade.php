@@ -1,3 +1,8 @@
+@section('javascript')
+    <script src="{{URL::to('/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
+@endsection
+
 @extends('layouts.app')
 @section('content')
     <div class="container">
@@ -39,8 +44,4 @@
         </div>
     </div>
     @include('list.include.assistance')
-@endsection
-@section('javascript')
-    <script src="{{URL::to('/js/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
 @endsection
