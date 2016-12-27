@@ -15,7 +15,7 @@ class PeriodsTableSeeder extends Seeder
         $period = new \App\Period();
         $period->description = 'Septiembre-Diciembre 2016';
         $period->start_date ='2016-09-12';
-        $period->end_date = '2016-12-30';
+        $period->end_date = '2016-12-31';
         $period->first_month_end ='2016-09-30';
         $period->last_month_start ='2016-12-01';
         $period->save();
