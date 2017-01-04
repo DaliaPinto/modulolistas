@@ -36,10 +36,11 @@ var dy=1;
 for(i=0;i<=34;i++){
     /*if the first day is higher than index and last day is less than dy var
     *   this loop draws a td elements with a day number, else, just draws a empty td element*/
-    if((i>= firstDay) && (dy<= lastDate) && firstDay){
+    if((i>= firstDay) && (dy<= lastDate)){
         var td= document.createElement('td');
         td.innerHTML = dy;
         dy=dy+1;
+        console.log(dy);
     }else{
         var td= document.createElement('td');
     }
