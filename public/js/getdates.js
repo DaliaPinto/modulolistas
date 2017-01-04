@@ -34,8 +34,8 @@ var lastDate=dt.getDate();
 var dy=1;
 //the number of td that will be created
 for(i=0;i<=34;i++){
-    //if the first day is higher than index and last day is less than dy var
-    //this loop draws a td elements with a day number, else, just draws a empty td element
+    /*if the first day is higher than index and last day is less than dy var
+    *   this loop draws a td elements with a day number, else, just draws a empty td element*/
     if((i>= firstDay) && (dy<= lastDate) && firstDay){
         var td= document.createElement('td');
         td.innerHTML = dy;
@@ -56,7 +56,7 @@ tr.appendChild(assistance);
 tr.appendChild(absence);
 
 /**
-*Also td is createn in a loop. it contains a selects with
+*Also td is create in a loop. it contains a selects with
 *options to mark assistance (just the days when de subjects are impart)
 */
 //access to trStudents

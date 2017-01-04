@@ -36,7 +36,7 @@ class SchedulesTableSeeder extends Seeder
         $s->hour_id=3;
         $s->teacher_id= 2;
         $s->subject_id = 1;
-        $s->group_id= 1;
+        $s->group_id= 2;
         $s->period_id=1;
         $s->day = 2;
         $s->save();
@@ -46,7 +46,7 @@ class SchedulesTableSeeder extends Seeder
         $s->hour_id=3;
         $s->teacher_id= 2;
         $s->subject_id = 1;
-        $s->group_id= 1;
+        $s->group_id= 2;
         $s->period_id=2;
         $s->day = 3;
         $s->save();
@@ -56,7 +56,7 @@ class SchedulesTableSeeder extends Seeder
         $s->hour_id=4;
         $s->teacher_id= 2;
         $s->subject_id = 1;
-        $s->group_id= 1;
+        $s->group_id= 2;
         $s->period_id=2;
         $s->day = 3;
         $s->save();

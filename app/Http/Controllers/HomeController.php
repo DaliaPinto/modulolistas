@@ -80,7 +80,7 @@ class HomeController extends Controller
             where('teacher_id', $teacher->id)
             ->where('period_id', $period->id)->get();
 
-        //obtain all the available hours
+        //obtain all the available hours, to show in schedule
         $hours = Hour::all();
 
         //return the array schedules to the view

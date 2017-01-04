@@ -18,7 +18,7 @@ Comming soon
     <script>
         var dates = getDates(new Date("{{$list_start_date}}"),
                 new Date("{{$list_end_date}}")),
-                workDays = filterWeekDays(dates, [{{$s->day}}]);
+                //workDays = filterWeekDays(dates, [1]);
         var assistance = document.getElementById('assistance-option');
         //document.writeln(workDays + " weekdays");
     </script>

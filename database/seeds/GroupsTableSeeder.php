@@ -14,43 +14,43 @@ class GroupsTableSeeder extends Seeder
         //
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 1;
+        $group->quarter = 2;
         $group->group = 'A';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 1;
+        $group->quarter = 2;
         $group->group = 'B';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 1;
+        $group->quarter = 2;
         $group->group = 'C';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 1;
+        $group->quarter = 2;
         $group->group = 'D';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 1;
+        $group->quarter = 2;
         $group->group = 'E';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'V';
-        $group->quarter = 7;
+        $group->quarter = 8;
         $group->group = 'A';
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'V';
-        $group->quarter = 7;
+        $group->quarter = 8;
         $group->group = 'B';
         $group->save();
     }

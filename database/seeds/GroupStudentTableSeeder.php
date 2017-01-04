@@ -15,55 +15,55 @@ class GroupStudentTableSeeder extends Seeder
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314104733';
         $gs->group_id=1;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314106734';
         $gs->group_id=1;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314106735';
         $gs->group_id=2;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314104636';
         $gs->group_id=1;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314103437';
         $gs->group_id=2;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314101938';
         $gs->group_id=1;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314104039';
         $gs->group_id=2;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314104440';
-        $gs->group_id=1;
-        $gs->period_id=1;
+        $gs->group_id=2;
+        $gs->period_id=2;
         $gs->save();
 
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314101335';
         $gs->group_id=2;
-        $gs->period_id=1;
+        $gs->period_id=2;
         $gs->save();
     }
 }
