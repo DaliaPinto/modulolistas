@@ -1,7 +1,21 @@
 @extends('layouts.app')
+
 @section('javascript')
     <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
+    <script>
+        var subjectImpart = [{{ $schedule->day }}],
+            startDate = new Date("{{$list_start_date}}"),
+            endDate = new Date ("{{$list_end_date}}");
+
+        console.log("{{$list_start_date}}");
+        console.log("{{$list_end_date}}");
+        var dates = getDates(startDate, endDate, subjectImpart);
+        var days = dates;
+        for (var i = 0; i < days.length; i ++ ) {
+            console.log(days[i].getDate() +" date");
+        }
+    </script>
 @endsection
 
 @section('content')
@@ -51,5 +65,4 @@
             <div id="current-day" class="col-md-5"></div>
         </div>
     </div>
-    @include('list.include.assistance')
 @endsection

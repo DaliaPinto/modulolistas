@@ -1,5 +1,3 @@
-
-<!--extends the header bar (teacher's information, logo, hamburger menu)-->
 @extends('layouts.app')
 
 @section('content')

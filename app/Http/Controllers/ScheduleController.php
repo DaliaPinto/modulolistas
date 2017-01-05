@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 use Carbon\Carbon;
 
-use App\Subject;
-use App\Group;
 use App\Schedule;
-use App\Student;
 use App\GroupStudent;
 use App\Period;
 
@@ -25,10 +22,13 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showList($id)
+    public function showList($subject_id, $group_id, $teacher_id, $period_id)
     {
         //obtain the schedule for id
-        $schedule= Schedule::where('id', $id)->first();
+        $schedule= Schedule::where('subject_id', $subject_id)
+            ->where('group_id', $group_id)
+            ->where('teacher_id', $teacher_id)
+            ->where('period_id', $period_id)->first();
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
@@ -45,7 +45,7 @@ class ScheduleController extends Controller
         $first_month_end = Carbon::createFromFormat('Y-m-d', $list_dates->first_month_end);
         //obtain when the period ends
         $period_end = Carbon::createFromFormat('Y-m-d', $list_dates->end_date);
-        //obtain when the last month starts in period
+        //obtanin when the last month starts in period
         $last_month_start = Carbon::createFromFormat('Y-m-d', $list_dates->last_month_start);
         //compare if current date is between period start date and the first month end
         if($current_date >= $period_start && $current_date <= $first_month_end) {

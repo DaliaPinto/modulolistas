@@ -1,5 +1,3 @@
-
-
 <div class="row">
     <div class="col-md-12 margin-div">
         <div class="col-md-3">
@@ -10,7 +8,7 @@
             </select>
         </div>
         <div class="col-lg-3">
-            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+
         </div>
         <div class="col-lg-3">
         </div>
