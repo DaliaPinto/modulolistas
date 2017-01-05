@@ -28,15 +28,15 @@ class ScheduleController extends Controller
     public function showList($id)
     {
         //obtain the schedule for id
-        $list = Schedule::where('id', $id)->first();
+        $schedule= Schedule::where('id', $id)->first();
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
         //obtain the students list by group id and period id
-        $students = GroupStudent::where('group_id', $list->group->id)
-                                ->where('period_id', $list->period->id)->get();
+        $students = GroupStudent::where('group_id', $schedule->group->id)
+                                ->where('period_id', $schedule->period->id)->get();
         //obtain periods dates about period id
-        $list_dates = Period::where('id', '=', $list->period->id)->first();
+        $list_dates = Period::where('id', '=', $schedule->period->id)->first();
         //obtain the current day
         $current_date = Carbon::today();
         //obtain when the period starts
@@ -59,7 +59,7 @@ class ScheduleController extends Controller
         }
 
         //return view with schedule info and students array
-        return view('list.showlist', ['schedule' =>$list, 'students' => $students, 'list_start_date'=> $list_start_date, 'list_end_date' => $list_end_date]);
+        return view('list.showlist', ['schedule' =>$schedule, 'students' => $students, 'list_start_date'=> $list_start_date, 'list_end_date' => $list_end_date]);
 
         //return a json api for testing
         //return response()->json(['schedules' =>$list, 'students' =>$students, 'list_dates'=> $list_detail, 'status' => 0], 200);

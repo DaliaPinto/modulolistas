@@ -13,49 +13,71 @@ for(i=0;i<tdNumber.length;i++){
 /**
 * This function make a days header <th> in a table list.
 */
-
-//access to tr days
-var tr = document.getElementById('tr-days');
-//current date
-var dt= new Date();
-//obtain the month
-var month=dt.getMonth();
-//obtain the 4 digits year
-var year=dt.getFullYear();
-//current format day
-dt=new Date(year, month, 01);
-//obtain the actual month first day
-var firstDay=dt.getDay();
-//month plus one, because month format starts in 0
-var months = dt.setMonth(month+1,0);
-//obtain the actual month last day
-var lastDate=dt.getDate();
-//this variable shows the empty days if month starts in day 1, 2 or others.
-var dy=1;
-//the number of td that will be created
-for(i=0;i<=34;i++){
-    /*if the first day is higher than index and last day is less than dy var
-    *   this loop draws a td elements with a day number, else, just draws a empty td element*/
-    if((i>= firstDay) && (dy<= lastDate)){
-        var td= document.createElement('td');
-        td.innerHTML = dy;
-        dy=dy+1;
-        console.log(dy);
-    }else{
-        var td= document.createElement('td');
+//function thDaysMonth(dt) {
+    //access to tr days
+    var tr = document.getElementById('tr-days');
+    //obtain the current day
+    var dt = new Date();
+    console.log('current date ' + dt);
+    //obtain the month
+    var month = dt.getMonth();
+    console.log(month);
+    //obtain the 4 digits year
+    var year = dt.getFullYear();
+    //current month format
+    dt = new Date(year, month, 01);
+    //obtain the actual month first day
+    var firstDay = dt.getDay();
+    console.log('first ' + firstDay);
+    //month plus one, because month format starts in 0
+    var months = dt.setMonth(month + 1, 0);
+    //obtain the actual month last day
+    var lastDate = dt.getDate();
+    console.log('last ' + lastDate);
+    //this variable print the date in td.
+    var dayDate = 1;
+    //this variable will count all the days that will be sundays
+    var sunday = 0;
+    //compare if firstDay is 0, the loop will count itself 34 times, else just 33 times
+    if (firstDay == 6) {
+        var counter = 36;
+    } else {
+        var counter = 35;
     }
-    //add in tr all the td
-    tr.appendChild(td);
-}
-//create two th, it contains the total hours assistence or absence in the month
-//about students
-var assistance =  document.createElement('td');
-var absence =  document.createElement('td');
-assistance.innerHTML = 'A';
-absence.innerHTML = 'F';
-tr.appendChild(assistance);
-tr.appendChild(absence);
-
+    console.log(counter);
+    //the number of td that will be created, in header list days
+    for (var i = 1; i <= counter; i++) {
+        var td = document.createElement('td');
+        //sunday will should be a seven multiple
+        sunday = i % 7;
+        /*if the first day is higher than index and last day is less than dy var
+         *   this loop draws a td elements with a day number, else, just draws a empty td element*/
+        if (i >= firstDay && dayDate <= lastDate) {
+            //dont show a sunday td
+            if (sunday == 0) {
+                td.style ='display:none;';
+                console.log('sunday ' + dayDate);
+            } else {
+                console.log('not sunday ' + dayDate);
+                td.innerHTML = dayDate;
+            }
+            //days date
+            dayDate = dayDate + 1;
+        } else {
+            var td = document.createElement('td');
+        }
+        //add in tr all the td
+        tr.appendChild(td);
+    }
+    //create two th, it contains the total hours assistence or absence in the month
+    //about students
+    var assistance = document.createElement('td');
+    var absence = document.createElement('td');
+    assistance.innerHTML = 'A';
+    absence.innerHTML = 'F';
+    tr.appendChild(assistance);
+    tr.appendChild(absence);
+//}
 /**
 *Also td is create in a loop. it contains a selects with
 *options to mark assistance (just the days when de subjects are impart)
@@ -63,8 +85,8 @@ tr.appendChild(absence);
 //access to trStudents
 var trStudents = document.getElementsByClassName('tr-students');
 //draw td in trStudents
-for(i=0;i<trStudents.length;i++){
-    for(j=0;j<=36;j++){
+for(var i=0;i<trStudents.length;i++){
+    for(var j=0;j<=32;j++){
         //create a new td and this will add in trStudents
         var tdAssistance = document.createElement('td');
         trStudents[i].appendChild(tdAssistance);

@@ -1,5 +1,6 @@
 <!--obtain all the schedule data-->
 <div class="row">
+    <div class="col-md-12 txt-center">Lista de Asistencia</div>
     <div class="col-md-5">
         CARRERA: Tecnologías de la Información y Comunicación
     </div>

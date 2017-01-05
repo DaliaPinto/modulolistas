@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Jerome') }}</title>
+    <title>Listas de Asistencia</title>
 
     <!-- Styles - Here can put all the styles references, this is the main page -->
     <link href="/css/app.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     @php
                                         $teacher = Auth::user()->teacher;
-                                        echo $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->second_name;
+                                        echo 'Bienvenido '. $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->second_name;
                                     @endphp
                                     <span class="caret"></span>
                                 </a>
