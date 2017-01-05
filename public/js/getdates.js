@@ -9,7 +9,6 @@ var tdNumber = document.getElementsByClassName('student-number');
 for(i=0;i<tdNumber.length;i++){
     tdNumber[i].innerHTML = i+1;
 }
-
 /**
 * This function make a days header <th> in a table list.
 */
@@ -18,59 +17,60 @@ for(i=0;i<tdNumber.length;i++){
     var tr = document.getElementById('tr-days');
     //obtain the current day
     var dt = new Date();
-    console.log('current date ' + dt);
+    //console.log('current date ' + dt);
     //obtain the month
     var month = dt.getMonth();
-    console.log(month);
+    //console.log(month);
     //obtain the 4 digits year
     var year = dt.getFullYear();
     //current month format
     dt = new Date(year, month, 01);
     //obtain the actual month first day
     var firstDay = dt.getDay();
-    console.log('first ' + firstDay);
-    //month plus one, because month format starts in 0
+    //console.log('first ' + firstDay);
+    //month plus one, 'cause month format starts in 0
     var months = dt.setMonth(month + 1, 0);
     //obtain the actual month last day
     var lastDate = dt.getDate();
-    console.log('last ' + lastDate);
-    //this variable print the date in td.
+    //console.log('last ' + lastDate);
+    //this variable will print the date in td.
     var dayDate = 1;
     //this variable will count all the days that will be sundays
     var sunday = 0;
-    //compare if firstDay is 0, the loop will count itself 34 times, else just 33 times
+    //compare if firstDay is 6, the loop will count itself 36 times, else just 35 times
     if (firstDay == 6) {
         var counter = 36;
     } else {
         var counter = 35;
     }
-    console.log(counter);
+    //console.log(counter);
     //the number of td that will be created, in header list days
     for (var i = 1; i <= counter; i++) {
+        //create a new td
         var td = document.createElement('td');
-        //sunday will should be a seven multiple
+        //sunday will should be a seven multiple (cause sunday starts in 0)
         sunday = i % 7;
-        /*if the first day is higher than index and last day is less than dy var
+        /*if the first day is higher than index and last day is smaller than dy var
          *   this loop draws a td elements with a day number, else, just draws a empty td element*/
         if (i >= firstDay && dayDate <= lastDate) {
             //dont show a sunday td
             if (sunday == 0) {
                 td.style ='display:none;';
-                console.log('sunday ' + dayDate);
+                //console.log('sunday ' + dayDate);
             } else {
-                console.log('not sunday ' + dayDate);
+                //console.log('not sunday ' + dayDate);
                 td.innerHTML = dayDate;
             }
-            //days date
+            //number of date
             dayDate = dayDate + 1;
         } else {
+            //create an empty td
             var td = document.createElement('td');
         }
-        //add in tr all the td
+        //add in tr all the td was create
         tr.appendChild(td);
     }
     //create two th, it contains the total hours assistence or absence in the month
-    //about students
     var assistance = document.createElement('td');
     var absence = document.createElement('td');
     assistance.innerHTML = 'A';
@@ -80,7 +80,7 @@ for(i=0;i<tdNumber.length;i++){
 //}
 /**
 *Also td is create in a loop. it contains a selects with
-*options to mark assistance (just the days when de subjects are impart)
+*options to mark assistance (just the days when the subjects are impart)
 */
 //access to trStudents
 var trStudents = document.getElementsByClassName('tr-students');
@@ -92,48 +92,46 @@ for(var i=0;i<trStudents.length;i++){
         trStudents[i].appendChild(tdAssistance);
     }
 }
-
 /**
-* this function count the dates in a period
+* Obtain an array of days in a period of time.
+ * param: dateStart - when the period starts
+ * param: dateEnd - when the period ends
+ * param: includeDays - an array of days about number
+ *        for example: sun == 0, mon == 1, wen == 3, sat == 6.
+ *        could add just one day or all the week [0] or [0,1,6], etc.
 */
-function getDates(dateStart, dateEnd) {
+function getDates(dateStart, dateEnd, includeDays) {
     var currentDate = dateStart,
-        dates = [];
-    while(currentDate <= dateEnd) {
-
+        dates = [],
+        weekdays = [];
+    //repeat the loop while start period will be less than end period
+    while(currentDate <= dateEnd){
         // append date to array
         dates.push(currentDate);
-
         // add one day
         // automatically rolling over to next month
-        var d = new Date(currentDate.valueOf());
+        var d = new Date(currentDate.valueOf()); //console.log(d);
         d.setDate(d.getDate() + 1);
-        currentDate = d;
-
+        //currentDate is rolling at the next day
+        currentDate = d; //console.log(currentDate);
     }
-    return dates;
-}
-/**
-*This funciont compare the days depends the pariod
-* and the number of weekday
-*
-*/
-function filterWeekDays(dates, includeDays) {
-    var weekdays = [];
-
-    // cycle dates
+    //cycle dates
     dates.forEach(function(day){
-
-        // cycle days to be included (sunday==0, monday==1, etc.)
+        //console.log(day);
+        // cycle days to be included (so==0, mo==1, etc.)
         includeDays.forEach(function(include) {
+            //console.log(include);
             if(day.getDay() == include) {
                 weekdays.push(day);
+                //console.log(day.getDay());
+                //console.log(weekdays);
             }
         });
     });
+    //console.log(dates);
     return weekdays;
+    //console.log(weekdays);
 }
-
 /**
  * Obtain the current date in
  *      current-day div
@@ -166,7 +164,7 @@ var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear
 var month = curMonth;
 
 var month = document.getElementById('month-name');
-month.innerHTML = 'MES: ' + curMonth;
+month.innerHTML = 'MES: ' + curMonth.toUpperCase();
 //put into div the current date
 var date = document.getElementById('current-day');
 date.innerHTML = 'Lista de asistencia hasta el día: ' + today;

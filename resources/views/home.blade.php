@@ -1,7 +1,10 @@
+
+<!--extends the header bar (teacher's information, logo, hamburger menu)-->
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
-    <!--search bar nav-->
+    <!--search nav bar-->
     @include('schedule.include.search')
    <div class="row">
        <div class="col-md-12">

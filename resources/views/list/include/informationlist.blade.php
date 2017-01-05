@@ -28,7 +28,7 @@
             $quarters = array('', 'Primero', 'Segundo', 'Tercero', 'Cuarto', 'Quinto', 'Sexto', 'Séptimo', 'Octavo', 'Noveno', 'Décimo', 'Onceavo');
             for($i=0; $i<=count($quarters); $i++){
                 if($schedule->group->quarter == $i){
-                    echo $quarters[$i];
+                    echo strtoupper($quarters[$i]);
                 }
             }
         @endphp
