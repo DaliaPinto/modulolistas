@@ -10,9 +10,11 @@ for(i=0;i<tdNumber.length;i++){
     tdNumber[i].innerHTML = i+1;
 }
 /**
-* This function make a days header <th> in a table list.
+ * This function make a days header <th> in a table list,
+ * and validate hours and days when de subject will impart.
+ * will compare with getDates method the date days
 */
-//function thDaysMonth(dt) {
+//function daysMonth(dt) {
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the current day
@@ -44,7 +46,7 @@ for(i=0;i<tdNumber.length;i++){
         var counter = 35;
     }
     //console.log(counter);
-    //the number of td that will be created, in header list days
+    //the number of td that will be create in header list attendance
     for (var i = 1; i <= counter; i++) {
         //create a new td
         var td = document.createElement('td');
@@ -98,7 +100,8 @@ for(var i=0;i<trStudents.length;i++){
  * param: dateEnd - when the period ends
  * param: includeDays - an array of days about number
  *        for example: sun == 0, mon == 1, wen == 3, sat == 6.
- *        could add just one day or all the week [0] or [0,1,6], etc.
+ *        could add just one day or all the week [0], [0,1,6],
+ *        or all combinations as possible
 */
 function getDates(dateStart, dateEnd, includeDays) {
     var currentDate = dateStart,

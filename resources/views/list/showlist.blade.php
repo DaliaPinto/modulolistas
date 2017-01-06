@@ -1,23 +1,24 @@
 @extends('layouts.app')
-
 @section('javascript')
     <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
     <script>
-        var subjectImpart = [{{$days}}],
-            startDate = new Date("{{$list_start_date}}"),
+        var days = [];
+        @foreach($days as $d)
+            days.push({{$d}});
+        @endforeach
+        var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
-            dates = getDates(startDate, endDate, subjectImpart);
-
-
+            dates = getDates(startDate, endDate, days);
+        console.log('dates');
         for (var i = 0; i < dates.length; i ++ ) {
-            console.log(dates[i].getDate() +" date");
+            console.log(dates[i].getDate());
         }
     </script>
 @endsection
 
 @section('content')
-
+    <h1>{{ $h }}</h1>
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
