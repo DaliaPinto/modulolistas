@@ -4,21 +4,20 @@
     <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
     <script>
-        var subjectImpart = [{{ $schedule->day }}],
+        var subjectImpart = [{{$days}}],
             startDate = new Date("{{$list_start_date}}"),
-            endDate = new Date ("{{$list_end_date}}");
+            endDate = new Date ("{{$list_end_date}}"),
+            dates = getDates(startDate, endDate, subjectImpart);
 
-        console.log("{{$list_start_date}}");
-        console.log("{{$list_end_date}}");
-        var dates = getDates(startDate, endDate, subjectImpart);
-        var days = dates;
-        for (var i = 0; i < days.length; i ++ ) {
-            console.log(days[i].getDate() +" date");
+
+        for (var i = 0; i < dates.length; i ++ ) {
+            console.log(dates[i].getDate() +" date");
         }
     </script>
 @endsection
 
 @section('content')
+
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">

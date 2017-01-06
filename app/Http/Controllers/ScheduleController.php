@@ -25,10 +25,21 @@ class ScheduleController extends Controller
     public function showList($subject_id, $group_id, $teacher_id, $period_id)
     {
         //obtain the schedule for id
-        $schedule= Schedule::where('subject_id', $subject_id)
+        $days = array();
+
+        $schedules= Schedule::where('subject_id', $subject_id)
             ->where('group_id', $group_id)
             ->where('teacher_id', $teacher_id)
-            ->where('period_id', $period_id)->first();
+            ->where('period_id', $period_id)->get();
+
+
+
+        foreach($schedules as $s) {
+            array_push($days, $s->day);
+        }
+        $days = array_unique($days);
+
+        $schedule = $schedules->first();
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
@@ -59,9 +70,14 @@ class ScheduleController extends Controller
         }
 
         //return view with schedule info and students array
-        return view('list.showlist', ['schedule' =>$schedule, 'students' => $students, 'list_start_date'=> $list_start_date, 'list_end_date' => $list_end_date]);
+        /*return view('list.showlist', [
+            'schedule' =>$schedule,
+            'students' => $students,
+            'list_start_date'=> $list_start_date,
+            'list_end_date' => $list_end_date,
+            'days' => $days]);*/
 
         //return a json api for testing
-        //return response()->json(['schedules' =>$list, 'students' =>$students, 'list_dates'=> $list_detail, 'status' => 0], 200);
+        return response()->json(['schedule' =>$schedule, 'students' =>$students, 'days'=>$days, 'status' => 0], 200);
     }
 }
