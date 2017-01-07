@@ -1,0 +1,244 @@
+{"career" : {
+	"id" : "01",
+	"name" : "Tecnologías de la Información y Comunicación",
+	"period" : {
+		"start_date" : "2017-01-04",
+		"end_date" : "2017-04-14",
+		"description" : "Ene-Abr 2017",
+		"areas" : [
+			{
+				"id" : "SIST 01",
+				"name" : "Sistemas Informáticos",				
+				"groups" : [
+					{
+						"id": 292,
+						"quarter" : 5,
+						"group" : "A",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Laura",
+								"last_name" : "Mendoza"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Guillermo",
+								"last_name" : "Juárez"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Juan",
+								"last_name" : "Reyes"
+							}]
+					},
+					{
+						"id": 245,
+						"quarter" : 5,
+						"group" : "B",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Miriam",
+								"last_name" : "López"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Saúl",
+								"last_name" : "Mendez"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Gerardo",
+								"last_name" : "Rodríguez"
+							}]
+					}],
+					"subjects" : [
+						{	
+							"id" : 34, 
+							"name" : "Desarrollo de Aplicaciones III",
+							"teacher" : {
+								"id" : 1123,
+								"first_name" : "Daniel",
+								"last_name" : "Torres"
+							}
+						},
+						{
+							"id" : 12, 
+							"name" : "Calidad en el Desarrollo de Software",
+							"teacher" : {
+								"id" : 113,
+								"first_name" : "Judith Cristina",
+								"last_name" : "Félix"
+							}
+						},
+						{
+							"id" : 23, 
+							"name" : "Ingeniería de Software II",
+							"teacher" : {
+								"id" : 113,
+								"first_name" : "Judith Cristina",
+								"last_name" : "Félix"
+							}
+						}
+					]				
+			},
+			{
+				"id" : "TELE02",
+				"name" : "Redes y Telecomunicaciones",				
+				"groups" : [
+					{
+						"id": 240,
+						"quarter" : 5,
+						"group" : "C",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Jorge",
+								"last_name" : "Islas"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Luis",
+								"last_name" : "Alvarez"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Santiago",
+								"last_name" : "Cabrera"
+							}]
+					},
+					{
+						"id": 290,
+						"quarter" : 5,
+						"group" : "D",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Moises",
+								"last_name" : "Castro"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Mario",
+								"last_name" : "De la Peña"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Francisco",
+								"last_name" : "Rodríguez"
+							}]
+					}],
+					"subjects" : [
+						{	
+							"id" : 34, 
+							"name" : "Sistemas Digitales",
+							"teacher" : {
+								"id" : 986,
+								"first_name" : "Oscar",
+								"last_name" : "Acosta"
+							}
+						},
+						{
+							"id" : 12, 
+							"name" : "Administración de Servidores II",
+							"teacher" : {
+								"id" : 143,
+								"first_name" : "Rafael",
+								"last_name" : "Avilez"
+							}
+						},
+						{
+							"id" : 23, 
+							"name" : "Sistemas de Telecomunicaciones II",
+							"teacher" : {
+								"id" : 967,
+								"first_name" : "César",
+								"last_name" : "Ortega"
+							}
+						}
+					]				
+			},
+			{
+				"id" : "MULTI03",
+				"name" : "Multimedia y Comercio Electrónico",				
+				"groups" : [
+					{
+						"id": 249,
+						"quarter" : 5,
+						"group" : "E",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Mario",
+								"last_name" : "Araujo"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Braulio",
+								"last_name" : "Cruz"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Joel",
+								"last_name" : "López"
+							}]
+					},
+					{
+						"id": 290,
+						"quarter" : 5,
+						"group" : "D",
+						"shift" : "M",						
+						"students" : [
+							{
+								"id" : "0314104733",
+								"first_name" : "Martin",
+								"last_name" : "Ruíz"
+							},
+							{
+								"id" : "0314103421",
+								"first_name" : "Fernando",
+								"last_name" : "Alonso"
+							},
+							{
+								"id" : "0211102976",
+								"first_name" : "Juan",
+								"last_name" : "Pérez"
+							}]
+					}],
+					"subjects" : [
+						{	
+							"id" : 34, 
+							"name" : "Desarrollo de Sitios Web para Comercio Electrónico",
+							"teacher" : {
+								"id" : 1123,
+								"first_name" : "Daniel",
+								"last_name" : "Torres"
+							}
+						},
+						{
+							"id" : 12, 
+							"name" : "Multimedia II",
+							"teacher" : {
+								"id" : 197,
+								"first_name" : "Felipe",
+								"last_name" : "Pérez"
+							}
+						},
+						{
+							"id" : 23, 
+							"name" : "Contabilidad",
+							"teacher" : {
+								"id" : 234,
+								"first_name" : "Rebeca",
+								"last_name" : "Rivera"
+							}
+						}
+					]				
+			}]
+	}
+}}

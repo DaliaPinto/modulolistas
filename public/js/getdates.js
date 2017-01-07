@@ -79,21 +79,20 @@ for(i=0;i<tdNumber.length;i++){
     absence.innerHTML = 'F';
     tr.appendChild(assistance);
     tr.appendChild(absence);
-//}
-/**
-*Also td is create in a loop. it contains a selects with
-*options to mark assistance (just the days when the subjects are impart)
-*/
-//access to trStudents
-var trStudents = document.getElementsByClassName('tr-students');
-//draw td in trStudents
-for(var i=0;i<trStudents.length;i++){
-    for(var j=0;j<=32;j++){
-        //create a new td and this will add in trStudents
-        var tdAssistance = document.createElement('td');
-        trStudents[i].appendChild(tdAssistance);
+    /*Also td is create in a loop. it contains a selects with
+    *options to mark assistance (just the days when the subjects are impart)
+    */
+    //access to trStudents
+    var trStudents = document.getElementsByClassName('tr-students');
+    //draw td in trStudents
+    for(var i=0;i<trStudents.length;i++){
+        for(var j=0;j<=32;j++){
+            //create a new td and this will add in trStudents
+            var tdAssistance = document.createElement('td');
+            trStudents[i].appendChild(tdAssistance);
+        }
     }
-}
+//}
 /**
 * Obtain an array of days in a period of time.
  * param: dateStart - when the period starts

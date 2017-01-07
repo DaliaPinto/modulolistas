@@ -18,7 +18,6 @@
 @endsection
 
 @section('content')
-    <h1>{{ $h }}</h1>
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
