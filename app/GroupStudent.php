@@ -10,7 +10,7 @@ class GroupStudent extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'student_id', 'group_id', 'period_id'
+        'student_id', 'group_id'
     ];
 
     /*
@@ -24,12 +24,6 @@ class GroupStudent extends Model
      */
     public function group(){
         return $this->belongsTo('App\Group');
-    }
-    /*
-     * Group table relationship
-     */
-    public function period(){
-        return $this->belongsTo('App\Period');
     }
 
     /*

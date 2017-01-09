@@ -10,12 +10,9 @@ class Schedule extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'hour_id',
         'teacher_id',
         'subject_id',
-        'group_id',
-        'period_id',
-        'day'
+        'group_id'
     ];
 
     /*
@@ -31,13 +28,6 @@ class Schedule extends Model
         return $this->belongsTo('App\Teacher');
     }
     /*
-    * period function make a object to access
-    *      at the Period attributes
-    */
-    public function period() {
-        return $this->belongsTo('App\Period');
-    }
-    /*
     * subject function make a object to access
     *      at the Subject attributes
     */
@@ -50,13 +40,6 @@ class Schedule extends Model
     */
     public function group() {
         return $this->belongsTo('App\Group');
-    }
-    /*
-    * hour function make a object to access
-    *      at the Hour attributes
-    */
-    public function hour() {
-        return $this->belongsTo('App\Hour');
     }
     /*
      * Bidirectional relationship with Attendance class

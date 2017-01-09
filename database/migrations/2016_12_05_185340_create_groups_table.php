@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->char('shift', 1);
             $table->tinyInteger('quarter');
             $table->char('group', 2);
+            $table->integer('period_id');
         });
     }
 
