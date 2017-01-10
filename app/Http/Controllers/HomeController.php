@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 use App\Schedule;
+use App\Group;
+use App\Day;
+use App\HourSchedule;
 use App\Hour;
 use App\Period;
 
@@ -76,37 +79,34 @@ class HomeController extends Controller
                                  ['end_date','>=',$today->toDateString()]])
                                 ->get()->first();
 
-        //array list of schedules about teacher id, and period id
-        $schedules = DB::table('schedules')
-            ->join('groups', 'schedules.group_id', '=', 'groups.id')
-            ->join('periods', 'groups.period_id', '=', 'periods.id')
-            ->where('teacher_id', $teacher->id)
-            ->where('periods.id', $period->id)->get();
+        $groups = Group::where('period_id', $period->id)->select('id')->get();
 
-        /*$hours = $this->getListHours();
+        $schedules = Schedule::where('teacher_id', $teacher->id)->whereIn('group_id', $groups)->with(['subject', 'group', 'days', 'days.hours'])->get();
+
+        $hours = $this->getListHours();
 
         foreach ($schedules as $schedule) {
             foreach ($schedule->days as $day) {
                 foreach ($day->hours as $hour) {
 
-                    $obj = $hours[$hour->hour_id - 1];
+                    $hourDay = $hours[$hour->hour_id - 1];
                     $numberDay = $day->day;
 
                     $row = new \stdClass();
                     $row->subject = $schedule->subject->name;
-                    $row->group = $schedule->group->name;
-                    $row->teacher =$schedule->teacher->first_name.' '.$schedule->teacher->last_name;
+                    $row->group = $schedule->group->quarter.'°'.$schedule->group->group;
+                    $row->teacher =$schedule->teacher->name.' '.$schedule->teacher->last_name;
 
-                    if($numberDay == 1) $obj->mon = $row;
-                    if($numberDay == 2) $obj->tue = $row;
-                    if($numberDay == 3) $obj->wed = $row;
-                    if($numberDay == 4) $obj->thu = $row;
-                    if($numberDay == 5) $obj->fri = $row;
+                    if($numberDay == 1) $hourDay->mon = $row;
+                    if($numberDay == 2) $hourDay->tue = $row;
+                    if($numberDay == 3) $hourDay->wed = $row;
+                    if($numberDay == 4) $hourDay->thu = $row;
+                    if($numberDay == 5) $hourDay->fri = $row;
                 }
             }
-        }*/
+        }
 
-        return response()->json([/*"schedule" => $hours, */"schedules" => $schedules], 200);
+        return response()->json(['schedule' => $hours], 200);
     }
     public function getListHours() {
         $hours = Hour::all();
@@ -120,7 +120,6 @@ class HomeController extends Controller
             $row->wed = null;
             $row->thu = null;
             $row->fri = null;
-
             array_push($columns, $row);
         }
         return $columns;
