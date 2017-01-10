@@ -11,6 +11,8 @@ class HoursTableSeeder extends Seeder
      */
     public function run()
     {
+        /***********Morning***************/
+
         //1st hour
         $hour = new \App\Hour();
         $hour->start_hour = '07:00:00';
@@ -52,7 +54,7 @@ class HoursTableSeeder extends Seeder
         $hour->end_hour= '14:00:00';
         $hour->save();
 
-        /***********Vespertine*************/
+        /***********Evening*************/
 
         //9th hour
         $hour = new \App\Hour();

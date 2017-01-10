@@ -83,7 +83,7 @@ class HomeController extends Controller
             ->where('teacher_id', $teacher->id)
             ->where('periods.id', $period->id)->get();
 
-        $hours = $this->getListHours();
+        /*$hours = $this->getListHours();
 
         foreach ($schedules as $schedule) {
             foreach ($schedule->days as $day) {
@@ -97,18 +97,17 @@ class HomeController extends Controller
                     $row->group = $schedule->group->name;
                     $row->teacher =$schedule->teacher->first_name.' '.$schedule->teacher->last_name;
 
-                    if($numberDay == 0) $obj->mon = $row;
-                    if($numberDay == 1) $obj->tue = $row;
-                    if($numberDay == 2) $obj->wed = $row;
-                    if($numberDay == 3) $obj->thu = $row;
-                    if($numberDay == 4) $obj->fri = $row;
+                    if($numberDay == 1) $obj->mon = $row;
+                    if($numberDay == 2) $obj->tue = $row;
+                    if($numberDay == 3) $obj->wed = $row;
+                    if($numberDay == 4) $obj->thu = $row;
+                    if($numberDay == 5) $obj->fri = $row;
                 }
             }
-        }
+        }*/
 
-        return response()->json(["schedule" => $hours], 200);
+        return response()->json([/*"schedule" => $hours, */"schedules" => $schedules], 200);
     }
-
     public function getListHours() {
         $hours = Hour::all();
         $columns = array();
