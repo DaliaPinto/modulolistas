@@ -1,3 +1,17 @@
 consultas ¿Cómo hacerlo con laravel?
 
 SELECT DISTINCT p.id FROM schedules s join periods p on s.period_id = p.id and DATE(curdate()) BETWEEN Date(p.start_date) and Date(p.end_date)
+
+
+
+
+
+        //obtain all the available hours, to show in schedule
+        $hours = Hour::all();
+
+        //return the array schedules to the view
+        return view('home')->with(['schedules' =>$schedules, 'hours'=>$hours]);
+
+        //create a json api for testing
+        //return response()->json(['schedules' => $schedules], 200);
+    }

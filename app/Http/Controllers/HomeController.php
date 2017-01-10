@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,17 +77,53 @@ class HomeController extends Controller
                                 ->get()->first();
 
         //array list of schedules about teacher id, and period id
-        $schedules = Schedule::
-            where('teacher_id', $teacher->id)
-            ->where('period_id', $period->id)->get();
+        $schedules = DB::table('schedules')
+            ->join('groups', 'schedules.group_id', '=', 'groups.id')
+            ->join('periods', 'groups.period_id', '=', 'periods.id')
+            ->where('teacher_id', $teacher->id)
+            ->where('periods.id', $period->id)->get();
 
-        //obtain all the available hours, to show in schedule
+        $hours = $this->getListHours();
+
+        foreach ($schedules as $schedule) {
+            foreach ($schedule->days as $day) {
+                foreach ($day->hours as $hour) {
+
+                    $obj = $hours[$hour->hour_id - 1];
+                    $numberDay = $day->day;
+
+                    $row = new \stdClass();
+                    $row->subject = $schedule->subject->name;
+                    $row->group = $schedule->group->name;
+                    $row->teacher =$schedule->teacher->first_name.' '.$schedule->teacher->last_name;
+
+                    if($numberDay == 0) $obj->mon = $row;
+                    if($numberDay == 1) $obj->tue = $row;
+                    if($numberDay == 2) $obj->wed = $row;
+                    if($numberDay == 3) $obj->thu = $row;
+                    if($numberDay == 4) $obj->fri = $row;
+                }
+            }
+        }
+
+        return response()->json(["schedule" => $hours], 200);
+    }
+
+    public function getListHours() {
         $hours = Hour::all();
+        $columns = array();
 
-        //return the array schedules to the view
-        return view('home')->with(['schedules' =>$schedules, 'hours'=>$hours]);
+        foreach ($hours as $hour) {
+            $row = new \stdClass();
+            $row->hour = $hour->start_hour.' - '.$hour->end_hour;
+            $row->mon = null;
+            $row->tue = null;
+            $row->wed = null;
+            $row->thu = null;
+            $row->fri = null;
 
-        //create a json api for testing
-        //return response()->json(['schedules' => $schedules], 200);
+            array_push($columns, $row);
+        }
+        return $columns;
     }
 }
