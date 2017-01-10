@@ -25,4 +25,10 @@ class Day extends Model
     public function schedule() {
         return $this->belongsTo('App\Schedule');
     }
+    /*
+     * Bidirectional relationship with HourSchedule class
+     */
+    public function hours() {
+        return $this->hasMany('App\HourSchedule');
+    }
 }

@@ -18,7 +18,10 @@ class Hour extends Model
      */
     public $timestamps = false;
 
-    public function schedules() {
-        return $this->hasMany('App\Schedule');
+    /*
+     * Bidirectional relationship with HourSchedule class
+     */
+    public function hours() {
+        return $this->hasMany('App\HourSchedule');
     }
 }

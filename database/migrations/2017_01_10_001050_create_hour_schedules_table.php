@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHoursSchedulesTable extends Migration
+class CreateHourSchedulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateHoursSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hours_schedules', function (Blueprint $table) {
+        Schema::create('hour_schedules', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('hour_id');
             $table->integer('day_id');
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -26,6 +27,6 @@ class CreateHoursSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hours_schedules');
+        Schema::dropIfExists('hour_schedules');
     }
 }
