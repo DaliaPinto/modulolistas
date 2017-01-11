@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use App\Schedule;
 use App\GroupStudent;
 use App\Period;
+use App\Day;
+use App\HourSchedule;
 
 use App\Attendance;
 
@@ -24,20 +26,16 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
-        //need all the days when the subject will impart
-        $days = array();
-        //need all the hours for validations
         $hours = array();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
-        /*foreach($schedules as $s) {
-            array_push($days, $s->day);
-            array_push($hours, $s->hour_id);
+        $days = Day::where('schedule_id', $schedule->id)->get();
+        foreach($days as $d) {
+            foreach ($d->hours as $h){
+                array_push($hours, $h);
+            }
         }
-        //need just the hours (distinct values)
-        $days = array_unique($days);*/
-
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
@@ -71,14 +69,18 @@ class ScheduleController extends Controller
             'schedule' =>$schedule,
             'students' => $students,
             'list_start_date'=> $list_start_date,
-            'list_end_date' => $list_end_date
+            'list_end_date' => $list_end_date,
+            'days' => $days,
+            'hours' => $hours
         ]);
 
         //return a json api for testing
-        /*return response()->json(['schedule' =>$schedule,
+        return response()->json(['schedule' =>$schedule,
                                  'students' =>$students,
                                  'list_start_date'=> $list_start_date,
                                  'list_end_date' => $list_end_date,
-                                 'status' => 0], 200);*/
+                                 'days' => $days,
+                                 'hours' => $hours,
+                                 'status' => 0], 200);
     }
 }
