@@ -22,35 +22,29 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showList($subject_id, $group_id, $teacher_id, $period_id)
+    public function showList($id)
     {
         //need all the days when the subject will impart
         $days = array();
         //need all the hours for validations
         $hours = array();
         //obtain an array of schedules
-        $schedules= Schedule::where('subject_id', $subject_id)
-                            ->where('group_id', $group_id)
-                            ->where('teacher_id', $teacher_id)
-                            ->where('period_id', $period_id)->get();
+        $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
-        foreach($schedules as $s) {
+        /*foreach($schedules as $s) {
             array_push($days, $s->day);
             array_push($hours, $s->hour_id);
         }
         //need just the hours (distinct values)
-        $days = array_unique($days);
+        $days = array_unique($days);*/
 
-        //just obtain de first result of schedules list
-        $schedule = $schedules->first();
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
         //obtain the students list by group id and period id
-        $students = GroupStudent::where('group_id', $group_id)
-                                ->where('period_id', $period_id)->get();
+        $students = GroupStudent::where('group_id', $schedule->group->id)->get();
         //obtain periods dates about period id
-        $list_dates = Period::where('id', '=', $period_id)->first();
+        $list_dates = Period::where('id', '=', $schedule->group->period_id)->first();
         //obtain the current day
         $current_date = Carbon::today();
         //obtain when the period starts
@@ -77,8 +71,7 @@ class ScheduleController extends Controller
             'schedule' =>$schedule,
             'students' => $students,
             'list_start_date'=> $list_start_date,
-            'list_end_date' => $list_end_date,
-            'days' => $days
+            'list_end_date' => $list_end_date
         ]);
 
         //return a json api for testing
@@ -86,8 +79,6 @@ class ScheduleController extends Controller
                                  'students' =>$students,
                                  'list_start_date'=> $list_start_date,
                                  'list_end_date' => $list_end_date,
-                                 'days'=>$days,
-                                 'hours'=>$hours,
                                  'status' => 0], 200);*/
     }
 }

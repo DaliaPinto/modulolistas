@@ -11,7 +11,7 @@
             Vespertino
         @endif
     </div>
-    <div class="col-md-3">PERIODO: {{ $schedule->period->description }}</div>
+    <div class="col-md-3">PERIODO: {{ $schedule->group->period->description }}</div>
     <div class="col-md-2">MATERIA: {{ $schedule->subject->name }} </div>
 </div>
 <div class="row">

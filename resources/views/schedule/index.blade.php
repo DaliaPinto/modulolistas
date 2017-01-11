@@ -16,27 +16,42 @@
             <td>{{ $hour->hour }}</td>
             <td>
                 @if($hour->mon != null)
-                <a href="{{route('list', ['subject' => $hour->mon->schedule])}}">{{ $hour->mon->subject.' - '.$hour->mon->group }}</a>
+                <a href="{{route('list', ['subject' => $hour->mon->schedule])}}">
+                    {{ $hour->mon->subject.' - '.$hour->mon->group}}
+                    {{$hour->mon->teacher }}
+                </a>
                 @endif
             </td>
             <td>
                 @if($hour->tue != null)
-                    <a href="{{route('list', ['subject' => $hour->tue->schedule])}}">{{ $hour->tue->subject.' - '.$hour->tue->group }}</a>
+                    <a href="{{route('list', ['subject' => $hour->tue->schedule])}}">
+                        {{ $hour->tue->subject.' - '.$hour->tue->group }}
+                        {{$hour->tue->teacher}}
+                    </a>
                 @endif
             </td>
             <td>
                 @if($hour->wed != null)
-                    <a href="{{route('list', ['subject' => $hour->wed->schedule])}}">{{ $hour->wed->subject.' - '.$hour->wed->group }}</a>
+                    <a href="{{route('list', ['subject' => $hour->wed->schedule])}}">
+                        {{ $hour->wed->subject.' - '.$hour->wed->group }}
+                        {{$hour->wed->teacher}}
+                    </a>
                 @endif
             </td>
             <td>
                 @if($hour->thu != null)
-                    <a href="{{route('list', ['subject' => $hour->thu->schedule])}}">{{ $hour->thu->subject.' - '.$hour->thu->group }}</a>
+                    <a href="{{route('list', ['subject' => $hour->thu->schedule])}}">
+                        {{ $hour->thu->subject.' - '.$hour->thu->group }}
+                        {{$hour->thu->teacher}}
+                    </a>
                 @endif
             </td>
             <td>
                 @if($hour->fri != null)
-                    <a href="{{route('list', ['subject' => $hour->fri->schedule])}}">{{ $hour->fri->subject.' - '.$hour->fri->group }}</a>
+                    <a href="{{route('list', ['subject' => $hour->fri->schedule])}}">
+                        {{ $hour->fri->subject.' - '.$hour->fri->group }}
+                        {{$hour->fri->teacher}}
+                    </a>
                 @endif
             </td>
 

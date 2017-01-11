@@ -35,7 +35,7 @@ Route::get('/home', [
 /*
  * Attendance List index view
 */
-Route::get('/schedule/{schedule}', [
+Route::get('/schedule/{id}', [
     'uses' => 'ScheduleController@showList',
     'as' => 'list',
     'middleware' => 'auth'

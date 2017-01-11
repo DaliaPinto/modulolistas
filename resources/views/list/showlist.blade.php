@@ -3,8 +3,8 @@
     <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
     <script>
-        var days = [];
-        @foreach($days as $d)
+        //var days = [];
+        {{--@foreach($days as $d)
             days.push({{$d}});
         @endforeach
         var startDate = new Date("{{$list_start_date}}"),
@@ -13,7 +13,7 @@
         console.log('dates');
         for (var i = 0; i < dates.length; i ++ ) {
             console.log(dates[i].getDate());
-        }
+        }--}}
     </script>
 @endsection
 
