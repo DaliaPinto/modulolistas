@@ -22,7 +22,7 @@ class SchedulesTableSeeder extends Seeder
         $s = new \App\Schedule();
         $s->teacher_id= 2;
         $s->subject_id = 1;
-        $s->group_id= 1;
+        $s->group_id= 4;
         $s->save();
 
         //save default test data
@@ -55,7 +55,7 @@ class SchedulesTableSeeder extends Seeder
         //save default test data
         $s = new \App\Schedule();
         $s->teacher_id= 1;
-        $s->subject_id = 1;
+        $s->subject_id = 3;
         $s->group_id= 3;
         $s->save();
 
