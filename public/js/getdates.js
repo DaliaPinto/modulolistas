@@ -84,11 +84,6 @@ function daysMonth(dt) {
 * options to mark assistance (just the days when the subjects are impart)
 */
 function drawTdAssitence(days){
-    //
-    days.forEach(function(val){
-        val = val+7;
-        console.log(val);
-    });
     //access to trStudents
     var trStudents = document.getElementsByClassName('tr-students');
     //draw td in trStudents
@@ -96,9 +91,35 @@ function drawTdAssitence(days){
         for(var j=0;j<=32;j++){
             //create a new td and this will add in trStudents
             var tdAssistance = document.createElement('td');
+                days.forEach(function (val) {
+                    val = val-1;
+                    var day = val +6;
+                    if(j==val || j==day){
+                        showSelect(tdAssistance);
+                    }
+                });
             trStudents[i].appendChild(tdAssistance);
         }
     }
+}
+function multiple(valor, multiple)
+{
+    resto = valor % multiple;
+    if(resto==0)
+        return true;
+    else
+        return false;
+}
+function showSelect(div) {
+    var select = document.createElement('select');
+    var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
+    for(var i = 0; i<8; i++){
+        var options = document.createElement('option');
+        options.value = status[i];
+        options.innerHTML = status[i];
+        select.appendChild(options);
+    }
+    div.appendChild(select);
 }
 /**
 * Obtain an array of days in a period of time.

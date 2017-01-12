@@ -26,6 +26,7 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
+        //$data = Excel::load('public/files/diciembre.xls')->get();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
@@ -67,6 +68,7 @@ class ScheduleController extends Controller
             'days' => $days
         ]);
 
+        //return response()->json(['data' => $data], 200);
         //return a json api for testing
         /*return response()->json(['schedule' =>$schedule,
                                  'students' =>$students,

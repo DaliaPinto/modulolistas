@@ -8,16 +8,15 @@
             days.push({{$d->day}});
             @foreach($d->hours as $h)
                 var time = "{{$h->hour->start_hour}}";
-                //console.log('{ "day" : ' + {{ $d->day }} + ', "time" : "' + time + '"}');
             @endforeach
         @endforeach
-        var startDate = new Date("{{$list_start_date}}"),
+        /*var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days);
         //console.log('dates');
         for (var i = 0; i < dates.length; i ++ ) {
             //console.log(dates[i].getDate());
-        }
+        }*/
         daysMonth(new Date("2017-01-12"));
         drawTdAssitence(days);
     </script>
