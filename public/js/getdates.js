@@ -6,20 +6,19 @@ var tdNumber = document.getElementsByClassName('student-number');
 /**
  * Add student list number
  */
-for(i=0;i<tdNumber.length;i++){
+for(var i=0;i<tdNumber.length;i++){
     tdNumber[i].innerHTML = i+1;
 }
 /**
  * This function make a days header <th> in a table list,
  * and validate hours and days when de subject will impart.
  * will compare with getDates method the date days
+ *  param : dt is the date by the month of the list (could be any day)
 */
-//function daysMonth(dt) {
+function daysMonth(dt) {
+    //console.log(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
-    //obtain the current day
-    var dt = new Date();
-    //console.log('current date ' + dt);
     //obtain the month
     var month = dt.getMonth();
     //console.log(month);
@@ -47,7 +46,7 @@ for(i=0;i<tdNumber.length;i++){
     }
     //console.log(counter);
     //the number of td that will be create in header list attendance
-    for (var i = 1; i <= counter; i++) {
+    for (var i = 0; i <= counter; i++) {
         //create a new td
         var td = document.createElement('td');
         //sunday will should be a seven multiple (cause sunday starts in 0)
@@ -57,7 +56,7 @@ for(i=0;i<tdNumber.length;i++){
         if (i >= firstDay && dayDate <= lastDate) {
             //dont show a sunday td
             if (sunday == 0) {
-                td.style ='display:none;';
+                td.style = 'display:none;';
                 //console.log('sunday ' + dayDate);
             } else {
                 //console.log('not sunday ' + dayDate);
@@ -79,9 +78,17 @@ for(i=0;i<tdNumber.length;i++){
     absence.innerHTML = 'F';
     tr.appendChild(assistance);
     tr.appendChild(absence);
-    /*Also td is create in a loop. it contains a selects with
-    *options to mark assistance (just the days when the subjects are impart)
-    */
+}
+/**
+* Also td is create in a loop. it contains a selects with
+* options to mark assistance (just the days when the subjects are impart)
+*/
+function drawTdAssitence(days){
+    //
+    days.forEach(function(val){
+        val = val+7;
+        console.log(val);
+    });
     //access to trStudents
     var trStudents = document.getElementsByClassName('tr-students');
     //draw td in trStudents
@@ -92,7 +99,7 @@ for(i=0;i<tdNumber.length;i++){
             trStudents[i].appendChild(tdAssistance);
         }
     }
-//}
+}
 /**
 * Obtain an array of days in a period of time.
  * param: dateStart - when the period starts

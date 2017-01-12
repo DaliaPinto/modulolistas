@@ -26,16 +26,10 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
-        $hours = array();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
         $days = Day::where('schedule_id', $schedule->id)->get();
-        foreach($days as $d) {
-            foreach ($d->hours as $h){
-                array_push($hours, $h);
-            }
-        }
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
@@ -70,17 +64,15 @@ class ScheduleController extends Controller
             'students' => $students,
             'list_start_date'=> $list_start_date,
             'list_end_date' => $list_end_date,
-            'days' => $days,
-            'hours' => $hours
+            'days' => $days
         ]);
 
         //return a json api for testing
-        return response()->json(['schedule' =>$schedule,
+        /*return response()->json(['schedule' =>$schedule,
                                  'students' =>$students,
                                  'list_start_date'=> $list_start_date,
                                  'list_end_date' => $list_end_date,
                                  'days' => $days,
-                                 'hours' => $hours,
-                                 'status' => 0], 200);
+                                 'status' => 0], 200);*/
     }
 }
