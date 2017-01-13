@@ -15,10 +15,12 @@ for(var i=0;i<tdNumber.length;i++){
  * will compare with getDates method the date days
  *  param : dt is the date by the month of the list (could be any day)
 */
-function daysMonth(dt) {
+function daysMonth(dt, dates) {
     //console.log(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
+    var tdAssistance = document.getElementsByClassName('td-assistance');
+    var trStudents = document.getElementsByClassName('tr-students');
     //obtain the month
     var month = dt.getMonth();
     //console.log(month);
@@ -44,9 +46,12 @@ function daysMonth(dt) {
     } else {
         var counter = 35;
     }
+
+    
+
     //console.log(counter);
     //the number of td that will be create in header list attendance
-    for (var i = 0; i <= counter; i++) {
+    for (var i = 1; i <= counter; i++) {
         //create a new td
         var td = document.createElement('td');
         //sunday will should be a seven multiple (cause sunday starts in 0)
@@ -63,7 +68,7 @@ function daysMonth(dt) {
                 td.innerHTML = dayDate;
             }
             //number of date
-            dayDate = dayDate + 1;
+            dayDate++;
         } else {
             //create an empty td
             var td = document.createElement('td');
@@ -83,32 +88,21 @@ function daysMonth(dt) {
 * Also td is create in a loop. it contains a selects with
 * options to mark assistance (just the days when the subjects are impart)
 */
-function drawTdAssitence(days){
-    //access to trStudents
+function drawTdAssitence(dates){
     var trStudents = document.getElementsByClassName('tr-students');
-    //draw td in trStudents
-    for(var i=0;i<trStudents.length;i++){
-        for(var j=0;j<=32;j++){
-            //create a new td and this will add in trStudents
+    for(var i = 0; i<trStudents.length; i++){
+        for(var j = 0;j < 30; j++){
             var tdAssistance = document.createElement('td');
-                days.forEach(function (val) {
-                    val = val-1;
-                    var day = val +6;
-                    if(j==val || j==day){
-                        showSelect(tdAssistance);
-                    }
-                });
             trStudents[i].appendChild(tdAssistance);
+            for (var h = 0; h < dates.length; h ++) {
+                if(j==dates[h].getDate()){
+                    var div = document.createElement('div');
+                    showSelect(div);
+                    tdAssistance.appendChild(div);
+                }
+            }
         }
     }
-}
-function multiple(valor, multiple)
-{
-    resto = valor % multiple;
-    if(resto==0)
-        return true;
-    else
-        return false;
 }
 function showSelect(div) {
     var select = document.createElement('select');
@@ -160,7 +154,7 @@ function getDates(dateStart, dateEnd, includeDays) {
     });
     //console.log(dates);
     return weekdays;
-    //console.log(weekdays);
+    console.log(weekdays);
 }
 /**
  * Obtain the current date in

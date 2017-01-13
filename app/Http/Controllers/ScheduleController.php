@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\ExcelServiceProvider;
 
 use Psy\Util\Json;
 use Carbon\Carbon;
@@ -12,7 +13,6 @@ use App\Schedule;
 use App\GroupStudent;
 use App\Period;
 use App\Day;
-use App\HourSchedule;
 
 use App\Attendance;
 
@@ -26,7 +26,8 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
-        //$data = Excel::load('public/files/diciembre.xls')->get();
+        //
+        //$data = Excel::load('public/files/Diciembre.xls')->get();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
