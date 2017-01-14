@@ -46,9 +46,6 @@ function daysMonth(dt, dates) {
     } else {
         var counter = 35;
     }
-
-    drawTdAssistence(dates);
-
     //console.log(counter);
     //the number of td that will be create in header list attendance
     for (var i = 1; i <= counter; i++) {
@@ -64,9 +61,8 @@ function daysMonth(dt, dates) {
                 td.style = 'display:none;';
                 //console.log('sunday ' + dayDate);
             } else {
-                //put in td the calendar number of the day
-                td.innerHTML = dayDate;
                 //console.log('not sunday ' + dayDate);
+                td.innerHTML = dayDate;
             }
             //number of date
             dayDate++;
@@ -86,29 +82,28 @@ function daysMonth(dt, dates) {
     tr.appendChild(absence);
 }
 /**
-* Also td is create in a loop. it contains a selects with
-* options to mark assistance (just the days when the subjects are impart)
-*/
+ * Also td is create in a loop. it contains a selects with
+ * options to mark assistance (just the days when the subjects are impart)
+ */
 function drawTdAssistence(dates){
     var trStudents = document.getElementsByClassName('tr-students');
     for(var i = 0; i<trStudents.length; i++){
-        for(var j = 0;j < 31; j++){
-            var tdAssistance = document.createElement('td');
-            trStudents[i].appendChild(tdAssistance);
-            for (var h = 0; h < dates.length; h ++) {
-                if(j==dates[h].getDate()){
-                    var div = document.createElement('div');
-                    showSelect(div);
-                    tdAssistance.appendChild(div);
+        for(var j = 2;j < 38; j++){
+            var sunday = j % 7;
+            if (sunday != 0) {
+                var tdAssistance = document.createElement('td');
+                trStudents[i].appendChild(tdAssistance);
+                for (var h = 0; h < dates.length; h ++) {
+                    if(j==dates[h].getDate()){
+                        var div = document.createElement('div');
+                        showSelect(div);
+                        tdAssistance.appendChild(div);
+                    }
                 }
             }
         }
     }
 }
-/**
-* Draw a select with options assistance in div
-* param: div - parent node where the select will be show.
-*/
 function showSelect(div) {
     var select = document.createElement('select');
     var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
@@ -159,7 +154,7 @@ function getDates(dateStart, dateEnd, includeDays) {
     });
     //console.log(dates);
     return weekdays;
-    //console.log(weekdays);
+    console.log(weekdays);
 }
 /**
  * Obtain the current date in
