@@ -13,9 +13,8 @@
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days);
-
         daysMonth(new Date("2017-04-12"), dates);
-        drawTdAssitence(dates);
+        //drawTdAssitence(dates);
     </script>
 @endsection
 

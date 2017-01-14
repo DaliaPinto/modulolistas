@@ -47,7 +47,7 @@ function daysMonth(dt, dates) {
         var counter = 35;
     }
 
-    
+    drawTdAssistence(dates);
 
     //console.log(counter);
     //the number of td that will be create in header list attendance
@@ -64,8 +64,9 @@ function daysMonth(dt, dates) {
                 td.style = 'display:none;';
                 //console.log('sunday ' + dayDate);
             } else {
-                //console.log('not sunday ' + dayDate);
+                //put in td the calendar number of the day
                 td.innerHTML = dayDate;
+                //console.log('not sunday ' + dayDate);
             }
             //number of date
             dayDate++;
@@ -88,10 +89,10 @@ function daysMonth(dt, dates) {
 * Also td is create in a loop. it contains a selects with
 * options to mark assistance (just the days when the subjects are impart)
 */
-function drawTdAssitence(dates){
+function drawTdAssistence(dates){
     var trStudents = document.getElementsByClassName('tr-students');
     for(var i = 0; i<trStudents.length; i++){
-        for(var j = 0;j < 30; j++){
+        for(var j = 0;j < 31; j++){
             var tdAssistance = document.createElement('td');
             trStudents[i].appendChild(tdAssistance);
             for (var h = 0; h < dates.length; h ++) {
@@ -104,6 +105,10 @@ function drawTdAssitence(dates){
         }
     }
 }
+/**
+* Draw a select with options assistance in div
+* param: div - parent node where the select will be show.
+*/
 function showSelect(div) {
     var select = document.createElement('select');
     var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
@@ -154,7 +159,7 @@ function getDates(dateStart, dateEnd, includeDays) {
     });
     //console.log(dates);
     return weekdays;
-    console.log(weekdays);
+    //console.log(weekdays);
 }
 /**
  * Obtain the current date in
