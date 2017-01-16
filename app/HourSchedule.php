@@ -25,6 +25,12 @@ class HourSchedule extends Model
     public function day(){
         return $this->belongsTo('App\Day');
     }
+    /*
+     * Bidirectional relationship with Attendance class
+     */
+    public function attendances() {
+        return $this->hasMany('App\Attendance');
+    }
 
     /*
      * Quit the timestamp default

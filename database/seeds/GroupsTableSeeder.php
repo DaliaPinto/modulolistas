@@ -14,50 +14,50 @@ class GroupsTableSeeder extends Seeder
         //
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 2;
-        $group->group = 'A';
+        $group->grade = 2;
+        $group->group = '2°A - Matutino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 2;
-        $group->group = 'B';
+        $group->grade = 2;
+        $group->group = '2°B - Matutino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 2;
-        $group->group = 'C';
+        $group->grade = 2;
+        $group->group = '2°C - Matutino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 2;
-        $group->group = 'D';
+        $group->grade = 2;
+        $group->group = '2°D - Matutino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'M';
-        $group->quarter = 2;
-        $group->group = 'E';
+        $group->grade = 2;
+        $group->group = '2°E - Matutino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'V';
-        $group->quarter = 8;
-        $group->group = 'A';
+        $group->grade = 8;
+        $group->group = '8°A - Vespertino';
         $group->period_id = 2;
         $group->save();
 
         $group = new \App\Group();
         $group->shift = 'V';
-        $group->quarter = 8;
-        $group->group = 'B';
+        $group->grade = 8;
+        $group->group = '8°B - Vespertino';
         $group->period_id = 2;
         $group->save();
     }

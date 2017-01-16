@@ -100,7 +100,7 @@ class HomeController extends Controller
                     //empty object to fill subject, group and teacher
                     $row = new \stdClass();
                     $row->subject = $schedule->subject->name;
-                    $row->group = $schedule->group->quarter.'°'.$schedule->group->group;
+                    $row->group = $schedule->group->group;
                     $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name;
                     $row->schedule = $schedule->id;
 

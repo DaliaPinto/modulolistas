@@ -17,7 +17,8 @@ class CreateStudentsTable extends Migration
             $table->char('id', 10);
             $table->string('name', 50);
             $table->string('last_name', 50);
-            $table->string('second_name', 50)->nullable();
+            $table->string('middle_name', 50)->nullable();
+            $table->char('status', 1)->default('R');
         });
     }
 

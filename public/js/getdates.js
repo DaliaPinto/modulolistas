@@ -19,8 +19,6 @@ function daysMonth(dt, dates) {
     //console.log(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
-    var tdAssistance = document.getElementsByClassName('td-assistance');
-    var trStudents = document.getElementsByClassName('tr-students');
     //obtain the month
     var month = dt.getMonth();
     //console.log(month);
@@ -61,8 +59,9 @@ function daysMonth(dt, dates) {
                 td.style = 'display:none;';
                 //console.log('sunday ' + dayDate);
             } else {
-                //console.log('not sunday ' + dayDate);
+                //put in td the calendar number of the day
                 td.innerHTML = dayDate;
+                //console.log('not sunday ' + dayDate);
             }
             //number of date
             dayDate++;

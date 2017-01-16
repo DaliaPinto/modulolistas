@@ -13,6 +13,7 @@ use App\Schedule;
 use App\GroupStudent;
 use App\Period;
 use App\Day;
+use App\Student;
 
 use App\Attendance;
 
@@ -35,8 +36,10 @@ class ScheduleController extends Controller
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
-        //obtain the students list by group id and period id
-        $students = GroupStudent::where('group_id', $schedule->group->id)->get();
+        //obtain the status of students
+        $studentss = Student::where('status', 'R')->select('id')->get();
+        //obtain the students list by group id where status is regular
+        $students = GroupStudent::where('group_id', $schedule->group->id)->whereIn('student_id', $studentss)->get();
         //obtain periods dates about period id
         $list_dates = Period::where('id', '=', $schedule->group->period_id)->first();
         //obtain the current day

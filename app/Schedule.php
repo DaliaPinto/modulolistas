@@ -42,12 +42,6 @@ class Schedule extends Model
         return $this->belongsTo('App\Group');
     }
     /*
-     * Bidirectional relationship with Attendance class
-     */
-    public function attendances() {
-        return $this->hasMany('App\Attendance');
-    }
-    /*
     * Bidirectional relationship with Days class
     */
     public function days() {

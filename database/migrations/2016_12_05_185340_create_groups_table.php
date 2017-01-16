@@ -16,8 +16,8 @@ class CreateGroupsTable extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->unsignedTinyInteger('id', true);
             $table->char('shift', 1);
-            $table->tinyInteger('quarter');
-            $table->char('group', 2);
+            $table->tinyInteger('grade');
+            $table->char('group', 20);
             $table->integer('period_id');
         });
     }
