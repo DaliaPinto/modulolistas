@@ -64,6 +64,11 @@ class HourSchedulesTableSeeder extends Seeder
         $h->hour_id = 4;
         $h->day_id = 5;
         $h->save();
+        $h= new \App\HourSchedule();
+        $h->hour_id = 5;
+        $h->day_id = 5;
+        $h->save();
+
 
         //day 6
         $h= new \App\HourSchedule();

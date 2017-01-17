@@ -1,20 +1,32 @@
 @extends('layouts.app')
 @section('javascript')
-    <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/getdates.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
     <script>
+        //arrays of dates and hours
         var days = [];
+        var hours = [];
+        //push eloquent variables to array
         @foreach($days as $d)
             days.push({{$d->day}});
+            //days has hours
             @foreach($d->hours as $h)
-                var time = "{{$h->hour->start_hour}}";
+                hours.push("{{$h->hour->start_hour}}");
             @endforeach
         @endforeach
+        //startDate: when the first month starts
+        //endDate: when the first month ends
+        //dates: is a funtion and return a weekdays array.
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days);
+        //This functions return a table calendar header
         daysMonth(new Date("2017-01-12"), dates);
-        drawTdAssistence(dates);
+        //This function return <td> cells in table list.
+        drawTdAssistence(dates, hours);
     </script>
 @endsection
 
@@ -59,10 +71,11 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-7"></div>
-            <div id="current-day" class="col-md-5"></div>
+            <div class="row"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
+            <div class="row">
+                <div class="col-md-7"></div>
+                <div id="current-day" class="col-md-5"></div>
+            </div>
         </div>
     </div>
 @endsection

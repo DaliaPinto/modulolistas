@@ -13,7 +13,7 @@
     <!-- Styles - Here can put all the styles references, this is the main page -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-min/bootstrap.min.css" rel="stylesheet">
     @yield('css')
 
     <!-- Scripts - Here can put all the styles references, this is the main page -->
@@ -72,7 +72,6 @@
                                                      document.getElementById('logout-form').submit();">
                                             Cerrar Sesión
                                         </a>
-
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
@@ -91,5 +90,9 @@
     <!-- Scripts -->
     @yield('javascript')
     <script src="/js/app.js"></script>
+    <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
 </body>
 </html>

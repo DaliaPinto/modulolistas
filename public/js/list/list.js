@@ -1,7 +1,7 @@
 /*Created by Dalia Pinto on 07 dec 2017*/
 
 
-//acces to tr students
+//access to tr students
 var tdNumber = document.getElementsByClassName('student-number');
 /**
  * Add student list number
@@ -11,11 +11,10 @@ for(var i=0;i<tdNumber.length;i++){
 }
 /**
  * This function make a days header <th> in a table list,
- * and validate hours and days when de subject will impart.
- * will compare with getDates method the date days
- *  param : dt is the date by the month of the list (could be any day)
+ * it compare the argument month, and draw the number date about the day
+ * param : dt - is the date by the month of the list (could be any day)
 */
-function daysMonth(dt, dates) {
+function daysMonth(dt) {
     //console.log(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
@@ -81,21 +80,24 @@ function daysMonth(dt, dates) {
     tr.appendChild(absence);
 }
 /**
- * Also td is create in a loop. it contains a selects with
+ * drawTdAssistance create <td> in a loop. it contains a selects with
  * options to mark assistance (just the days when the subjects are impart)
  */
-function drawTdAssistence(dates){
+function drawTdAssistence(dates, hours){
+    console.log(hours);
     var trStudents = document.getElementsByClassName('tr-students');
     for(var i = 0; i<trStudents.length; i++){
         for(var j = 2;j < 38; j++){
             var sunday = j % 7;
             if (sunday != 0) {
                 var tdAssistance = document.createElement('td');
+                tdAssistance.className = 'td-assistance';
                 trStudents[i].appendChild(tdAssistance);
                 for (var h = 0; h < dates.length; h ++) {
                     if(j==dates[h].getDate()){
                         var div = document.createElement('div');
-                        showSelect(div);
+                        div.className = 'select-students';
+                        showSelect(div, hours);
                         tdAssistance.appendChild(div);
                     }
                 }
@@ -103,17 +105,33 @@ function drawTdAssistence(dates){
         }
     }
 }
-function showSelect(div) {
+/**
+*Create a menu options, to change assistance in list
+*param: div - parent to append select.
+*/
+function showSelect(div, hours) {
+    //create select element
     var select = document.createElement('select');
+    //put class attribute to select.
+    select.className = 'select-status';
+    //array of status
     var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
+    //loop 8 times, cause are 8 options
     for(var i = 0; i<8; i++){
+        //create option
         var options = document.createElement('option');
+        //value is the status
         options.value = status[i];
+        //put status
         options.innerHTML = status[i];
+        //append options in select.
         select.appendChild(options);
     }
+    //append select in div param.
     div.appendChild(select);
 }
+
+
 /**
 * Obtain an array of days in a period of time.
  * param: dateStart - when the period starts
