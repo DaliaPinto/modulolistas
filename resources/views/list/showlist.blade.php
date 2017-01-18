@@ -17,9 +17,13 @@
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
+        //token is for create incidence, a required data
+        //url is the route where the incidence will create
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
-            dates = getDates(startDate, endDate, days);
+            dates = getDates(startDate, endDate, days),
+            token = '{{ Session::token() }}',
+            url = '{{ route('create') }}';
         //This functions return a table calendar header
         daysMonth(new Date(), dates);
         //This function return <td> cells in table list.

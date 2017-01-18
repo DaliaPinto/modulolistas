@@ -1,4 +1,4 @@
-<!--obtain all the schedule data-->
+<!--obtain all the schedule details-->
 <div id="information-div">
     <div class="row">
         <div class="col-md-11 txt-center">Lista de Asistencia</div>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="form-group">
                         <label for="incidence-reason">Motivo de Incidencia: </label>
-                        <input type="text" class="form-control" id="incidence-reason" name="incidence-reason">
+                        <input type="text" class="form-control" id="incidence-type" name="incidence-type">
                     </div>
                     <div class="form-group">
                         <label for="incidence-description">Descripción: </label>
@@ -94,4 +94,3 @@
 
     </div>
 </div>
-

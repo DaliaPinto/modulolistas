@@ -41,3 +41,10 @@ Route::get('/list/{id}', [
     'middleware' => 'auth'
 ]);
 
+/*
+ * Create an incidence in list index view
+ */
+Route::post('/create', function(\Illuminate\Http\Request $request){
+    return response()->json(['date' => $request['date']]);
+})->name('create');
+
