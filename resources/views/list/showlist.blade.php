@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('javascript')
-    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
     <script>
@@ -19,18 +16,19 @@
         @endforeach
         //startDate: when the first month starts
         //endDate: when the first month ends
-        //dates: is a funtion and return a weekdays array.
+        //dates: is a function and return a weekdays array.
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days);
         //This functions return a table calendar header
-        daysMonth(new Date("2017-01-12"), dates);
+        daysMonth(new Date(), dates);
         //This function return <td> cells in table list.
         drawTdAssistence(dates, hours);
     </script>
 @endsection
 
 @section('content')
+
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">

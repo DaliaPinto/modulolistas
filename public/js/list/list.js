@@ -16,6 +16,8 @@ for(var i=0;i<tdNumber.length;i++){
 */
 function daysMonth(dt) {
     //console.log(dt);
+    //put month date in div.
+    monthName(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the month
@@ -177,36 +179,37 @@ function getDates(dateStart, dateEnd, includeDays) {
  * Obtain the current date in
  *      current-day div
  */
-var objToday = new Date(),
-    weekday = new Array('Domingo',
-                        'Lunes',
-                        'Martes',
-                        'Miércoles',
-                        'Jueves',
-                        'Viernes',
-                        'Sábado'),
-    dayOfWeek = weekday[objToday.getDay()],
-    dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate(): objToday.getDate(),
-    months = new Array('Enero',
-                        'Febrero',
-                        'Marzo',
-                        'Abril',
-                        'Mayo',
-                        'Junio',
-                        'Julio',
-                        'Agosto',
-                        'Septiembre',
-                        'Octubre',
-                        'Noviembre',
-                        'Diciembre'),
-    curMonth = months[objToday.getMonth()],
-    curYear = objToday.getFullYear();
-var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear;
-var month = curMonth;
+function monthName(objToday){
+    var weekday = new Array('Domingo',
+                            'Lunes',
+                            'Martes',
+                            'Miércoles',
+                            'Jueves',
+                            'Viernes',
+                            'Sábado'),
+        dayOfWeek = weekday[objToday.getDay()],
+        dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate(): objToday.getDate(),
+        months = new Array('Enero',
+                            'Febrero',
+                            'Marzo',
+                            'Abril',
+                            'Mayo',
+                            'Junio',
+                            'Julio',
+                            'Agosto',
+                            'Septiembre',
+                            'Octubre',
+                            'Noviembre',
+                            'Diciembre'),
+        curMonth = months[objToday.getMonth()],
+        curYear = objToday.getFullYear();
+    var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear;
+    var month = curMonth;
 
-var month = document.getElementById('month-name');
-month.innerHTML = 'MES: ' + curMonth.toUpperCase();
-//put into div the current date
-var date = document.getElementById('current-day');
-date.innerHTML = 'Lista de asistencia hasta el día: ' + today;
+    var month = document.getElementById('month-name');
+    month.innerHTML = 'MES: ' + curMonth.toUpperCase();
+    //put into div the current date
+    var date = document.getElementById('current-day');
+    date.innerHTML = 'Lista de asistencia hasta el día: ' + today;
+}
 

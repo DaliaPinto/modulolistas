@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Listas de Asistencia</title>
+    <title>{{ config('app.name', 'Jerome') }}</title>
 
     <!-- Styles - Here can put all the styles references, this is the main page -->
     <link href="/css/app.css" rel="stylesheet">
@@ -83,16 +83,13 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
-
     <!-- Scripts -->
-    @yield('javascript')
-    <script src="/js/app.js"></script>
+    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    @yield('javascript')
 </body>
 </html>
