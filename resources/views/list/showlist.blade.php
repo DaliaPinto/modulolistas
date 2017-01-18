@@ -1,3 +1,6 @@
+@section('head')
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+@endsection
 @extends('layouts.app')
 @section('javascript')
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
@@ -5,10 +8,13 @@
     <script>
         //arrays of dates and hours
         var days = [];
+        var daysId = [];
         var hours = [];
         //push eloquent variables to array
         @foreach($days as $d)
             days.push({{$d->day}});
+            daysId.push({{$d->id}});
+            console.log(daysId);
             //days has hours
             @foreach($d->hours as $h)
                 hours.push("{{$h->hour->start_hour}}");
@@ -23,11 +29,12 @@
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days),
             token = '{{ Session::token() }}',
-            url = '{{ route('create') }}';
+            url = '{{ route('edit') }}';
         //This functions return a table calendar header
         daysMonth(new Date(), dates);
         //This function return <td> cells in table list.
         drawTdAssistence(dates, hours);
+        selectIncidence(daysId, dates);
     </script>
 @endsection
 

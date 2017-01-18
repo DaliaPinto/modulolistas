@@ -7,13 +7,22 @@ $('.dropdown-menu').find('li').find('a').eq(2).on('click', function (){
     console.log(event);
     $('#myModal').modal();
 });
-
+/**
+ *onload dates in select
+ */
+function selectIncidence(days, dates){
+    console.log('days '  + days);
+    console.log(dates);
+    $('#incidence-date').load(function(){
+    });
+}
 //save in post route, all the values that was obtained in inputs
 $('#incidence-save').on('click', function(){
     $.ajax({
         method: 'POST',
         url: url,
         data:{
+            //id: made a data-type in html, then pass the attribute to js and this, could named as incidenceId or something like that
             date: $('#incidence-date option:selected').text(),
             type: $('#incidence-type').val(),
             day: $('#incidence-date').val(),

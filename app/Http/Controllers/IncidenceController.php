@@ -14,7 +14,7 @@ class IncidenceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -48,7 +48,12 @@ class IncidenceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'date' => 'required',
+            'type' => 'required',
+            'day' => 'required',
+            'description' => 'required'
+        ]);
     }
 
     /**

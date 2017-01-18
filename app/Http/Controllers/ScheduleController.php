@@ -27,8 +27,7 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
-        //
-        //$data = Excel::load('public/files/Diciembre.xls')->get();
+        //$data = Excel::load('/public/files/Diciembre.xls')->get();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule

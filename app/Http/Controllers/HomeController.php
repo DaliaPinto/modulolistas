@@ -21,7 +21,6 @@ class HomeController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -31,8 +30,7 @@ class HomeController extends Controller
     /**
      * Where to redirect users after login.
      *      it depends for the user type
-     *
-     * @var string
+     * @return view
      */
     public function getInitView()
     {
@@ -47,9 +45,6 @@ class HomeController extends Controller
                 return view('list.index');
                 break;
             case 2:
-                return view('schedule.tutor');
-                break;
-            case 3:
                 return view('schedule.tutor');
                 break;
             default:
@@ -119,8 +114,9 @@ class HomeController extends Controller
         //return json for testing
         //return response()->json(['schedule' => $hours], 200);
     }
-    /*
+    /**
      * getListHours return an array of hours
+     * @return array of day rows
      */
     public function getListHours() {
         //all the hours

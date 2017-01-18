@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 margin-div">
         <div class="col-md-3">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar listas de Asistencia por:
+             Buscar listas de Asistencia por:
         </div>
         <div class="col-lg-2">
             <select class="form-control">

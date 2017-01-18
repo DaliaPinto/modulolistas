@@ -3,15 +3,16 @@
     <div class="row">
         <div class="col-md-11 txt-center">Lista de Asistencia</div>
         <div class="col-md-1">
-            <div class="dropdown">
+            <div class="dropdown"> Opciones
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    <i class="fa fa-bars fa-2x" aria="true"></i>
+
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="{{route('home')}}"><span class="glyphicon glyphicon-arrow-left" aria="true"></span> Regresar a horarios</a></li>
+                    <li><a href="{{route('home')}}"><i class="fa fa-arrow-circle-left" aria="true"></i> Regresar a horarios</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-alert" aria="true"></span> Reportar Incidencia</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-open-file" aria="true"></span> Descargar Lista</a></li>
+                    <li><a href="#"><i class="fa fa-warning" aria="true"></i> Reportar Incidencia</a></li>
+                    <li><a href="#"><i class="fa fa-file-pdf-o" aria="true"></i> Descargar Lista</a></li>
                 </ul>
             </div>
         </div>
@@ -54,7 +55,7 @@
 
 
 <!-- Modal Incidence-->
-<div id="myModal" class="modal fade" role="dialog">
+{{--<div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -63,34 +64,43 @@
                 <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle" aria="true"></span></button>
                 <h4 class="modal-title">Reportar Incidencia</h4>
             </div>
+
+            {!! Form::open(['method' => 'POST', 'action' => 'IncidenceController@store', 'class' => 'form-horizontal']) !!}
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
+                <div class="form-group">
+                    <div class="input-group">
                         <label for="incidence-date">Seleccione Fecha:</label>
-                        <select name="incidence-date" id="incidence-date" class="form-control">
+                        <select name="incidence-date" id="incidence-date" value="{{ old('incidence-date') }}" class="form-control">
                             <option value="1">2017-01-13</option>
                         </select>
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="incidence-reason">Motivo de Incidencia: </label>
-                        <input type="text" class="form-control" id="incidence-type" name="incidence-type">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="incidence-type">Motivo de Incidencia: </label>
+                        <input type="text" class="form-control" id="incidence-type" value="{{ old('incidence-type') }}" name="incidence-type">
                     </div>
-                    <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
                         <label for="incidence-description">Descripción: </label>
-                        <textarea name="incidence-description" id="incidence-description" rows="5" class="form-control"></textarea>
+                        <textarea name="incidence-description" id="incidence-description" value="{{ old('incidence-description') }}" rows="5" class="form-control"></textarea>
                     </div>
-                    <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
                         <label for="incidence-activity">Actividades: </label>
-                        <textarea name="incidence-activity" id="incidence-activity" rows=5 class="form-control"></textarea>
+                        <textarea name="incidence-activity" id="incidence-activity" value="{{ old('incidence-activity') }}" rows=5 class="form-control"></textarea>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="incidence-save">Guardar Cambios</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
+            {!! Form::close() !!}
         </div>
 
     </div>
-</div>
+</div>--}}

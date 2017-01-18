@@ -14,7 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/bootstrap-min/bootstrap.min.css" rel="stylesheet">
-    @yield('css')
+    @yield('head')
 
     <!-- Scripts - Here can put all the styles references, this is the main page -->
     <script>
@@ -58,6 +58,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <i class="fa fa-user-o" aria="true"></i>
                                     @php
                                         $teacher = Auth::user()->teacher;
                                         echo 'Bienvenido '. $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->second_name;
@@ -90,6 +91,8 @@
     <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/moment.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/moment-with-locales.js')}}" type="text/javascript"></script>
     @yield('javascript')
 </body>
 </html>
