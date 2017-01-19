@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Incidence;
 use Illuminate\Http\Request;
 
 class IncidenceController extends Controller
@@ -14,7 +15,16 @@ class IncidenceController extends Controller
      */
     public function store(Request $request)
     {
+        $incidence = new Incidence();
+        $incidence->incidence_type = $request['incidence_type'];
+        $incidence->date = $request['date'];
+        $incidence->description = $request['description'];
+        $incidence->activity = $request['activity '];
+        $incidence->day_id = $request['day_id'];
+        $incidence->save();
 
+        return response()->json(['status' => 0,
+            'message' => 'Reporte de Incidencia Generado'], 200);
     }
 
     /**
@@ -50,7 +60,7 @@ class IncidenceController extends Controller
     {
         $this->validate($request, [
             'date' => 'required',
-            'type' => 'required',
+            'incidence_type' => 'required',
             'day' => 'required',
             'description' => 'required'
         ]);

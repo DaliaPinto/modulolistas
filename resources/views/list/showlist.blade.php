@@ -10,11 +10,10 @@
         var days = [];
         var daysId = [];
         var hours = [];
-        //push eloquent variables to array
+        //push number day and id in an array
         @foreach($days as $d)
             days.push({{$d->day}});
             daysId.push({{$d->id}});
-            console.log(daysId);
             //days has hours
             @foreach($d->hours as $h)
                 hours.push("{{$h->hour->start_hour}}");
@@ -30,16 +29,16 @@
             dates = getDates(startDate, endDate, days),
             token = '{{ Session::token() }}',
             url = '{{ route('edit') }}';
-        //This functions return a table calendar header
-        daysMonth(new Date(), dates);
+        //This function return a table calendar header
+        daysMonth(new Date());
         //This function return <td> cells in table list.
         drawTdAssistence(dates, hours);
+        //make options in select incidence modal
         selectIncidence(daysId, dates);
     </script>
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
@@ -83,8 +82,10 @@
             <div class="row"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
             <div class="row">
                 <div class="col-md-7"></div>
-                <div id="current-day" class="col-md-5"></div>
+                <div class="col-md-5">{{ $today }}</div>
             </div>
         </div>
     </div>
+    <!--Modal view-->
+    @include('incidence.create')
 @endsection

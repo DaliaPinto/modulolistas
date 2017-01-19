@@ -4,30 +4,36 @@
  */
 //access to create incidence Modal
 $('.dropdown-menu').find('li').find('a').eq(2).on('click', function (){
-    console.log(event);
     $('#myModal').modal();
 });
 /**
  *onload dates in select
  */
 function selectIncidence(days, dates){
-    console.log('days '  + days);
+    dates = moment();
     console.log(dates);
-    $('#incidence-date').load(function(){
+    $('#select').load(function(){
+        for(var i = 0; i<dates.length; i++){
+            $('<option></option>',{
+                text: dates[i].format("YYYY-MM-DD"),
+                value : dates[i].format("YYYY-MM-DD")
+
+            }).appendTo('#date');
+        }
     });
 }
-//save in post route, all the values that was obtained in inputs
+//save in post route, all the values that was obtained on inputs
 $('#incidence-save').on('click', function(){
     $.ajax({
         method: 'POST',
         url: url,
         data:{
             //id: made a data-type in html, then pass the attribute to js and this, could named as incidenceId or something like that
-            date: $('#incidence-date option:selected').text(),
-            type: $('#incidence-type').val(),
-            day: $('#incidence-date').val(),
-            description: $('#incidence-description').val(),
-            activity: $('#incidence-activity').val(),
+            date: $('#date option:selected').text(),
+            incidence_type: $('#incidence_type').val(),
+            day: $('#date').val(),
+            description: $('#description').val(),
+            activity: $('#activity').val(),
             _token: token
         }
     })
@@ -35,5 +41,8 @@ $('#incidence-save').on('click', function(){
             console.log(dt['date']);
         })
 });
+
+//post new incidence
+
 
 

@@ -27,6 +27,8 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
+        //obtains current day
+        $today= Carbon::now()->formatLocalized('%a %d %b %y');
         //$data = Excel::load('/public/files/Diciembre.xls')->get();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
@@ -68,7 +70,8 @@ class ScheduleController extends Controller
             'students' => $students,
             'list_start_date'=> $list_start_date,
             'list_end_date' => $list_end_date,
-            'days' => $days
+            'days' => $days,
+            'today' => $today
         ]);
 
         //return response()->json(['data' => $data], 200);

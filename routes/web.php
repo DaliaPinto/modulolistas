@@ -48,3 +48,13 @@ Route::post('/edit', function(\Illuminate\Http\Request $request){
     return response()->json(['date' => $request['date']]);
 })->name('edit');
 
+/*
+ * Create an incidence in list index view
+ *
+ */
+Route::post('/create', [
+    'uses' => 'IncidenceController@store',
+    'as' => 'create',
+    'middleware' => 'auth'
+]);
+

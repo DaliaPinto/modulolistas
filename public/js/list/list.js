@@ -173,7 +173,6 @@ function getDates(dateStart, dateEnd, includeDays) {
     });
     //console.log(dates);
     return weekdays;
-    console.log(weekdays);
 }
 /**
  * Obtain the current date in
@@ -209,7 +208,5 @@ function monthName(objToday){
     var month = document.getElementById('month-name');
     month.innerHTML = 'MES: ' + curMonth.toUpperCase();
     //put into div the current date
-    var date = document.getElementById('current-day');
-    date.innerHTML = 'Lista de asistencia hasta el día: ' + today;
 }
 

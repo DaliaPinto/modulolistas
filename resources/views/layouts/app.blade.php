@@ -91,8 +91,8 @@
     <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/moment.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/moment-with-locales.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>
     @yield('javascript')
 </body>
 </html>
