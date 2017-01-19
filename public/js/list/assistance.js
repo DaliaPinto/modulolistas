@@ -9,18 +9,12 @@ $('.dropdown-menu').find('li').find('a').eq(2).on('click', function (){
 /**
  *onload dates in select
  */
-function selectIncidence(days, dates){
-    dates = moment();
-    console.log(dates);
-    $('#select').load(function(){
-        for(var i = 0; i<dates.length; i++){
-            $('<option></option>',{
-                text: dates[i].format("YYYY-MM-DD"),
-                value : dates[i].format("YYYY-MM-DD")
-
-            }).appendTo('#date');
-        }
-    });
+function selectIncidence(dates){
+    var dt = "";
+    for(var i = 0; i<dates.length; i++){
+        dt = moment(new Date(dates[i]));
+        $('#date').append('<option value="'+dt.format("YYYY-MM-DD")+'">'+ dt.format("dddd, D MMMM YYYY")+'</option>');
+    }
 }
 //save in post route, all the values that was obtained on inputs
 $('#incidence-save').on('click', function(){
@@ -43,6 +37,53 @@ $('#incidence-save').on('click', function(){
 });
 
 //post new incidence
-
+$('#save-incidence').click(function () {
+    $('#form-create-incidence').submit();
+});
+$('#form-create-incidence').validate({
+    errorClass: "alert alert-danger",
+    errorElement: "div",
+    rules: {
+        date:{
+            required: true
+        },
+        incidence_type: {
+            required: true
+        },
+        description: {
+            required: false
+        },
+        activity: {
+            required: false
+        },
+        day_id:{
+            required: false
+        }
+    },
+    submitHandler: function(form) {
+        console.log('form: ' + form);
+        $('#save-incidence').prop('disabled', true);
+        var data = $(form).serializeArray(); console.log('data: '+ data);
+        $.ajax({
+            method: 'post',
+            url: urlIncidence,
+            _token: token,
+            data: data
+        }).done(function(response){
+            console.log('response: ' +response);
+            var $form = $('#form-create-incidence');
+            console.log('url: ' +urlIncidence);
+            if(response.status === 0)
+            {
+                $form.empty();
+            }
+            else
+            {
+                $('#message').append('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' +
+                    'No se pudo añadir la incidencia.</div>');
+            }
+        });
+    }
+});
 
 

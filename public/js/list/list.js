@@ -15,7 +15,7 @@ for(var i=0;i<tdNumber.length;i++){
  * param : dt - is the date by the month of the list (could be any day)
 */
 function daysMonth(dt) {
-    //console.log(dt);
+    console.log(dt);
     //put month date in div.
     monthName(dt);
     //access to tr days
@@ -45,9 +45,15 @@ function daysMonth(dt) {
     } else {
         var counter = 35;
     }
+    //if first day is 0 = dom, counter need to start in 0, else in 1
+    if(firstDay == 0){
+        var init = 0;
+    }else{
+        var init = 1;
+    }
     //console.log(counter);
     //the number of td that will be create in header list attendance
-    for (var i = 1; i <= counter; i++) {
+    for (var i = init; i <= counter; i++) {
         //create a new td
         var td = document.createElement('td');
         //sunday will should be a seven multiple (cause sunday starts in 0)
@@ -86,7 +92,7 @@ function daysMonth(dt) {
  * options to mark assistance (just the days when the subjects are impart)
  */
 function drawTdAssistence(dates, hours){
-    console.log(hours);
+    //console.log(dates);
     var trStudents = document.getElementsByClassName('tr-students');
     for(var i = 0; i<trStudents.length; i++){
         for(var j = 2;j < 38; j++){
@@ -178,35 +184,10 @@ function getDates(dateStart, dateEnd, includeDays) {
  * Obtain the current date in
  *      current-day div
  */
-function monthName(objToday){
-    var weekday = new Array('Domingo',
-                            'Lunes',
-                            'Martes',
-                            'Miércoles',
-                            'Jueves',
-                            'Viernes',
-                            'Sábado'),
-        dayOfWeek = weekday[objToday.getDay()],
-        dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate(): objToday.getDate(),
-        months = new Array('Enero',
-                            'Febrero',
-                            'Marzo',
-                            'Abril',
-                            'Mayo',
-                            'Junio',
-                            'Julio',
-                            'Agosto',
-                            'Septiembre',
-                            'Octubre',
-                            'Noviembre',
-                            'Diciembre'),
-        curMonth = months[objToday.getMonth()],
-        curYear = objToday.getFullYear();
-    var today = dayOfWeek + " " + dayOfMonth + " de " + curMonth + " del " + curYear;
-    var month = curMonth;
-
-    var month = document.getElementById('month-name');
-    month.innerHTML = 'MES: ' + curMonth.toUpperCase();
-    //put into div the current date
+function monthName(dt){
+    var month = moment(new Date(dt));
+    var today = moment(new Date());
+    $('#month-name').text('MES: '+ month.format("MMMM").toUpperCase());
+    $('#cur-date').text('Ultima Actualización : ' + today.format('dddd, D MMMM YYYY, h:mm:ss a'));
 }
 

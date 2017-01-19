@@ -5,6 +5,7 @@
 @section('javascript')
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>
     <script>
         //arrays of dates and hours
         var days = [];
@@ -23,18 +24,21 @@
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
         //token is for create incidence, a required data
+        //url is the route where the incidence will edit
         //url is the route where the incidence will create
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days),
             token = '{{ Session::token() }}',
-            url = '{{ route('edit') }}';
+            url = '{{ route('edit') }}',
+            urlIncidence= '{{ route('create') }}';
+
         //This function return a table calendar header
         daysMonth(new Date());
         //This function return <td> cells in table list.
         drawTdAssistence(dates, hours);
         //make options in select incidence modal
-        selectIncidence(daysId, dates);
+        document.body.onload = selectIncidence(dates);
     </script>
 @endsection
 
@@ -79,13 +83,15 @@
                     </table>
                 </div>
             </div>
-            <div class="row"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
             <div class="row">
-                <div class="col-md-7"></div>
-                <div class="col-md-5">{{ $today }}</div>
+                <div class="col-md-7"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
+                <div class="col-md-5" id="cur-date"></div>
+            </div>
+            <div class="row" id="messages">
             </div>
         </div>
     </div>
     <!--Modal view-->
     @include('incidence.create')
 @endsection
+

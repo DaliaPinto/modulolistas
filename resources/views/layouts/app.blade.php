@@ -93,6 +93,7 @@
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery.validate.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/locale.js')}}" type="text/javascript"></script>
     @yield('javascript')
 </body>
 </html>
