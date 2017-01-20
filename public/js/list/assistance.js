@@ -55,9 +55,6 @@ $('#form-create-incidence').validate({
         },
         activity: {
             required: false
-        },
-        day_id:{
-            required: false
         }
     },
     submitHandler: function(form) {
@@ -67,7 +64,6 @@ $('#form-create-incidence').validate({
         $.ajax({
             method: 'post',
             url: urlIncidence,
-            _token: token,
             data: data
         }).done(function(response){
             console.log('response: ' +response);
@@ -76,10 +72,12 @@ $('#form-create-incidence').validate({
             if(response.status === 0)
             {
                 $form.empty();
+                $form.append('<div class="alert alert-success" role="alert"><i class="fa fa-exclamation-circle"></i> ' +
+                    'Reporte de Incidencia Generado</div>');
             }
             else
             {
-                $('#message').append('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' +
+                $form.append('<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle"></i> ' +
                     'No se pudo añadir la incidencia.</div>');
             }
         });

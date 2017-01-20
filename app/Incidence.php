@@ -14,13 +14,13 @@ class Incidence extends Model
         'date',
         'description',
         'activity',
-        'day_id'
+        'schedule_id'
     ];
     /*
      * schedule table relationships
      */
-    public function day(){
-        return $this->hasOne('App\Day');
+    public function schedule(){
+        return $this->hasOne('App\Schedule');
     }
     /*
      * Quit the timestamp default

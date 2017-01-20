@@ -19,7 +19,7 @@ class CreateIncidencesTable extends Migration
             $table->date('date');
             $table->string('description', 50)->nullable();
             $table->string('activity', 255)->nullable();
-            $table->integer('day_id');
+            $table->integer('schedule_id');
         });
     }
 

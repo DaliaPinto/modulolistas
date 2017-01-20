@@ -20,7 +20,7 @@ class IncidenceController extends Controller
         $incidence->date = $request['date'];
         $incidence->description = $request['description'];
         $incidence->activity = $request['activity '];
-        $incidence->day_id = $request['day_id'];
+        $incidence->schedule_id = $request['schedule_id'];
         $incidence->save();
 
         return response()->json(['status' => 0,

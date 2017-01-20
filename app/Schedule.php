@@ -47,4 +47,10 @@ class Schedule extends Model
     public function days() {
         return $this->hasMany('App\Day');
     }
+    /*
+     * Bidirectional relationship with HourSchedule class
+     */
+    public function incidences() {
+        return $this->hasMany('App\Incidence');
+    }
 }
