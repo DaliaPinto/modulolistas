@@ -10,7 +10,7 @@ class Group extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'shift', 'quarter', 'group', 'period_id'
+        'shift', 'quarter', 'group', 'period_id', 'career_id'
     ];
 
     /*
@@ -24,6 +24,13 @@ class Group extends Model
     */
     public function period(){
         return $this->belongsTo('App\Period');
+    }
+    /*
+    * period function make a object to access
+    *      at the Career attributes
+    */
+    public function career(){
+        return $this->belongsTo('App\Career');
     }
 
     /*

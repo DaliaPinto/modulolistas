@@ -58,3 +58,7 @@ Route::post('/create', [
     'middleware' => 'auth'
 ]);
 
+Route::get('/excelFile', [
+    'uses' => 'ScheduleController@showDataExcel'
+]);
+

@@ -14,11 +14,12 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
-            $table->unsignedTinyInteger('id', true);
+            $table->integer('id', true);
             $table->char('shift', 1);
             $table->tinyInteger('grade');
             $table->char('group', 20);
             $table->integer('period_id');
+            $table->integer('career_id');
         });
     }
 

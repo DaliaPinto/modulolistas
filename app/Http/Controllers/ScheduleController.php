@@ -1,12 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\ExcelServiceProvider;
-
-use Psy\Util\Json;
 use Carbon\Carbon;
 
 use App\Schedule;
@@ -15,7 +9,8 @@ use App\Period;
 use App\Day;
 use App\Student;
 
-use App\Attendance;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ScheduleController extends Controller
 {
@@ -27,7 +22,6 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
-        //$data = Excel::load('/public/files/Diciembre.xls')->get();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
@@ -79,5 +73,10 @@ class ScheduleController extends Controller
                                  'list_end_date' => $list_end_date,
                                  'days' => $days,
                                  'status' => 0], 200);*/
+    }
+
+    public function showDataExcel() {
+        $data = Excel::load('public/files/Diciembre.xls', function($reader) { })->get();
+        return response()->json(['data' => $data]);
     }
 }

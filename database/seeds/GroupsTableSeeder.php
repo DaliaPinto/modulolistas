@@ -11,12 +11,16 @@ class GroupsTableSeeder extends Seeder
      */
     public function run()
     {
+        $career = new \App\Career();
+        $career->name = 'Tecnologías de la Información y Comunicación';
+
         //
         $group = new \App\Group();
         $group->shift = 'M';
         $group->grade = 2;
         $group->group = '2°A - Matutino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -24,6 +28,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 2;
         $group->group = '2°B - Matutino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -31,6 +36,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 2;
         $group->group = '2°C - Matutino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -38,6 +44,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 2;
         $group->group = '2°D - Matutino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -45,6 +52,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 2;
         $group->group = '2°E - Matutino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -52,6 +60,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 8;
         $group->group = '8°A - Vespertino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
 
         $group = new \App\Group();
@@ -59,6 +68,7 @@ class GroupsTableSeeder extends Seeder
         $group->grade = 8;
         $group->group = '8°B - Vespertino';
         $group->period_id = 2;
+        $group->career_id = 1;
         $group->save();
     }
 }
