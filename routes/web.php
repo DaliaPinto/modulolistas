@@ -42,7 +42,7 @@ Route::get('/list/{id}', [
 ]);
 
 /*
- * Create an incidence in list index view
+ * Edit an incidence in list index view
  */
 Route::post('/edit', function(\Illuminate\Http\Request $request){
     return response()->json(['date' => $request['date']]);
@@ -57,6 +57,7 @@ Route::post('/create', [
     'as' => 'create',
     'middleware' => 'auth'
 ]);
+
 
 Route::get('/excelFile', [
     'uses' => 'ScheduleController@showDataExcel'

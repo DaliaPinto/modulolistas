@@ -9,36 +9,80 @@
     <script>
         //arrays of dates and hours
         var days = [];
-        var daysId = [];
-        var hours = [];
         //push number day and id in an array
         @foreach($days as $d)
             days.push({{$d->day}});
-            daysId.push({{$d->id}});
-            //days has hours
-            @foreach($d->hours as $h)
-                hours.push("{{$h->hour->start_hour}}");
-            @endforeach
         @endforeach
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
-        //token is for create incidence, a required data
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days),
-            token = '{{ Session::token() }}',
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('create') }}';
 
         //This function return a table calendar header
         daysMonth(new Date());
-        //This function return <td> cells in table list.
-        drawTdAssistence(dates, hours);
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
+        document.body.onload = drawTdAssistence(dates);
+        /**
+         * drawTdAssistance create <td> in a loop. it contains a selects with
+         * options to mark assistance (just the days when the subjects are impart)
+         */
+        function drawTdAssistence(dates){
+            //console.log(dt.getDate());
+            var trStudents = document.getElementsByClassName('tr-students');
+            for(var i = 0; i<trStudents.length; i++){
+                for(var j = 2;j < 38; j++){
+                    var sunday = j % 7;
+                    if (sunday != 0) {
+                        var tdAssistance = document.createElement('td');
+                        tdAssistance.className = 'td-assistance';
+                        trStudents[i].appendChild(tdAssistance);
+                        for (var h = 0; h < dates.length; h ++) {
+                            if(j==dates[h].getDate()){
+                                var div = document.createElement('div');
+                                div.className = 'select-students';
+                                showSelect(div);
+                                tdAssistance.appendChild(div);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /**
+         *Create a menu options, to change assistance in list
+         *param: div - parent to append select.
+         */
+        function showSelect(div) {
+            var form = document.createElement('form');
+            form.className = 'form-assistance';
+            //create select element
+            var select = document.createElement('select');
+            //put class attribute to select.
+            select.className = 'select-status';
+            //array of status
+            var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
+            //loop 8 times, cause are 8 options
+            for(var i = 0; i<8; i++){
+                //create option
+                var options = document.createElement('option');
+                //value is the status
+                options.value = status[i];
+                //put status
+                options.innerHTML = status[i];
+                //append options in select.
+                select.appendChild(options);
+            }
+            //append select in div param.
+            form.appendChild(select);
+            div.appendChild(form);
+        }
     </script>
 @endsection
 

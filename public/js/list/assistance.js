@@ -3,7 +3,7 @@
  * Created by Dalia Pinto on 17/01/2017.
  */
 //access to create incidence Modal
-$('.dropdown-menu').find('li').find('a').eq(2).on('click', function (){
+$('#new-incidence').on('click', function (){
     $('#myModal').modal();
 });
 /**
@@ -39,6 +39,9 @@ $('#incidence-save').on('click', function(){
 //post new incidence
 $('#save-incidence').click(function () {
     $('#form-create-incidence').submit();
+});
+$("#cancel-incidence").click(function() {
+    $('#new-incidence').show();
 });
 $('#form-create-incidence').validate({
     errorClass: "alert alert-danger",

@@ -75,6 +75,7 @@ class ScheduleController extends Controller
                                  'status' => 0], 200);*/
     }
 
+    //create api by excel sheet
     public function showDataExcel() {
         $data = Excel::load('public/files/Diciembre.xls', function($reader) { })->get();
         return response()->json(['data' => $data]);

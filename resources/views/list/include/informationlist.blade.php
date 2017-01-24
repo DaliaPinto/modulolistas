@@ -10,7 +10,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="{{route('home')}}"><i class="fa fa-arrow-circle-left" aria="true"></i> Regresar a horarios</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="fa fa-warning" aria="true"></i> Reportar Incidencia</a></li>
+                    <li id="new-incidence"><a href="#"><i class="fa fa-warning" aria="true"></i> Reportar Incidencia</a></li>
                     <li><a href="#"><i class="fa fa-file-pdf-o" aria="true"></i> Descargar Lista</a></li>
                 </ul>
             </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <div class="col-md-5">
-            CARRERA: Tecnologías de la Información y Comunicación
+            CARRERA: {{ $schedule->group->career->name }}
         </div>
         <div class="col-md-4">MATERIA: {{ $schedule->subject->name }} </div>
         <div class="col-md-3">PERIODO: {{ $schedule->group->period->description }}</div>

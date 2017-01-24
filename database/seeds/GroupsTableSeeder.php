@@ -11,8 +11,6 @@ class GroupsTableSeeder extends Seeder
      */
     public function run()
     {
-        $career = new \App\Career();
-        $career->name = 'Tecnologías de la Información y Comunicación';
 
         //
         $group = new \App\Group();

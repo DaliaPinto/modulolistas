@@ -15,7 +15,7 @@ for(var i=0;i<tdNumber.length;i++){
  * param : dt - is the date by the month of the list (could be any day)
 */
 function daysMonth(dt) {
-    console.log(dt);
+    //console.log(dt);
     //put month date in div.
     monthName(dt);
     //access to tr days
@@ -87,58 +87,6 @@ function daysMonth(dt) {
     tr.appendChild(assistance);
     tr.appendChild(absence);
 }
-/**
- * drawTdAssistance create <td> in a loop. it contains a selects with
- * options to mark assistance (just the days when the subjects are impart)
- */
-function drawTdAssistence(dates, hours){
-    //console.log(dates);
-    var trStudents = document.getElementsByClassName('tr-students');
-    for(var i = 0; i<trStudents.length; i++){
-        for(var j = 2;j < 38; j++){
-            var sunday = j % 7;
-            if (sunday != 0) {
-                var tdAssistance = document.createElement('td');
-                tdAssistance.className = 'td-assistance';
-                trStudents[i].appendChild(tdAssistance);
-                for (var h = 0; h < dates.length; h ++) {
-                    if(j==dates[h].getDate()){
-                        var div = document.createElement('div');
-                        div.className = 'select-students';
-                        showSelect(div, hours);
-                        tdAssistance.appendChild(div);
-                    }
-                }
-            }
-        }
-    }
-}
-/**
-*Create a menu options, to change assistance in list
-*param: div - parent to append select.
-*/
-function showSelect(div, hours) {
-    //create select element
-    var select = document.createElement('select');
-    //put class attribute to select.
-    select.className = 'select-status';
-    //array of status
-    var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
-    //loop 8 times, cause are 8 options
-    for(var i = 0; i<8; i++){
-        //create option
-        var options = document.createElement('option');
-        //value is the status
-        options.value = status[i];
-        //put status
-        options.innerHTML = status[i];
-        //append options in select.
-        select.appendChild(options);
-    }
-    //append select in div param.
-    div.appendChild(select);
-}
-
 
 /**
 * Obtain an array of days in a period of time.
@@ -146,7 +94,7 @@ function showSelect(div, hours) {
  * param: dateEnd - when the period ends
  * param: includeDays - an array of days about number
  *        for example: sun == 0, mon == 1, wen == 3, sat == 6.
- *        could add just one day or all the week [0], [0,1,6],
+ *        it can add just one day or all the week [0], [0,1,6],
  *        or all combinations as possible
 */
 function getDates(dateStart, dateEnd, includeDays) {
@@ -188,6 +136,6 @@ function monthName(dt){
     var month = moment(new Date(dt));
     var today = moment(new Date());
     $('#month-name').text('MES: '+ month.format("MMMM").toUpperCase());
-    $('#cur-date').text('Ultima Actualización : ' + today.format('dddd, D MMMM YYYY, h:mm:ss a'));
+    $('#cur-date').text('Ultima Actualización: ' + today.format('dddd, D MMMM YYYY, h:mm:ss a'));
 }
 

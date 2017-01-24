@@ -19,7 +19,7 @@ class IncidenceController extends Controller
         $incidence->incidence_type = $request['incidence_type'];
         $incidence->date = $request['date'];
         $incidence->description = $request['description'];
-        $incidence->activity = $request['activity '];
+        $incidence->activity = $request['activity'];
         $incidence->schedule_id = $request['schedule_id'];
         $incidence->save();
 
@@ -34,17 +34,6 @@ class IncidenceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }
