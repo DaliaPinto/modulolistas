@@ -40,9 +40,8 @@ $('#incidence-save').on('click', function(){
 $('#save-incidence').click(function () {
     $('#form-create-incidence').submit();
 });
-$("#cancel-incidence").click(function() {
-    $('#new-incidence').show();
-});
+
+
 $('#form-create-incidence').validate({
     errorClass: "alert alert-danger",
     errorElement: "div",
@@ -74,9 +73,13 @@ $('#form-create-incidence').validate({
             console.log('url: ' +urlIncidence);
             if(response.status === 0)
             {
-                $form.empty();
-                $form.append('<div class="alert alert-success" role="alert"><i class="fa fa-exclamation-circle"></i> ' +
+                $form.prepend('<div class="alert alert-success" role="alert" id="msg-success"><i class="fa fa-exclamation-circle"></i> ' +
                     'Reporte de Incidencia Generado</div>');
+                $('#incidence_type, #description, #activity').val('');
+                $('#save-incidence').prop('disabled', false);
+                $('#myModal').on('click', function () {
+                    $('#msg-success').hide('3000');
+                });
             }
             else
             {

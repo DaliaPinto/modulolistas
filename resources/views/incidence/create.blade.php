@@ -36,7 +36,7 @@
             <!--Modal Footer-->
             <div class="modal-footer">
                 <button id="save-incidence" type="submit" class="btn btn-primary">Guardar</button>
-                <button id="cancel-incidence" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div><!--/Modal Footer-->
         </div><!--/Modal content-->
     </div><!--/Modal Dialog-->
