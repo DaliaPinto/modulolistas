@@ -12,8 +12,8 @@ $('#new-incidence').on('click', function (){
 function selectIncidence(dates){
     var dt = "";
     for(var i = 0; i<dates.length; i++){
-        dt = moment(new Date(dates[i]));
-        $('#date').append('<option value="'+dt.format("YYYY-MM-DD")+'">'+ dt.format("dddd, D MMMM YYYY")+'</option>');
+        dt = moment(new Date(dates[i].date));
+        $('#date').append('<option value="'+dt.format("YYYY-MM-DD")+'">'+ dt.format("D MMMM YYYY")+" - "+ dt.format("dddd").toUpperCase()+'</option>');
     }
 }
 //save in post route, all the values that was obtained on inputs

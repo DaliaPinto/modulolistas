@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\HourSchedule;
 use Carbon\Carbon;
 
 use App\Schedule;
@@ -24,17 +23,18 @@ class ScheduleController extends Controller
      */
     public function showList($id)
     {
+        //save in array, hours_schedule data
+        $hours = array();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
         $days = Day::where('schedule_id', $schedule->id)->get();
-
-        //obtain total hour by day
-        $hours = Day::join('hour_schedules', 'hour_schedules.day_id', '=', 'days.id')
-            ->where('schedule_id', $schedule->id)
-            ->groupBy('days.day')
-            ->get(['days.day', DB::raw('count(*) as hours')]);
-
+        //push in $hours array, to get the data in view
+        foreach ($days as $day){
+            foreach ($day->hours as $hour){
+                array_push($hours, $hour);
+            }
+        }
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
