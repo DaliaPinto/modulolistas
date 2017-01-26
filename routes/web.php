@@ -54,7 +54,7 @@ Route::post('/edit', function(\Illuminate\Http\Request $request){
  */
 Route::post('/create', [
     'uses' => 'IncidenceController@store',
-    'as' => 'create',
+    'as' => 'createIncidence',
     'middleware' => 'auth'
 ]);
 

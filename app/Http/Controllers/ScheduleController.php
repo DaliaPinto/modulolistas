@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\HourSchedule;
 use Carbon\Carbon;
 
 use App\Schedule;
@@ -9,6 +10,7 @@ use App\Period;
 use App\Day;
 use App\Student;
 
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -26,13 +28,20 @@ class ScheduleController extends Controller
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
         $days = Day::where('schedule_id', $schedule->id)->get();
+
+        //obtain total hour by day
+        $hours = Day::join('hour_schedules', 'hour_schedules.day_id', '=', 'days.id')
+            ->where('schedule_id', $schedule->id)
+            ->groupBy('days.day')
+            ->get(['days.day', DB::raw('count(*) as hours')]);
+
         //this variables contains the start and end date of period
         $list_start_date = null;
         $list_end_date = null;
         //obtain the status of students
-        $studentss = Student::where('status', 'R')->select('id')->get();
+        $student = Student::where('status', 'R')->select('id')->get();
         //obtain the students list by group id where status is regular
-        $students = GroupStudent::where('group_id', $schedule->group->id)->whereIn('student_id', $studentss)->get();
+        $students = GroupStudent::where('group_id', $schedule->group->id)->whereIn('student_id', $student)->get();
         //obtain periods dates about period id
         $list_dates = Period::where('id', '=', $schedule->group->period_id)->first();
         //obtain the current day
@@ -62,7 +71,8 @@ class ScheduleController extends Controller
             'students' => $students,
             'list_start_date'=> $list_start_date,
             'list_end_date' => $list_end_date,
-            'days' => $days
+            'days' => $days,
+            'hours' => $hours
         ]);
 
         //return response()->json(['data' => $data], 200);
@@ -74,7 +84,6 @@ class ScheduleController extends Controller
                                  'days' => $days,
                                  'status' => 0], 200);*/
     }
-
     //create api by excel sheet
     public function showDataExcel() {
         $data = Excel::load('public/files/Diciembre.xls', function($reader) { })->get();

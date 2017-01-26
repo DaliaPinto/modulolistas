@@ -75,6 +75,7 @@ $('#form-create-incidence').validate({
             {
                 $form.prepend('<div class="alert alert-success" role="alert" id="msg-success"><i class="fa fa-exclamation-circle"></i> ' +
                     'Reporte de Incidencia Generado</div>');
+
                 $('#incidence_type, #description, #activity').val('');
                 $('#save-incidence').prop('disabled', false);
                 $('#myModal').on('click', function () {

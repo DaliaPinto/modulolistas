@@ -6,13 +6,31 @@
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>
-    <script>
+    <script type="text/javascript">
+        //Global status variable
+        STATUS = '';
+
+
         //arrays of dates and hours
+
         var days = [];
-        //push number day and id in an array
         @foreach($days as $d)
             days.push({{$d->day}});
         @endforeach
+            console.log(days);
+            
+        /*if(hours.length == 1){
+            STATUS = 'A';
+        }else if(hours.length == 2){
+            STATUS = 'B'
+        }else if(hours.length == 3){
+            STATUS = 'C'
+        }else if(hours.length == 4){
+            STATUS = 'D'
+        }else if(hours.length == 5) {
+            STATUS = 'E'
+        }*/
+
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
@@ -22,7 +40,7 @@
             endDate = new Date ("{{$list_end_date}}"),
             dates = getDates(startDate, endDate, days),
             url = '{{ route('edit') }}',
-            urlIncidence= '{{ route('create') }}';
+            urlIncidence= '{{ route('createIncidence') }}';
 
         //This function return a table calendar header
         daysMonth(new Date());
@@ -60,16 +78,14 @@
          *param: div - parent to append select.
          */
         function showSelect(div) {
-            var form = document.createElement('form');
-            form.className = 'form-assistance';
             //create select element
             var select = document.createElement('select');
             //put class attribute to select.
             select.className = 'select-status';
             //array of status
-            var status = ['A', 'B', 'C', 'D', 'E','/', 'R', 'J'];
+            var status = [STATUS,'/','R','J'];
             //loop 8 times, cause are 8 options
-            for(var i = 0; i<8; i++){
+            for(var i = 0; i<status.length; i++){
                 //create option
                 var options = document.createElement('option');
                 //value is the status
@@ -80,8 +96,7 @@
                 select.appendChild(options);
             }
             //append select in div param.
-            form.appendChild(select);
-            div.appendChild(form);
+            div.appendChild(select);
         }
     </script>
 @endsection
