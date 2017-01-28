@@ -1,11 +1,7 @@
-@section('head')
-    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
-@endsection
 @extends('layouts.app')
 @section('javascript')
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         //day arrays obtain the weekday, it will use in
         //getDates functions

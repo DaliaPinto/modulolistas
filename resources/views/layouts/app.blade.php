@@ -14,6 +14,8 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/bootstrap-min/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="/css/header/navbar.css" rel="stylesheet">
     @yield('head')
 
     <!-- Scripts - Here can put all the styles references, this is the main page -->
@@ -25,12 +27,13 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class=" navbar-style">
             <div class="container">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                        <i class="fa fa-bars fa-2x" aria="true" style="color:#fff;"></i>
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -38,15 +41,14 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Jerome
+                    <a href="{{ url('/') }}">
+                        <img src="/images/logo.png" alt="">
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -87,11 +89,15 @@
         @yield('content')
     </div>
     <!-- Scripts -->
-    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
+
+    <!--Script for validation form-->
     <script src="{{URL::to('/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>
+    <!--Script for date format-->
     <script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/locale.js')}}" type="text/javascript"></script>
     @yield('javascript')
