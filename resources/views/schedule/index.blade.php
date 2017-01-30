@@ -2,7 +2,6 @@
 @section('javascript')
     <script type="text/javascript">
         $(document).ready(function() {
-            console.log('carga tooltip');
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>

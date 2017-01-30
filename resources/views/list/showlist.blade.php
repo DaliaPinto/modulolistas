@@ -5,14 +5,14 @@
     <script type="text/javascript">
         //day arrays obtain the weekday, it will use in
         //getDates functions
-        var days = [];
-        @foreach($days as $d)
-            days.push({{$d->day}});
-        @endforeach
+       /* var days = [];
+        var daysId =[];
+        {{--@foreach($days as $d)
+            days.push({day_number : {{$d->day}}, day_id: {{$d->id}}} );
+        @endforeach--}}*/
 
         //count total hours by day, to pass list
         var data = {!! $days !!};
-        console.log(data);
         validateStatus(data);
 
         //startDate: when the first month starts
@@ -22,13 +22,13 @@
         //url is the route where the incidence will create
         var startDate = new Date("{{$list_start_date}}"),
             endDate = new Date ("{{$list_end_date}}"),
-            dates = getDates(startDate, endDate, days),
+            dates = getDates(startDate, endDate, data),
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
 
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
-        document.body.onload = drawTdAssistence(dates);
+        document.body.onload = drawTdAssistence(dates, data);
         daysMonth(new Date());
 
     </script>

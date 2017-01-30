@@ -98,6 +98,7 @@ function daysMonth(dt) {
  *        for example: sun == 0, mon == 1, wen == 3, sat == 6.
  *        it can add just one day or all the week [0], [0,1,6],
  *        or all combinations as possible
+ * @return: Array of days in the includeDays array
 */
 function getDates(dateStart, dateEnd, includeDays) {
     var currentDate = dateStart,
@@ -116,19 +117,17 @@ function getDates(dateStart, dateEnd, includeDays) {
     }
     //cycle dates
     dates.forEach(function(day){
-        //console.log(day);
         // cycle days to be included (so==0, mo==1, etc.)
         includeDays.forEach(function(include) {
             //console.log(include);
-            if(day.getDay() == include) {
-                weekdays.push({date : day, numberday : include});
+            if(day.getDay() == include.day) {
+                weekdays.push({date : day, number_day : include.day, day_id : include.id});
                 //weekdays.push(day);
                 //console.log(day.getDay());
                 //console.log(weekdays);
             }
         });
     });
-    //console.log(dates);
     return weekdays;
 }
 /**
@@ -146,8 +145,8 @@ function monthName(dt){
  * drawTdAssistance create <td> in a loop. it contains a selects with
  * options to mark assistance (just the days when the subjects are impart)
  */
-function drawTdAssistence(dates){
-    //console.log(dt.getDate());
+function drawTdAssistence(dates, data){
+    console.log(dates);
     var trStudents = document.getElementsByClassName('tr-students');
     for(var i = 0; i<trStudents.length; i++){
         for(var j = 2;j < 38; j++){
@@ -160,7 +159,7 @@ function drawTdAssistence(dates){
                     if(j==dates[h].date.getDate()){
                         var div = document.createElement('div');
                         div.className = 'select-students';
-                        showSelect(div);
+                        showSelect(div, dates[h], data);
                         tdAssistance.appendChild(div);
                     }
                 }
@@ -172,11 +171,16 @@ function drawTdAssistence(dates){
  *Create a menu options, to change assistance in list
  *param: div - parent to append select.
  */
-function showSelect(div) {
+function showSelect(div, dates, data) {
+    //console.log(dates);
     //create select element
     var select = document.createElement('select');
     //put class attribute to select.
     select.className = 'select-status';
+    //Add function
+    select.onchange = function () {
+        obtainValue(this, dates, data);
+    };
     //loop 8 times, cause are 8 options
     for(var i = 0; i<STATUS.length; i++){
         //create option
@@ -195,6 +199,7 @@ function showSelect(div) {
  * Compare de hours to put the status values in combo
 */
 function validateStatus(data){
+    console.log(data);
     for(var i = 0; i<data.length; i++){
         var totalHours = data[i].hours.length;
         switch(totalHours){
