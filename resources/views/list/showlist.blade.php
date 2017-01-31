@@ -1,36 +1,38 @@
 @extends('layouts.app')
 @section('javascript')
+    <!--Attendance list-->
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
-        //day arrays obtain the weekday, it will use in
-        //getDates functions
-       /* var days = [];
-        var daysId =[];
-        {{--@foreach($days as $d)
-            days.push({day_number : {{$d->day}}, day_id: {{$d->id}}} );
-        @endforeach--}}*/
-
-        //count total hours by day, to pass list
+        //data: is an array of objects, contains days, and hours of schedules
+        //are impart.
         var data = {!! $days !!};
         validateStatus(data);
+
+        var month = {!! $months !!};
+        console.log(month);
 
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
-        var startDate = new Date("{{$list_start_date}}"),
-            endDate = new Date ("{{$list_end_date}}"),
+        var startDate = addDays(new Date(month[2].start_date), 1),
+            endDate = addDays(new Date(month[2].end_date), 1),
             dates = getDates(startDate, endDate, data),
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
 
+        console.log('start date: '+startDate + ' end date: '+endDate);
+
+        //put in tabs the name of the period months
+        $('.tab-month').html('');
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
+        //draw tds in td table
         document.body.onload = drawTdAssistence(dates, data);
-        daysMonth(new Date());
-
+        //put in header table list, the date day
+        daysMonth(startDate);
     </script>
 @endsection
 
@@ -38,10 +40,10 @@
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#">Enero</a></li>
-                <li role="presentation"><a href="#">Febrero</a></li>
-                <li role="presentation"><a href="#">Marzo</a></li>
-                <li role="presentation"><a href="#">Abril</a></li>
+                <li role="presentation" class="active"><a href="#" class="tab-month"></a></li>
+                <li role="presentation"><a href="#" class="tab-month"></a></li>
+                <li role="presentation"><a href="#" class="tab-month"></a></li>
+                <li role="presentation"><a href="#" class="tab-month"></a></li>
             </ul>
             <!--information List-->
             @include('list.include.informationlist')

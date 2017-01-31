@@ -41,7 +41,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/') }}" data-toggle="tooltip" title="Ir a Inicio" data-placement="right">
                         <img src="/images/logo.png" alt="">
                     </a>
                 </div>
@@ -58,7 +58,7 @@
                             <li><a href="{{ url('/login') }}">Iniciar Sesión</a></li>
                             <li><a href="{{ url('/register') }}">Registro</a></li>
                         @else
-                            <li class="dropdown">
+                            <li class="dropdown" data-toggle="tooltip" title="Menú de Usuario" data-placement="left">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class="fa fa-user-o" aria="true"></i>
                                     @php
@@ -100,6 +100,11 @@
     <!--Script for date format-->
     <script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/locale.js')}}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
     @yield('javascript')
 </body>
 </html>

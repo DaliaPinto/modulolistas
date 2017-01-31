@@ -34,6 +34,7 @@ function daysMonth(dt) {
     //console.log('first ' + firstDay);
     //month plus one, 'cause month format starts in 0
     var months = dt.setMonth(month + 1, 0);
+    //console.log('month: '+months);
     //obtain the actual month last day
     var lastDate = dt.getDate();
     //console.log('last ' + lastDate);
@@ -235,4 +236,12 @@ function validateStatus(data){
                 break
         }
     }
+}
+/**
+ * Convert in correct format day
+*/
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(date.getDate() + days);
+    return result;
 }

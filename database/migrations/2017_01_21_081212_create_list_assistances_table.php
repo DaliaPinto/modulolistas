@@ -17,7 +17,7 @@ class CreateListAssistancesTable extends Migration
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('schedule_id');
+            $table->integer('period_id');
         });
     }
 

@@ -1,11 +1,4 @@
 <!--Header table schedules-->
-@section('javascript')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
-@endsection
 <table class="table">
     <thead>
         <tr>

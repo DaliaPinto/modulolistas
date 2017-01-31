@@ -10,7 +10,7 @@ class ListAssistance extends Model
     * Method, it fill the seeders
     */
     protected $fillable = [
-        'start_date', 'end_date', 'schedule_id'
+        'start_date', 'end_date', 'period_id'
     ];
 
     /*
@@ -21,7 +21,7 @@ class ListAssistance extends Model
     /*
      * Bidirectional relationship with Schedule class
      */
-    public function schedule() {
-        return $this->belongsTo('App\Schedule');
+    public function period() {
+        return $this->belongsTo('App\Period');
     }
 }
