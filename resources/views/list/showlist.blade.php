@@ -9,8 +9,8 @@
         var data = {!! $days !!};
         validateStatus(data);
 
+        //month is an array of months in the period
         var month = {!! $months !!};
-        console.log(month);
 
         //startDate: when the first month starts
         //endDate: when the first month ends
@@ -23,10 +23,14 @@
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
 
-        console.log('start date: '+startDate + ' end date: '+endDate);
-
+        //Put text in tabs
+        $.each( month, function(key, value ) {
+            var date = moment(value.start_date);
+            $('.tab-month').eq(key).html(date.format('MMMM').toUpperCase());
+            console.log();
+        });
         //put in tabs the name of the period months
-        $('.tab-month').html('');
+
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
         //draw tds in td table
