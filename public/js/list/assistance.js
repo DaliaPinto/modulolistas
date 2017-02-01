@@ -1,7 +1,11 @@
-
 /**
- * Created by Dalia Pinto on 17/01/2017.
+ * fileoverview: assistance.js contains all the CRUD in
+ * attendance model, and incidence model, and details
+ * in incidence.create.blade view
+ * Author: Dalia Patricia Pinto Islas
+ * 2017-17-01
  */
+
 //access to create incidence Modal
 $('#new-incidence').on('click', function (){
     $('#myModal').modal();

@@ -1,3 +1,11 @@
+/**
+ * fileoverview: list.js contains all the details in
+ * showlist.blade.php view
+ * Author: Dalia Patricia Pinto Islas
+ * 2016-07-12
+ */
+
+
 /*Created by Dalia Pinto on 07 dec 2017*/
 
 //Global status variable
@@ -17,25 +25,27 @@ for(var i=0;i<tdNumber.length;i++){
  * param : dt - is the date by the month of the list (could be any day)
 */
 function daysMonth(dt) {
-    //console.log(dt);
+    //console.log('dt: '+dt);
     //put month date in div.
     monthName(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the month
     var month = dt.getMonth();
-    //console.log(month);
+    //console.log('month: ' + month);
     //obtain the 4 digits year
     var year = dt.getFullYear();
-    //current month format
+    //console.log('year: '+year);
+    //obtain the first day of dt
     dt = new Date(year, month, 01);
-    //obtain the actual month first day
+    //console.log('dt format :' + dt);
+    //obtain the dayweek number of dt
     var firstDay = dt.getDay();
-    //console.log('first ' + firstDay);
+    //console.log('first: ' + firstDay);
     //month plus one, 'cause month format starts in 0
     var months = dt.setMonth(month + 1, 0);
     //console.log('month: '+months);
-    //obtain the actual month last day
+    //obtain the dt last day
     var lastDate = dt.getDate();
     //console.log('last ' + lastDate);
     //this variable will print the date in td.
@@ -64,6 +74,7 @@ function daysMonth(dt) {
         /*if the first day is higher than index and last day is smaller than dy var
          *   this loop draws a td elements with a day number, else, just draws a empty td element*/
         if (i >= firstDay && dayDate <= lastDate) {
+            //console.log('i: '+i + ' firstDay: '+ firstDay+ ' dayDate: '+dayDate+' lastDate: '+lastDate);
             //dont show a sunday td
             if (sunday == 0) {
                 td.style = 'display:none;';
@@ -75,14 +86,12 @@ function daysMonth(dt) {
             }
             //number of date
             dayDate++;
-        } else {
-            //create an empty td
-            var td = document.createElement('td');
+            //console.log('dayDate: '+dayDate);
         }
         //add in tr all the td was create
         tr.appendChild(td);
     }
-    //create two th, it contains the total hours assistence or absence in the month
+    //create two th, it contains the total hours assistance or absence in the month
     var assistance = document.createElement('td');
     var absence = document.createElement('td');
     assistance.innerHTML = 'A';
@@ -141,17 +150,67 @@ function monthName(dt){
     $('#month-name').text('MES: '+ month.format("MMMM").toUpperCase());
     $('#cur-date').text('Ultima Actualización: ' + today.format('dddd, D MMMM YYYY, h:mm:ss a'));
 }
-/*Updated by Dalia Pinto on 26 dec 2017*/
+/*Updated by Dalia Pinto on 26 jan 2017*/
 /**
  * drawTdAssistance create <td> in a loop. it contains a selects with
  * options to mark assistance (just the days when the subjects are impart)
  */
-function drawTdAssistence(dates, data){
-    console.log(dates);
+function drawTdAssistence(dates, data, dt){
+    var month = dt.getMonth();
+    var year = dt.getFullYear();
+    dt = new Date(year, month, 01);
+    var firstDay = dt.getDay();
+    var months = dt.setMonth(month + 1, 0);
+    var lastDate = dt.getDate();
+    var dayDate = 1;
+    var sunday = 0;
+    var counter = 0;
+    var init = 0;
+    if (firstDay == 6) {
+        counter = 36;
+    } else {
+        counter = 35;
+    }
+    if(firstDay == 0){
+        init = 0;
+    }else{
+        init = 1;
+    }
     var trStudents = document.getElementsByClassName('tr-students');
-    for(var i = 0; i<trStudents.length; i++){
-        for(var j = 2;j < 38; j++){
-            var sunday = j % 7;
+    var today = addDays(new Date(),1);
+
+    for(var i = 0; i<trStudents.length; i++) {
+        for (var j = init; j <= counter; j++) {
+            var tdAssistance = document.createElement('td');
+            sunday = j % 7;
+            if (j >= firstDay && dayDate <= lastDate) {
+                 if (sunday == 0) {
+                     tdAssistance.style = 'display:none;';
+                 }else {
+                    $.each( dates, function(key, value ) {
+                         if(dayDate == value.date.getDate()){
+                             if(value.date <= today){
+                                 console.log('dayDate: '+dayDate +' today: '+today.getDate());
+                                 var div = document.createElement('div');
+                                 div.className = 'select-students';
+                                 showSelect(div, dates, data);
+                                 tdAssistance.appendChild(div);
+                             }
+                         }
+                     });
+                 }
+                dayDate++;
+             }
+            trStudents[i].appendChild(tdAssistance);
+        }
+    }
+
+
+    //console.log(dates);
+    //var trStudents = document.getElementsByClassName('tr-students');
+    /*for(var i = 0; i<trStudents.length; i++){
+        for(var j = init;j < counter; j++){
+            sunday = j % 7;
             if (sunday != 0) {
                 var tdAssistance = document.createElement('td');
                 tdAssistance.className = 'td-assistance';
@@ -166,7 +225,7 @@ function drawTdAssistence(dates, data){
                 }
             }
         }
-    }
+    }*/
 }
 /**
  *Create a menu options, to change assistance in list
@@ -200,39 +259,39 @@ function showSelect(div, dates, data) {
  * Compare de hours to put the status values in combo
 */
 function validateStatus(data){
-    console.log(data);
+    //console.log(data);
     for(var i = 0; i<data.length; i++){
         var totalHours = data[i].hours.length;
         switch(totalHours){
             case 1:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0, 0, 'A');
-                console.log(totalHours);
-                console.log(STATUS);
+                /*console.log(totalHours);
+                console.log(STATUS);*/
                 break;
             case 2:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0, 0, 'B', 'A');
-                console.log(totalHours);
-                console.log(STATUS);
+                /*console.log(totalHours);
+                console.log(STATUS);*/
                 break;
             case 3:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'C', 'B', 'A');
-                console.log(totalHours);
-                console.log(STATUS);
+                /*console.log(totalHours);
+                console.log(STATUS);*/
                 break;
             case 4:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'D', 'C', 'B', 'A');
-                console.log(totalHours);
-                console.log(STATUS);
+                /*console.log(totalHours);
+                console.log(STATUS);*/
                 break;
             case 5:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'E', 'D', 'C', 'B', 'A');
-                console.log(totalHours);
-                console.log(STATUS);
+                /*console.log(totalHours);
+                console.log(STATUS);*/
                 break
         }
     }

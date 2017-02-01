@@ -11,7 +11,7 @@
                     <li><a href="{{route('home')}}"><i class="fa fa-arrow-circle-left" aria="true"></i> Regresar a horarios</a></li>
                     <li role="separator" class="divider"></li>
                     <li id="new-incidence"><a href="#"><i class="fa fa-warning" aria="true"></i> Reportar Incidencia</a></li>
-                    <li><a href="#"><i class="fa fa-file-pdf-o" aria="true"></i> Descargar Lista</a></li>
+                    <li><a href="#"><i class="fa fa-file-excel-o" aria="true"></i> Descargar Lista en Excel</a></li>
                 </ul>
             </div>
         </div>
