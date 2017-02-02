@@ -15,8 +15,8 @@
         //dates: is a function and return a weekdays array.
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
-        var startDate = addDays(new Date(month[0].start_date), 1),
-            endDate = addDays(new Date(month[0].end_date), 1),
+        var startDate = addDays(new Date(month[1].start_date), 1),
+            endDate = addDays(new Date(month[1].end_date), 1),
             dates = getDates(startDate, endDate, data),
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
@@ -44,10 +44,10 @@
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href="#" class="tab-month"></a></li>
-                <li role="presentation"><a href="#" class="tab-month"></a></li>
-                <li role="presentation"><a href="#" class="tab-month"></a></li>
-                <li role="presentation"><a href="#" class="tab-month"></a></li>
+                <li role="presentation" class="active" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
             </ul>
             <!--information List-->
             @include('list.include.informationlist')
@@ -75,6 +75,9 @@
                                 <td class="student-number"></td>
                                 <td>{{ $s->student_id }}</td>
                                 <td>{{ $s->student->last_name }} {{ $s->student->second_name }} {{ $s->student->name }} </td>
+                               {{-- @for($i=0;$i<36;$i++)
+                                    <td class="assistance"></td>
+                                @endfor--}}
                             </tr>
                         @empty
                             <tr>

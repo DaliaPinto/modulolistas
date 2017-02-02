@@ -156,11 +156,9 @@ function monthName(dt){
  * options to mark assistance (just the days when the subjects are impart)
  */
 function drawTdAssistence(dates, data, dt){
-    var month = dt.getMonth(),
-        year = dt.getFullYear();
-        dt = new Date(year, month, 01);
+        dt = new Date(dt.getFullYear(), dt.getMonth(), 01);
     var firstDay = dt.getDay(),
-        months = dt.setMonth(month + 1, 0),
+        months = dt.setMonth(dt.getMonth() + 1, 0),
         lastDate = dt.getDate(),
         dayDate = 1,
         sunday = 0,
@@ -202,29 +200,8 @@ function drawTdAssistence(dates, data, dt){
              }
             trStudents[i].appendChild(tdAssistance);
         }
+        dayDate = 1;
     }
-
-
-    //console.log(dates);
-    //var trStudents = document.getElementsByClassName('tr-students');
-    /*for(var i = 0; i<trStudents.length; i++){
-        for(var j = init;j < counter; j++){
-            sunday = j % 7;
-            if (sunday != 0) {
-                var tdAssistance = document.createElement('td');
-                tdAssistance.className = 'td-assistance';
-                trStudents[i].appendChild(tdAssistance);
-                for (var h = 0; h < dates.length; h ++) {
-                    if(j==dates[h].date.getDate()){
-                        var div = document.createElement('div');
-                        div.className = 'select-students';
-                        showSelect(div, dates[h], data);
-                        tdAssistance.appendChild(div);
-                    }
-                }
-            }
-        }
-    }*/
 }
 /**
  *Create a menu options, to change assistance in list
