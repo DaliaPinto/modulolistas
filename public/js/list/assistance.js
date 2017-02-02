@@ -96,22 +96,23 @@ $('#form-create-incidence').validate({
 });
 
 function obtainValue(element, dates, data){
+    console.log(dates);
     for(var i=0;i<data.length;i++){
         for(var j=0;j<data[i].hours.length;j++){
-            var curDate = moment(new Date());
-            var dateAttendance = moment(new Date(dates));
-            var assistance = element.value;
-            var parent = element.parentNode.parentNode.parentNode;
-            var idStudent = parent.children[1].innerText;
-            var ids = data[i].hours[j].id;
+            $curDate = moment(new Date());
+            $dateAttendance = moment(new Date(dates.date));
+            $assistance = element.value;
+            $parent = element.closest('tr');
+            $idStudent = $parent.children[1].innerText;
+            $ids = data[i].hours[j].id;
 
 
-            console.log('date: '+dateAttendance.format('YYYY-MM-DD'));
-            console.log('student-id: '+idStudent);
-            console.log('status-attendance: '+assistance);
-            console.log('hours_id: '+ids);
-            console.log('created_at: '+ curDate.format('YYYY-MM-DD'));
-            console.log('updated_at: '+ curDate.format('YYYY-MM-DD'));
+            console.log('date: '+$dateAttendance.format('YYYY-MM-DD'));
+            console.log('student-id: '+$idStudent);
+            console.log('status-attendance: '+$assistance);
+            console.log('hours_id: '+$ids);
+            console.log('created_at: '+ $curDate.format('YYYY-MM-DD'));
+            console.log('updated_at: '+ $curDate.format('YYYY-MM-DD'));
             console.log('*****');
         }
     }

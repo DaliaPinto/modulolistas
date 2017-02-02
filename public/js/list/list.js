@@ -9,7 +9,7 @@
 /*Created by Dalia Pinto on 07 dec 2017*/
 
 //Global status variable
-STATUS = [];
+//STATUS = [];
 
 //access to tr students
 var tdNumber = document.getElementsByClassName('student-number');
@@ -156,16 +156,16 @@ function monthName(dt){
  * options to mark assistance (just the days when the subjects are impart)
  */
 function drawTdAssistence(dates, data, dt){
-    var month = dt.getMonth();
-    var year = dt.getFullYear();
-    dt = new Date(year, month, 01);
-    var firstDay = dt.getDay();
-    var months = dt.setMonth(month + 1, 0);
-    var lastDate = dt.getDate();
-    var dayDate = 1;
-    var sunday = 0;
-    var counter = 0;
-    var init = 0;
+    var month = dt.getMonth(),
+        year = dt.getFullYear();
+        dt = new Date(year, month, 01);
+    var firstDay = dt.getDay(),
+        months = dt.setMonth(month + 1, 0),
+        lastDate = dt.getDate(),
+        dayDate = 1,
+        sunday = 0,
+        counter = 0,
+        init = 0;
     if (firstDay == 6) {
         counter = 36;
     } else {
@@ -176,21 +176,18 @@ function drawTdAssistence(dates, data, dt){
     }else{
         init = 1;
     }
-    var trStudents = document.getElementsByClassName('tr-students');
-    var today = addDays(new Date(),1);
-
+    var trStudents = document.getElementsByClassName('tr-students'),
+        today = moment(new Date());
     for(var i = 0; i<trStudents.length; i++) {
         for (var j = init; j <= counter; j++) {
             var tdAssistance = document.createElement('td');
             sunday = j % 7;
             if (j >= firstDay && dayDate <= lastDate) {
-                 if (sunday == 0) {
-                     tdAssistance.style = 'display:none;';
-                 }else {
-                    $.each( dates, function(key, value ) {
+                 if (sunday != 0) {
+                     $.each( dates, function(key, value ) {
+                         var date = moment(new Date(value.date));
                          if(dayDate == value.date.getDate()){
-                             if(value.date <= today){
-                                 console.log('dayDate: '+dayDate +' today: '+today.getDate());
+                             if(date.format('YYYY-MM-DD') <= today.format('YYYY-MM-DD')){
                                  var div = document.createElement('div');
                                  div.className = 'select-students';
                                  showSelect(div, dates, data);
@@ -198,6 +195,8 @@ function drawTdAssistence(dates, data, dt){
                              }
                          }
                      });
+                 }else {
+                     tdAssistance.style = 'display:none;';
                  }
                 dayDate++;
              }
@@ -232,6 +231,7 @@ function drawTdAssistence(dates, data, dt){
  *param: div - parent to append select.
  */
 function showSelect(div, dates, data) {
+    //console.log(dates[1].date);
     //console.log(dates);
     //create select element
     var select = document.createElement('select');
@@ -241,24 +241,17 @@ function showSelect(div, dates, data) {
     select.onchange = function () {
         obtainValue(this, dates, data);
     };
-    //loop 8 times, cause are 8 options
-    for(var i = 0; i<STATUS.length; i++){
-        //create option
-        var options = document.createElement('option');
-        //value is the status
-        options.value = STATUS[i];
-        //put status
-        options.innerHTML = STATUS[i];
-        //append options in select.
-        select.appendChild(options);
-    }
+    //put days array to validate status in options
+    validateStatus(select, data);
     //append select in div param.
     div.appendChild(select);
 }
 /**
  * Compare de hours to put the status values in combo
+ * @param: data - is an objects of days
 */
-function validateStatus(data){
+function validateStatus(element, data){
+    var STATUS =[];
     //console.log(data);
     for(var i = 0; i<data.length; i++){
         var totalHours = data[i].hours.length;
@@ -266,38 +259,40 @@ function validateStatus(data){
             case 1:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0, 0, 'A');
-                /*console.log(totalHours);
-                console.log(STATUS);*/
                 break;
             case 2:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0, 0, 'B', 'A');
-                /*console.log(totalHours);
-                console.log(STATUS);*/
                 break;
             case 3:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'C', 'B', 'A');
-                /*console.log(totalHours);
-                console.log(STATUS);*/
                 break;
             case 4:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'D', 'C', 'B', 'A');
-                /*console.log(totalHours);
-                console.log(STATUS);*/
                 break;
             case 5:
                 STATUS = ['/','R','J'];
                 STATUS.splice(0,0, 'E', 'D', 'C', 'B', 'A');
-                /*console.log(totalHours);
-                console.log(STATUS);*/
                 break
         }
+    }
+    for(var j = 0; j<STATUS.length; j++){
+        //create option
+        var options = document.createElement('option');
+        //value is the status
+        options.value = STATUS[j];
+        //put status
+        options.innerHTML = STATUS[j];
+        //append options in select.
+        element.appendChild(options);
     }
 }
 /**
  * Convert in correct format day
+ * @param: date - obviously is the date
+ * @param: days - the number of days that should to add at the @date
 */
 function addDays(date, days) {
     var result = new Date(date);

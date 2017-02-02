@@ -7,8 +7,6 @@
         //data: is an array of objects, contains days, and hours of schedules
         //are impart.
         var data = {!! $days !!};
-        validateStatus(data);
-
         //month is an array of months in the period
         var month = {!! $months !!};
 
@@ -17,8 +15,8 @@
         //dates: is a function and return a weekdays array.
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
-        var startDate = addDays(new Date(month[1].start_date), 1),
-            endDate = addDays(new Date(month[1].end_date), 1),
+        var startDate = addDays(new Date(month[0].start_date), 1),
+            endDate = addDays(new Date(month[0].end_date), 1),
             dates = getDates(startDate, endDate, data),
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
@@ -26,8 +24,9 @@
         //Put text in tabs
         $.each( month, function(key, value ) {
             var date = moment(value.start_date);
-            $('.tab-month').eq(key).html(date.format('MMMM').toUpperCase());
-            $('.tab-month').attr('href', '');
+            $tab = $('.tab-month');
+            $tab.eq(key).html(date.format('MMMM').toUpperCase());
+            $tab.attr('href', '');
             console.log();
         });
         //put in tabs the name of the period months
