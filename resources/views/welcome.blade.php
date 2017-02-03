@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Jerome</title>
+        <title>Listas de Asistencia</title>
 
         <!-- Styles -->
         <style>
@@ -76,7 +76,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Jerome
+                    UTT
                 </div>
 
                 <div class="links">

@@ -103,7 +103,13 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
+            curDate();
         });
+        //obtain a current day in div.
+        function curDate(){
+            var today = moment(new Date());
+            $('#is-today').text('Hoy es: '+today.format('dddd, D MMMM YYYY, h:mm:ss a'));
+        }
     </script>
     @yield('javascript')
 </body>

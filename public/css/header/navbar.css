@@ -11,3 +11,12 @@
     margin-top: 10px;
     width: 20%;
 }
+@font-face {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/Roboto-Condensed.ttf") format('truetype');
+}
+body{
+    font-family: Roboto;
+}

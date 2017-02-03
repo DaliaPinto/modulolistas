@@ -23,7 +23,8 @@ for(var i=0;i<tdNumber.length;i++){
 */
 function drawThAssistence(dt) {
     //put month date in div.
-    monthName(dt);
+    var monthName = moment(new Date(dt));
+    $('#month-name').text('MES: '+ monthName.format("MMMM").toUpperCase());
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the month
@@ -118,10 +119,9 @@ function getDates(dateStart, dateEnd, includeDays) {
         includeDays.forEach(function(include) {
             //console.log(include);
             if(day.getDay() == include.day) {
-                weekdays.push({date : day, number_day : include.day, day_id : include.id});
+                weekdays.push({date : day, number_day : include.day, day_id : include.id, total_hours: include.hours.length});
                 //weekdays.push(day);
                 //console.log(day.getDay());
-                //console.log(weekdays);
             }
         });
     });
@@ -131,11 +131,9 @@ function getDates(dateStart, dateEnd, includeDays) {
  * Obtain the current date in
  *      current-day div
  */
-function monthName(dt){
-    var month = moment(new Date(dt));
+function curDate(){
     var today = moment(new Date());
-    $('#month-name').text('MES: '+ month.format("MMMM").toUpperCase());
-    $('#cur-date').text('Ultima Actualización: ' + today.format('dddd, D MMMM YYYY, h:mm:ss a'));
+    $('#is-today').text('Hoy es: '+today.format('dddd, D MMMM YYYY, h:mm:ss a'));
 }
 /*Updated by Dalia Pinto on 26 jan 2017*/
 /**
@@ -163,6 +161,8 @@ function drawTdAssistence(dates, data, dt){
         counter = 0,
         //when the loop starts
         init = 0,
+        //A sum of hours in the month
+        hours = 0,
         //access to tr-students
         trStudents = document.getElementsByClassName('tr-students'),
         //current day to compare with the date assistance
@@ -193,6 +193,7 @@ function drawTdAssistence(dates, data, dt){
                  if (sunday != 0) {
                      //count the array of date in the month when teacher imparts a class
                      $.each( dates, function(key, value ) {
+                         var hour = value.total_hours;
                          //format date class
                          var date = moment(new Date(value.date));
                          //if counter days is the same with date class
@@ -201,7 +202,8 @@ function drawTdAssistence(dates, data, dt){
                              //create div to put select options
                              var div = document.createElement('div');
                              div.className = 'select-students';
-                             //compare if number days is the same
+                             //compare if number days is the same between data
+                             // array and dates array
                              for(var k = 0; k<data.length; k++){
                                 if(value.number_day == data[k].day){
                                     showSelect(div, data[k], date.format('YYYY-MM-DD'));
@@ -210,6 +212,8 @@ function drawTdAssistence(dates, data, dt){
                              tdAssistance.appendChild(div);
                          }
                      });
+                     //hours +=hour;
+                     //console.log(hours);
                  }else {
                      //if day is sunday, hide the cell
                      tdAssistance.style = 'display:none;';

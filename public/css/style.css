@@ -1,6 +1,6 @@
 .txt-center{
     margin-top: 10px; margin-bottom: 10px;
-    text-align: center;
+    text-align: center; font-size: 16pt;
 }
 .header-div{
     color:#fff; height: 30px; padding-top: 4px;
@@ -28,4 +28,13 @@
 .th-name{
     width:12%;
     text-align: center;
+}
+.txt-align-right{
+    text-align: right;
+}
+.txt-align-left{
+    text-align: left;
+}
+.txt-align-left, .txt-align-right{
+    margin-bottom: 10px; margin-top: 10px; font-size: 12pt;
 }

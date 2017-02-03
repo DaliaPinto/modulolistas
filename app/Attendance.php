@@ -10,7 +10,7 @@ class Attendance extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'hour_schedule_id',
+        'schedule_id',
         'student_id',
         'attendance_status',
         'attendance_date'
@@ -18,8 +18,8 @@ class Attendance extends Model
     /*
      * Schedule table relationship
      */
-    public function hour(){
-        return $this->belongsTo('App\Hour_Schedule');
+    public function schedule(){
+        return $this->belongsTo('App\Schedule');
     }
     /*
      * Student table relationship

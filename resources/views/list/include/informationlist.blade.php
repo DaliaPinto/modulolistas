@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-md-11 txt-center">Lista de Asistencia</div>
         <div class="col-md-1">
-            <div class="dropdown"> Opciones
+            <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <i class="fa fa-bars fa-2x" aria="true"></i>
-                </button>
+                </button>  Opciones
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li><a href="{{route('home')}}"><i class="fa fa-arrow-circle-left" aria="true"></i> Regresar a horarios</a></li>
                     <li role="separator" class="divider"></li>

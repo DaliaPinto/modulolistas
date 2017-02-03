@@ -109,7 +109,7 @@ class HomeController extends Controller
             }
         }
         //return view with schedule info by teacher and period
-        return view('home', ['hours' => $hours]);
+        return view('home', ['hours' => $hours, 'teacher' => $teacher, 'period' => $period]);
 
         //return json for testing
         //return response()->json(['schedule' => $hours], 200);

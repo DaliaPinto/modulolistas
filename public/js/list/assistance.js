@@ -94,25 +94,36 @@ $('#form-create-incidence').validate({
         });
     }
 });
-
+/**
+ *
+ * @param element:
+ * @param dt:
+ * @param data:
+ */
 function obtainValue(element, dt, data){
-    console.log(data);
-        for(var j=0;j<data.hours.length;j++){
-            $curDate = moment(new Date());
-            $dateAttendance = dt;
-            $assistance = element.value;
-            $parent = element.closest('tr');
-            $idStudent = $parent.children[1].innerText;
-            $ids = data.hours[j].id;
+    $schedule = data.schedule_id;
+    $curDate = moment(new Date());
+    $dateAttendance = dt;
+    $assistance = element.value;
+    $parent = element.closest('tr');
+    $idStudent = $parent.children[1].innerText;
 
 
-            console.log('date: '+$dateAttendance);
-            console.log('student-id: '+$idStudent);
-            console.log('status-attendance: '+$assistance);
-            console.log('hours_id: '+$ids);
-            console.log('created_at: '+ $curDate.format('YYYY-MM-DD'));
-            console.log('updated_at: '+ $curDate.format('YYYY-MM-DD'));
-            console.log('*****');
-        }
+    console.log('date: '+$dateAttendance);
+    console.log('schedule_id: '+$schedule);
+    console.log('student_id: '+$idStudent);
+    console.log('status_attendance: '+$assistance);
+    console.log('created_at: '+ $curDate.format('YYYY-MM-DD'));
+    console.log('*****');
+}
+
+function totalHours(status, hours){
+
+    if($status == 'A'){}
+    if($status == 'B'){}
+    if($status == 'C'){}
+    if($status == 'D'){}
+    if($status == 'E'){}
+    //$.extend( object1, object2 );
 }
 
