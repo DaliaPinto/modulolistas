@@ -95,19 +95,18 @@ $('#form-create-incidence').validate({
     }
 });
 
-function obtainValue(element, dates, data){
-    console.log(dates);
-    for(var i=0;i<data.length;i++){
-        for(var j=0;j<data[i].hours.length;j++){
+function obtainValue(element, dt, data){
+    console.log(data);
+        for(var j=0;j<data.hours.length;j++){
             $curDate = moment(new Date());
-            $dateAttendance = moment(new Date(dates.date));
+            $dateAttendance = dt;
             $assistance = element.value;
             $parent = element.closest('tr');
             $idStudent = $parent.children[1].innerText;
-            $ids = data[i].hours[j].id;
+            $ids = data.hours[j].id;
 
 
-            console.log('date: '+$dateAttendance.format('YYYY-MM-DD'));
+            console.log('date: '+$dateAttendance);
             console.log('student-id: '+$idStudent);
             console.log('status-attendance: '+$assistance);
             console.log('hours_id: '+$ids);
@@ -115,6 +114,5 @@ function obtainValue(element, dates, data){
             console.log('updated_at: '+ $curDate.format('YYYY-MM-DD'));
             console.log('*****');
         }
-    }
 }
 

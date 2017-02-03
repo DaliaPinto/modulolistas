@@ -8,9 +8,6 @@
 
 /*Created by Dalia Pinto on 07 dec 2017*/
 
-//Global status variable
-//STATUS = [];
-
 //access to tr students
 var tdNumber = document.getElementsByClassName('student-number');
 /**
@@ -24,47 +21,41 @@ for(var i=0;i<tdNumber.length;i++){
  * it compare the argument month, and draw the number date about the day
  * param : dt - is the date by the month of the list (could be any day)
 */
-function daysMonth(dt) {
-    //console.log('dt: '+dt);
+function drawThAssistence(dt) {
     //put month date in div.
     monthName(dt);
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the month
     var month = dt.getMonth();
-    //console.log('month: ' + month);
     //obtain the 4 digits year
     var year = dt.getFullYear();
-    //console.log('year: '+year);
     //obtain the first day of dt
     dt = new Date(year, month, 01);
-    //console.log('dt format :' + dt);
     //obtain the dayweek number of dt
     var firstDay = dt.getDay();
-    //console.log('first: ' + firstDay);
     //month plus one, 'cause month format starts in 0
     var months = dt.setMonth(month + 1, 0);
-    //console.log('month: '+months);
     //obtain the dt last day
     var lastDate = dt.getDate();
-    //console.log('last ' + lastDate);
     //this variable will print the date in td.
     var dayDate = 1;
     //this variable will count all the days that will be sundays
     var sunday = 0;
+    var counter = 0;
+    var init = 0;
     //compare if firstDay is 6, the loop will count itself 36 times, else just 35 times
     if (firstDay == 6) {
-        var counter = 36;
+        counter = 36;
     } else {
-        var counter = 35;
+        counter = 35;
     }
     //if first day is 0 = dom, counter need to start in 0, else in 1
     if(firstDay == 0){
-        var init = 0;
+        init = 0;
     }else{
-        var init = 1;
+        init = 1;
     }
-    //console.log(counter);
     //the number of td that will be create in header list attendance
     for (var i = init; i <= counter; i++) {
         //create a new td
@@ -74,19 +65,15 @@ function daysMonth(dt) {
         /*if the first day is higher than index and last day is smaller than dy var
          *   this loop draws a td elements with a day number, else, just draws a empty td element*/
         if (i >= firstDay && dayDate <= lastDate) {
-            //console.log('i: '+i + ' firstDay: '+ firstDay+ ' dayDate: '+dayDate+' lastDate: '+lastDate);
             //dont show a sunday td
             if (sunday == 0) {
                 td.style = 'display:none;';
-                //console.log('sunday ' + dayDate);
             } else {
                 //put in td the calendar number of the day
                 td.innerHTML = dayDate;
-                //console.log('not sunday ' + dayDate);
             }
             //number of date
             dayDate++;
-            //console.log('dayDate: '+dayDate);
         }
         //add in tr all the td was create
         tr.appendChild(td);
@@ -154,16 +141,33 @@ function monthName(dt){
 /**
  * drawTdAssistance create <td> in a loop. it contains a selects with
  * options to mark assistance (just the days when the subjects are impart)
+ * and select don't can be show after the current date.
+ * @param: dates - object of dates and days
+ * @param: data - object of days
+ * @param: dt - the month date.
  */
 function drawTdAssistence(dates, data, dt){
-        dt = new Date(dt.getFullYear(), dt.getMonth(), 01);
+    //format date
+    dt = new Date(dt.getFullYear(), dt.getMonth(), 01);
+    //obtain the first number weekday of the month
     var firstDay = dt.getDay(),
+        //month format
         months = dt.setMonth(dt.getMonth() + 1, 0),
+        //the last day in the month
         lastDate = dt.getDate(),
+        //increment and count all the days
         dayDate = 1,
+        //no count sundays day
         sunday = 0,
+        //the limit of loop
         counter = 0,
-        init = 0;
+        //when the loop starts
+        init = 0,
+        //access to tr-students
+        trStudents = document.getElementsByClassName('tr-students'),
+        //current day to compare with the date assistance
+        today = moment(new Date());
+
     if (firstDay == 6) {
         counter = 36;
     } else {
@@ -174,96 +178,125 @@ function drawTdAssistence(dates, data, dt){
     }else{
         init = 1;
     }
-    var trStudents = document.getElementsByClassName('tr-students'),
-        today = moment(new Date());
+
+    //Access to row
     for(var i = 0; i<trStudents.length; i++) {
+        //create new td's
         for (var j = init; j <= counter; j++) {
             var tdAssistance = document.createElement('td');
+            //if weekday is 0 (sunday), it doesn't show td
             sunday = j % 7;
+            //compare if index is higher than first weekday month
+            //and counter days is less than last day date
             if (j >= firstDay && dayDate <= lastDate) {
+                //if day isn't sunday
                  if (sunday != 0) {
+                     //count the array of date in the month when teacher imparts a class
                      $.each( dates, function(key, value ) {
+                         //format date class
                          var date = moment(new Date(value.date));
-                         if(dayDate == value.date.getDate()){
-                             if(date.format('YYYY-MM-DD') <= today.format('YYYY-MM-DD')){
-                                 var div = document.createElement('div');
-                                 div.className = 'select-students';
-                                 showSelect(div, dates, data);
-                                 tdAssistance.appendChild(div);
+                         //if counter days is the same with date class
+                         //and date is less than current day
+                         if(dayDate == value.date.getDate() && date.format('YYYY-MM-DD') <= today.format('YYYY-MM-DD')){
+                             //create div to put select options
+                             var div = document.createElement('div');
+                             div.className = 'select-students';
+                             //compare if number days is the same
+                             for(var k = 0; k<data.length; k++){
+                                if(value.number_day == data[k].day){
+                                    showSelect(div, data[k], date.format('YYYY-MM-DD'));
+                                }
                              }
+                             tdAssistance.appendChild(div);
                          }
                      });
                  }else {
+                     //if day is sunday, hide the cell
                      tdAssistance.style = 'display:none;';
                  }
+                //increment the counter days in the month
                 dayDate++;
              }
+             //append td in tr parent node
             trStudents[i].appendChild(tdAssistance);
         }
+        //clean dayDate
         dayDate = 1;
     }
 }
 /**
  *Create a menu options, to change assistance in list
- *param: div - parent to append select.
+ * @param: div - parent to append select.
+ * @param: dates - array of object dates
+ * @param: data - array of object days
  */
-function showSelect(div, dates, data) {
-    //console.log(dates[1].date);
-    //console.log(dates);
+function showSelect(element, data, dt) {
     //create select element
     var select = document.createElement('select');
     //put class attribute to select.
     select.className = 'select-status';
-    //Add function
+    //Add function when select is change
     select.onchange = function () {
-        obtainValue(this, dates, data);
+        obtainValue(this, dt, data);
     };
     //put days array to validate status in options
     validateStatus(select, data);
     //append select in div param.
-    div.appendChild(select);
+    element.appendChild(select);
 }
 /**
- * Compare de hours to put the status values in combo
- * @param: data - is an objects of days
-*/
-function validateStatus(element, data){
-    var STATUS =[];
-    //console.log(data);
-    for(var i = 0; i<data.length; i++){
-        var totalHours = data[i].hours.length;
-        switch(totalHours){
-            case 1:
-                STATUS = ['/','R','J'];
-                STATUS.splice(0, 0, 'A');
-                break;
-            case 2:
-                STATUS = ['/','R','J'];
-                STATUS.splice(0, 0, 'B', 'A');
-                break;
-            case 3:
-                STATUS = ['/','R','J'];
-                STATUS.splice(0,0, 'C', 'B', 'A');
-                break;
-            case 4:
-                STATUS = ['/','R','J'];
-                STATUS.splice(0,0, 'D', 'C', 'B', 'A');
-                break;
-            case 5:
-                STATUS = ['/','R','J'];
-                STATUS.splice(0,0, 'E', 'D', 'C', 'B', 'A');
-                break
-        }
-    }
-    for(var j = 0; j<STATUS.length; j++){
+ * Put options in select, it depends to hours
+ * @param element : parent node
+ * @param arrayStatus : status hours array
+ */
+function menuOptions(element, arrayStatus){
+    for(var j = 0; j<arrayStatus.length; j++){
         //create option
         var options = document.createElement('option');
         //value is the status
-        options.value = STATUS[j];
+        options.value = arrayStatus[j];
         //put status
-        options.innerHTML = STATUS[j];
+        options.innerHTML = arrayStatus[j];
         //append options in select.
         element.appendChild(options);
+    }
+}
+/**
+ * Compare de hours to put the status values in combo
+ * @param data: is an objects of days
+ * @param element : is parent node
+*/
+function validateStatus(element, data){
+    //is the array values
+    var status =[];
+    //count total hours in data array
+    var totalHours = data.hours.length;
+    switch(totalHours){
+        case 1:
+            status = ['/','R','J'];
+            status.splice(0, 0, 'A');
+            menuOptions(element, status);
+            break;
+        case 2:
+            status = ['/','R','J'];
+            status.splice(0, 0, 'B', 'A');
+            menuOptions(element, status);
+            break;
+        case 3:
+            status = ['/','R','J'];
+            status.splice(0,0, 'C', 'B', 'A');
+            menuOptions(element, status);
+            break;
+        case 4:
+            status = ['/','R','J'];
+            status.splice(0,0, 'D', 'C', 'B', 'A');
+            menuOptions(element, status);
+            break;
+        case 5:
+            status = ['/','R','J'];
+            status.splice(0,0, 'E', 'D', 'C', 'B', 'A');
+            menuOptions(element, status);
+            break
     }
 }
 /**
