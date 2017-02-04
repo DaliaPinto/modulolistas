@@ -18,7 +18,7 @@
                         </div>
                         <div class="form-group">
                             <label for="incidence_type">Motivo de Incidencia: </label>
-                            <input type="text" class="form-control" id="incidence_type" name="incidence_type" placeholder="50 caracteres máx." maxlength="50">
+                            <input type="text" class="form-control" id="incidence_type" name="incidence_type" placeholder="255 caracteres máx." maxlength="255">
                         </div>
                         <div class="form-group">
                             <label for="description">Descripción: </label>

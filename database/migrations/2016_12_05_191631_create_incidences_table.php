@@ -17,7 +17,7 @@ class CreateIncidencesTable extends Migration
             $table->increments('id');
             $table->string('incidence_type', 50);
             $table->date('date');
-            $table->string('description', 50)->nullable();
+            $table->string('description', 255)->nullable();
             $table->string('activity', 255)->nullable();
             $table->integer('schedule_id');
         });

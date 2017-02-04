@@ -24,7 +24,8 @@ for(var i=0;i<tdNumber.length;i++){
 function drawThAssistence(dt) {
     //put month date in div.
     var monthName = moment(new Date(dt));
-    $('#month-name').text('MES: '+ monthName.format("MMMM").toUpperCase());
+    $monthDiv = $('#month-name');
+    $monthDiv.append('<i class="fa fa-calendar-check-o" aria="true"></i> '+ ' MES: '+ monthName.format("MMMM").toUpperCase());
     //access to tr days
     var tr = document.getElementById('tr-days');
     //obtain the month

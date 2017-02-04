@@ -60,11 +60,11 @@
                             <th rowspan="2">No.</th>
                             <th rowspan="2" class="th-id">Matrícula</th>
                             <th rowspan="2" class="th-name">Nombre</th>
-                            <th colspan="6">Primer Semana</th>
-                            <th colspan="6">Segunda Semana</th>
-                            <th colspan="6">Tercer Semana</th>
-                            <th colspan="6">Cuarta Semana</th>
-                            <th colspan="7">Quinta semana</th>
+                            <th colspan="6" class="txt-align-center">Primer Semana</th>
+                            <th colspan="6" class="txt-align-center">Segunda Semana</th>
+                            <th colspan="6" class="txt-align-center">Tercer Semana</th>
+                            <th colspan="6" class="txt-align-center">Cuarta Semana</th>
+                            <th colspan="7" class="txt-align-center">Quinta semana</th>
                             <th colspan="2">Total</th>
                         </tr>
                         <tr id="tr-days"></tr>
@@ -74,7 +74,7 @@
                             <tr class="tr-students">
                                 <td class="student-number"></td>
                                 <td>{{ $s->student_id }}</td>
-                                <td>{{ $s->student->last_name }} {{ $s->student->second_name }} {{ $s->student->name }} </td>
+                                <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
                                {{-- @for($i=0;$i<36;$i++)
                                     <td class="assistance"></td>
                                 @endfor--}}

@@ -1,6 +1,9 @@
-.txt-center{
+.txt-align-center{
+    text-align: center;
+}
+.schedule-head{
+    font-size: 16pt;
     margin-top: 10px; margin-bottom: 10px;
-    text-align: center; font-size: 16pt;
 }
 .header-div{
     color:#fff; height: 30px; padding-top: 4px;
@@ -12,7 +15,7 @@
     box-shadow: 3px 3px 3px #ccc;
 }
 .border-div{
-    border-right: 1px solid #00796B;
+    border: 1px solid #ddd;
 }
 .margin-div{
     margin-bottom: 20px;
@@ -37,4 +40,13 @@
 }
 .txt-align-left, .txt-align-right{
     margin-bottom: 10px; margin-top: 10px; font-size: 12pt;
+}
+#schedule-table th{
+    text-align: center;
+}
+.margin-bot{
+    margin-bottom: 20px;
+}
+.mrg-text{
+    margin-bottom: 5px;
 }

@@ -1,4 +1,4 @@
-<div class="row txt-center">
+<div class="row txt-align-center schedule-head">
     Horarios del profesor {{$teacher->name}} {{ $teacher->last_name }} {{ $teacher->middle_name }} del Periodo {{$period->description}}
 </div>
 <div class="row">

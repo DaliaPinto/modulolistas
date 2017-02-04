@@ -5,10 +5,8 @@
     <!--search nav bar-->
     @include('schedule.include.search')
    <div class="row">
-       <div class="col-md-12">
-           <!--Schedule container-->
-           @include('schedule.index')
-       </div>
+       <!--Schedule container-->
+       @include('schedule.index')
    </div>
 </div>
 @endsection
