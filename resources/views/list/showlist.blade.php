@@ -10,13 +10,15 @@
         //month is an array of months in the period
         var month = {!! $months !!};
 
+        {{--var students = {!! $test !!};--}}
+
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
-        var startDate = addDays(new Date(month[0].start_date), 1),
-            endDate = addDays(new Date(month[0].end_date), 1),
+        var startDate = addDays(new Date(month[1].start_date), 1),
+            endDate = addDays(new Date(month[1].end_date), 1),
             dates = getDates(startDate, endDate, data),
             url = '{{ route('edit') }}',
             urlIncidence= '{{ route('createIncidence') }}';
@@ -52,6 +54,7 @@
             <!--information List-->
             @include('list.include.informationlist')
             <div class="row">
+
                 <div class="col-md-12">
                     <!--students List-->
                     <table class="table table-bordered" id="listAttendance">

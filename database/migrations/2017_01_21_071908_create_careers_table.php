@@ -15,7 +15,7 @@ class CreateCareersTable extends Migration
     {
         Schema::create('careers', function (Blueprint $table) {
             $table->unsignedTinyInteger('id', true);
-            $table->string('name', 70);
+            $table->string('name', 200);
         });
     }
 
