@@ -62,42 +62,89 @@ class ScheduleController extends Controller
                                  'days' => $days,
                                  'status' => 0], 200);*/
     }
-    //create api by excel sheet
-    public function showDataExcel() {
+    /**
+     * Make inserts by Api excel in Careers and Group datatable
+     */
+    public function saveCareers() {
+         //get to excel sheet
         $students = Excel::load('public/files/febrero.xls', 'UTF-8')->get();
 
+        //group data by career
         $careers = $students->groupBy('carrera');
 
+        //save in database the career table
         foreach($careers as $key=>$career) {
             $n_career = new Career();
             $n_career->name = $key;
             $n_career->save();
 
+            //group data by group
             $groups = $career->groupBy('grupo');
 
+            //save in database the group table
             foreach($groups as $keyG=>$group) {
-                $g = preg_split("/\s/", $keyG);
-                $n_group = new Group();
+                //divide group field and make an array to feed the shift field, and grade field in
+                //group table
+                $group_array = preg_split("/\s/", $keyG);
 
-                if(count($g) == 5) {
-                    if($g[4] == 'Matutino'){
+                $n_group = new Group();
+                //if array is different to null, save data
+                if(count($group_array) == 5) {
+                    if($group_array[4] == 'Matutino'){
                         $n_group->shift = 'M';
                     }else{
                         $n_group->shift = 'V';
                     }
-                    $n_group->grade = $g[0];
+                    $n_group->grade = $group_array[0];
                     $n_group->group = $keyG;
                     $n_group->period_id = 2;
                     $n_group->career_id = $n_career->id;
                     $n_group->save();
+                    //echo collect(['test' => $group])->toJson();
+                    }
+
+                    /*$n_group_students = new GroupStudent();
+                    $n_group_students->group_id = $n_group->id;
+                    $n_group_students->student_id = $student_id[$j];
+                    $n_group_students->save();*/
                 }
-
-
-                //echo collect(['nose' => count($g)])->toJson();
+                //Test
+                //echo collect(['test' => count($student)])->toJson();
             }
-
-        }
+        //Test
         //return $students;
-        //return response()->json(['message' => 'ok']);
+        return response()->json(['message' => 'All data saved']);
+    }
+
+    /**
+     * Make inserts by Api excel in Students datatable
+     */
+    public function saveStudents() {
+        //get to excel sheet
+        $students = Excel::load('public/files/febrero.xls', 'UTF-8')->get();
+
+        //student values
+        $student_id = $students->pluck('matricula');
+        $student_name = $students->pluck('nombre');
+        $student_last = $students->pluck('primer_apellido');
+        $student_middle = $students->pluck('segundo_apellido');
+        $student_status = $students->pluck('situacion');
+        //echo collect(['test' => $student_name[$i]])->toJson();
+
+        for($i=0; $i<count($students);$i++) {
+            $n_students = new Student();
+            $n_students->id = $student_id[$i];
+            $n_students->name = $student_name[$i];
+            $n_students->last_name = $student_last[$i];
+            $n_students->middle_name = $student_middle[$i];
+            if($student_status[$i] == 'Regular'){
+                $n_students->status = 'R';
+            }else{
+                $n_students->status = 'I';
+            }
+            $n_students->save();//Test
+            //echo collect(['test' => $student_name[$i]])->toJson();
+        }
+        return response()->json(['message' => 'All data saved']);
     }
 }

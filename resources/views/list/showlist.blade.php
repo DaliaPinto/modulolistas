@@ -46,10 +46,10 @@
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href="#" class="tab-month"></a></li>
+                <li role="presentation" class="active" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
             </ul>
             <!--information List-->
             @include('list.include.informationlist')

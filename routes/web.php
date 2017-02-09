@@ -59,7 +59,11 @@ Route::post('/create', [
 ]);
 
 
-Route::get('/excelFile', [
-    'uses' => 'ScheduleController@showDataExcel'
+Route::get('/saveCareers', [
+    'uses' => 'ScheduleController@saveCareers'
+]);
+
+Route::get('/saveStudents', [
+    'uses' => 'ScheduleController@saveStudents'
 ]);
 
