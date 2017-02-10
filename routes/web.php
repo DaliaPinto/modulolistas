@@ -60,10 +60,9 @@ Route::post('/create', [
 
 
 Route::get('/saveCareers', [
-    'uses' => 'ScheduleController@saveCareers'
+    'uses' => 'CareerController@saveCareers'
 ]);
 
 Route::get('/saveStudents', [
-    'uses' => 'ScheduleController@saveStudents'
+    'uses' => 'StudentController@saveStudents'
 ]);
-

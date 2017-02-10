@@ -13,7 +13,7 @@ class GroupsTableSeeder extends Seeder
     {
 
         //
-        $group = new \App\Group();
+/*        $group = new \App\Group();
         $group->shift = 'M';
         $group->grade = 2;
         $group->group = '2°A - Matutino';
@@ -67,6 +67,6 @@ class GroupsTableSeeder extends Seeder
         $group->group = '8°B - Vespertino';
         $group->period_id = 2;
         $group->career_id = 1;
-        $group->save();
+        $group->save();*/
     }
 }

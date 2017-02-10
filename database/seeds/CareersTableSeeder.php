@@ -13,6 +13,6 @@ class CareersTableSeeder extends Seeder
     {
         $career = new \App\Career();
         $career->name = 'Tecnologías de la Información y Comunicación';
-        $career->save();
+        //$career->save();
     }
 }

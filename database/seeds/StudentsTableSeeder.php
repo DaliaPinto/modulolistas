@@ -11,7 +11,7 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-        $s = new App\Student;
+/*        $s = new App\Student;
         $s->id = '0314104733';
         $s->name = 'Brandon';
         $s->last_name = 'Stark';
@@ -73,6 +73,6 @@ class StudentsTableSeeder extends Seeder
         $s->name = 'John';
         $s->last_name = 'Snow';
         $s->middle_name = 'O.';
-        $s->save();
+        $s->save();*/
     }
 }

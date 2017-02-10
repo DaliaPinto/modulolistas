@@ -11,7 +11,7 @@ class GroupStudentTableSeeder extends Seeder
      */
     public function run()
     {
-        //Provisional
+/*        //Provisional
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314104733';
         $gs->group_id=1;
@@ -55,6 +55,6 @@ class GroupStudentTableSeeder extends Seeder
         $gs = new \App\GroupStudent();
         $gs->student_id = '0314101335';
         $gs->group_id=2;
-        $gs->save();
+        $gs->save();*/
     }
 }
