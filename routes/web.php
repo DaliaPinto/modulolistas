@@ -58,11 +58,17 @@ Route::post('/create', [
     'middleware' => 'auth'
 ]);
 
-
+/*
+ * Api excel route
+ */
 Route::get('/saveCareers', [
     'uses' => 'CareerController@saveCareers'
 ]);
 
 Route::get('/saveStudents', [
     'uses' => 'StudentController@saveStudents'
+]);
+
+Route::get('/saveSubjects', [
+    'uses' => 'SubjectController@saveSubjects'
 ]);

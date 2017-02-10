@@ -52,7 +52,7 @@ class DaysTableSeeder extends Seeder
 
         //day 3 schedule 5
         $day= new \App\Day();
-        $day->day = 3;
+        $day->day = 4;
         $day->schedule_id = 5;
         $day->save();
 
