@@ -120,12 +120,13 @@ function getDates(dateStart, dateEnd, includeDays) {
         includeDays.forEach(function(include) {
             //console.log(include);
             if(day.getDay() == include.day) {
-                weekdays.push({date : day, number_day : include.day, day_id : include.id, total_hours: include.hours.length});
+                weekdays.push({date : day, number_day : include.day});
                 //weekdays.push(day);
                 //console.log(day.getDay());
             }
         });
     });
+    //console.log(weekdays);
     return weekdays;
 }
 /**
@@ -205,16 +206,15 @@ function drawTdAssistence(dates, data, dt){
                              div.className = 'select-students';
                              //compare if number days is the same between data
                              // array and dates array
-                             for(var k = 0; k<data.length; k++){
-                                if(value.number_day == data[k].day){
-                                    showSelect(div, data[k], date.format('YYYY-MM-DD'));
+                             $.each( data, function(key, valueData ){
+                                if(value.number_day == valueData.day){
+                                    studentHours(valueData);
+                                    showSelect(div, valueData, date.format('YYYY-MM-DD'));
                                 }
-                             }
+                             });
                              tdAssistance.appendChild(div);
                          }
                      });
-                     //hours +=hour;
-                     //console.log(hours);
                  }else {
                      //if day is sunday, hide the cell
                      tdAssistance.style = 'display:none;';
@@ -227,8 +227,22 @@ function drawTdAssistence(dates, data, dt){
         }
         //clean dayDate
         dayDate = 1;
+
     }
 }
+
+/**
+ *
+ * @param hours array hours
+ */
+function studentHours(data) {
+
+    $.each(data, function (key, value) {
+        console.log(value);
+    });
+    //$('.tr-students').append('<td class="absence"></td>' + '<td class="attendance"></td>');
+}
+
 /**
  *Create a menu options, to change assistance in list
  * @param: div - parent to append select.
@@ -278,28 +292,23 @@ function validateStatus(element, data){
     var totalHours = data.hours.length;
     switch(totalHours){
         case 1:
-            status = ['/','R','J'];
-            status.splice(0, 0, 'A');
+            status = ['A','/','R','J'];
             menuOptions(element, status);
             break;
         case 2:
-            status = ['/','R','J'];
-            status.splice(0, 0, 'B', 'A');
+            status = ['B','A','/','R','J'];
             menuOptions(element, status);
             break;
         case 3:
-            status = ['/','R','J'];
-            status.splice(0,0, 'C', 'B', 'A');
+            status = ['C','B', 'A','/','R','J'];
             menuOptions(element, status);
             break;
         case 4:
-            status = ['/','R','J'];
-            status.splice(0,0, 'D', 'C', 'B', 'A');
+            status = ['D','C', 'B', 'A', '/','R','J'];
             menuOptions(element, status);
             break;
         case 5:
-            status = ['/','R','J'];
-            status.splice(0,0, 'E', 'D', 'C', 'B', 'A');
+            status = ['E', 'D', 'C', 'B', 'A', '/', 'R','J'];
             menuOptions(element, status);
             break
     }

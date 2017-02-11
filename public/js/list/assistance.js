@@ -1,6 +1,6 @@
 /**
  * fileoverview: assistance.js contains all the CRUD in
- * attendance model, and incidence model, and details
+ * attendance model, incidence model, and details
  * in incidence.create.blade view
  * Author: Dalia Patricia Pinto Islas
  * 2017-17-01
@@ -64,17 +64,14 @@ $('#form-create-incidence').validate({
         }
     },
     submitHandler: function(form) {
-        console.log('form: ' + form);
         $('#save-incidence').prop('disabled', true);
-        var data = $(form).serializeArray(); console.log('data: '+ data);
+        var data = $(form).serializeArray(); //console.log('data: '+ data);
         $.ajax({
             method: 'post',
             url: urlIncidence,
             data: data
         }).done(function(response){
-            console.log('response: ' +response);
             var $form = $('#form-create-incidence');
-            console.log('url: ' +urlIncidence);
             if(response.status === 0)
             {
                 $form.prepend('<div class="alert alert-success" role="alert" id="msg-success"><i class="fa fa-exclamation-circle"></i> ' +
@@ -108,6 +105,7 @@ function obtainValue(element, dt, data){
     $parent = element.closest('tr');
     $idStudent = $parent.children[1].innerText;
 
+    totalHours($assistance);
 
     console.log('date: '+$dateAttendance);
     console.log('schedule_id: '+$schedule);
@@ -117,13 +115,21 @@ function obtainValue(element, dt, data){
     console.log('*****');
 }
 
-function totalHours(status, hours){
+/**
+ *
+ * @param status
+ * @returns {number}
+ */
+function totalHours(status){
+    $hours=0;
 
-    if($status == 'A'){}
-    if($status == 'B'){}
-    if($status == 'C'){}
-    if($status == 'D'){}
-    if($status == 'E'){}
-    //$.extend( object1, object2 );
+    if(status == 'A' || status == 'J') $hours = 1;
+    if(status == 'B' || status == 'J') $hours = 2;
+    if(status == 'C' || status == 'J') $hours = 3;
+    if(status == 'D' || status == 'J') $hours = 4;
+    if(status == 'E' || status == 'J') $hours = 5;
+
+    console.log($hours);
+    return $hours;
 }
 
