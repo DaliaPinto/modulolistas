@@ -43,7 +43,7 @@ class CareerController extends Controller
         $second_first_date =  new Carbon('first day of next month');
         $second_last_date =  new Carbon('last day of next month');
 
-        echo collect(['group'=> $second_first_date,  'num_student' => $second_last_date])->toJson();
+        //echo collect(['group'=> $second_first_date,  'num_student' => $second_last_date])->toJson();
 
         //get the List assistance instance.
         $list = new ListAssistance();

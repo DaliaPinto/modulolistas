@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ListAssistance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -77,6 +78,14 @@ class HomeController extends Controller
         //get schedules by teacher and groups by the actual period.
         $schedules = Schedule::where('teacher_id', $teacher->id)->whereIn('group_id', $groups)->with(['subject', 'group', 'days', 'days.hours'])->get();
 
+        //get the current day
+        $today = Carbon::today();
+
+        //get all the months
+        $month = ListAssistance::where('start_date','<=', $today->toDateString())
+                                ->where('end_date', '>=', $today->toDateString())->first();
+
+
         //hours is an array by hours (this registered in seeds)
         $hours = $this->getListHours();
 
@@ -109,10 +118,10 @@ class HomeController extends Controller
             }
         }
         //return view with schedule info by teacher and period
-        return view('home', ['hours' => $hours, 'teacher' => $teacher, 'period' => $period]);
+        return view('home', ['hours' => $hours, 'teacher' => $teacher, 'period' => $period, 'month' => $month]);
 
         //return json for testing
-        //return response()->json(['schedule' => $hours], 200);
+        //return response()->json(['schedule' => $hours, 'month' => $month], 200);
     }
     /**
      * getListHours return an array of hours
