@@ -27,6 +27,13 @@ class GroupStudent extends Model
     }
 
     /*
+     * Group table relationship
+     */
+    public function listAssistance(){
+        return $this->belongsTo('App\ListAssistance');
+    }
+
+    /*
      * Quit the timestamp default
      */
     public $timestamps = false;

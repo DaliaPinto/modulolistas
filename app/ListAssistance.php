@@ -24,4 +24,10 @@ class ListAssistance extends Model
     public function period() {
         return $this->belongsTo('App\Period');
     }
+    /*
+     * Bidirectional relationship with HourSchedule class
+     */
+    public function groups() {
+        return $this->hasMany('App\GroupStudent');
+    }
 }

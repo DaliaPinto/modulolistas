@@ -15,7 +15,8 @@ class CreateGroupStudentsTable extends Migration
     {
         Schema::create('group_students', function (Blueprint $table) {
             $table->char('student_id', 10);
-            $table->tinyInteger('group_id');
+            $table->integer('group_id');
+            $table->integer('list_assistance_id');
         });
     }
 

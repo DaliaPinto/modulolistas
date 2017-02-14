@@ -31,10 +31,4 @@ class Period extends Model
     public function groupStudents() {
         return $this->hasMany('App\GroupStudent');
     }
-    /*
-     * Bidirectional relationship with HourSchedule class
-     */
-    public function lists() {
-        return $this->hasMany('App\ListAssistance');
-    }
 }

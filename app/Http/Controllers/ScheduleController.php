@@ -19,7 +19,7 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showList($id)
+    public function showList($id, $month)
     {
         //save in array, hours_schedule data
         $hours = array();
@@ -33,12 +33,13 @@ class ScheduleController extends Controller
                 array_push($hours, $hour);
             }
         }
-        //contain a list of months by period_id
-        $months = ListAssistance::where('period_id', $schedule->group->period_id)->get();
+        $months = ListAssistance::all();
         //obtain the status of students
         $student = Student::where('status', 'R')->select('id')->get();
         //obtain the students list by group id where status is regular
-        $students = GroupStudent::where('group_id', $schedule->group->id)->whereIn('student_id', $student)->get();
+        $students = GroupStudent::where('group_id', $schedule->group->id)->
+                                  where('list_assistance_id', $month)->
+                                  whereIn('student_id', $student)->get();
 
         //$test = $this->showDataExcel();
         //return view with schedule info and students array
