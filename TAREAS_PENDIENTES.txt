@@ -1,0 +1,86 @@
+PROGRAMACIÓN PENDIENTE
+
+*****IN PROGRESS*****
+---Trabajar con tabs, las pestañas que ya acomoden por mes.
+---Tomar asistencia con ajax.
+
+
+
+
+
+
+*****TO DO*****
+URGENTE
+-Profe puede cubrir horarios de maestros ¿El profe iniciaría sesión o se asignaría un tipo de permiso de relevo?
+-Profes pueden intercambiar horas. (Si un profe faltó por X motivo, puede cambiar la hora con otro profe)
+-Considerar si intercambió clase
+---------------------------------------
+---Método que ya tenga una asistencia para cada alumno registrada. Por default todos tienen una A, B, C (dependiendo si de esa clase en ese día tienen más horas).
+---Ir pensando, alumnos deben tener 85% de asistencia, obtener total de horas y de ahí hacer el cálculo. (Deberá tener un warning "este alumno ya excedió porcentaje de ausencia")
+---Horas acumuladas ¿Cómo contarlas? Método pendiente (si un alumno no fue a varias clases, se restan horas, si fue a todas, tiene 15 horas completas o las que deban de ser)
+---Mostrar el último día en el que se pasó lista (el último update_at en la tabla attendance)- TIMESTAMP remember
+---Validación para las incidencias (no permitir tomas lista una vez creada la incidencia)
+---Para todos los usuarios 
+---Validar si ya no estamos dentro del periodo, mostrar una pantalla alternativa de Consultas de listas por:
+Mes
+Periodo
+Materia
+Maestro
+---Permisos
+---Estilo cute :3
+---Hacer las cosas por ajax :D
+---RESPONSIVIDAD PLEASE!
+---Lista de Sesiones (Ver un listado de que maestro ya pasó lista y a que horas.)
+---¿Se harán los horarios? ¿Cómo se asignará el grupo y materia a cada maestro?
+
+
+
+
+
+
+
+*****DONE*****
+---Colocar una leyenda con periodo actual
+---Fecha actual
+---Bug en los selects. Pensar en otro método.
+---ScheduleController, lista de students en base al grupo.
+---Método que permita obtener todas horarios por id del docente y el periodo.
+---Método que permita obtener una pantalla con un get(), por docente, materia, grupo, y periodo.
+---Generar los días en base al current month.
+---¿Cómo se obtiene el período si en ocasiones empieza antes o después de un mes?
+---Añadir un header de los días en base al mes, (si el mes inicia en martes, recorrer los td).
+---Eliminar los días domingos del header de lista.
+---¿Qué pasará con los meses de 6 semanas?
+---¿Por qué el horario me pone días incorrectos? :S
+---Cambio en la manera de ver las listas. (Se realizó por ID, pero al momento de hacerlo así, se hace una lista por cada hora. (se deberá hacer un método que obtenga el id del maestro, del periodo, de la materia y del grupo, ya que de eso depende la lista, y así sólo se generará una sola lista).
+---Nueva corrección de las clases y base de datos, apariencia de horarios :C
+---Crear day y hourSchedules seeds
+---Arreglando ScheduleController
+---Resolviendo errores :C---
+---Hacer un método que en base al día de la semana y al periodo de clases, se muestre un select para los días que se tomarán lista.
+(Ejemplo: Todos los jueves del período septiembre-diciembre, de la materia: X) 
+---Selects no aplica domingos, el día se recorre junto a la fecha :/
+---Preguntar a profe Cristina, sobre las horas en un mismo día, pero que son saltadas. 
+---Trabajando con Incidencias 
+---Arreglar error en select (primeramente debe coincidir con fechas, el día se recorre junto a la fecha :/
+---Modal para dar de alta incidencias.
+---En incidencias Un combobox que contenga las fechas que ese profe da clases en el mes.
+---Exportar de excel a API
+---Crear una tabla Career, y una tabla lists_attendance
+---Tabs y listas ya se adaptan por mes.
+---Se añadió tabla carrera y lista, el schedule ahora depende de esto. Se necesita eliminar campos del periodo, pero esto se hará después.
+---Recordar: Método getdates servirá para obtener fecha del día de lista en model attendance (necesito fecha completa, no sólo el día)
+------Se necesitará realizar una validación si el current day es menor al día que se debe tomar lista, entonces no hay asistencia asignada, ni combobox, pero si sí. todos ya cuentan con una asistencia por default, que se dará de alta.
+---Arreglando bug de select (sólo se muestra en el primero tr)
+---Si en un día se imparte más de una hora, que el select de asistencia sólo contenga una nomenclatura menores. (no mayores).
+---Comparar si la asistencia es A, entonces que tenga el id 1 (algo así).
+---Poner divisiones en los horarios.
+---Trabajar con las ASISTENCIAS
+---mas registros y más datos.
+---¿Cómo paso de excel a la vista y guardo los datos?
+
+
+*****INVESTIGAR*****
+---¿Qué pasa con los alumnos que no están en la lista? ¿Dar opción de crear alumno?
+---Descargar Listas
+---Autosave ;) --- En proceso
