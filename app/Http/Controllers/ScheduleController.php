@@ -33,7 +33,10 @@ class ScheduleController extends Controller
                 array_push($hours, $hour);
             }
         }
+
+        $current_month = ListAssistance::where('id', $month)->first();
         $months = ListAssistance::all();
+
         //obtain the status of students
         $student = Student::where('status', 'R')->select('id')->get();
         //obtain the students list by group id where status is regular
@@ -47,7 +50,8 @@ class ScheduleController extends Controller
             'schedule' =>$schedule,
             'students' => $students,
             'days' => $days,
-            'months' => $months
+            'months' => $months,
+            'current_month' => $current_month
             //'test' => $test->toJSON()
         ]);
 

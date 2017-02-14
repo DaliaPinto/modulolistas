@@ -238,7 +238,7 @@ function drawTdAssistence(dates, data, dt){
 function studentHours(data) {
 
     $.each(data, function (key, value) {
-        console.log(value);
+        //console.log(value);
     });
     //$('.tr-students').append('<td class="absence"></td>' + '<td class="attendance"></td>');
 }

@@ -8,31 +8,29 @@
         //are impart.
         var data = {!! $days !!};
 
-        var month = {!! $months !!}
+        var months = {!! $months !!}
 
-        var startMonth = '2017-02-01';
-        var endMonth = '2017-02-28';
+        var month = {!! $current_month !!};
 
         //startDate: when the first month starts
         //endDate: when the first month ends
         //dates: is a function and return a weekdays array.
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
-        var startDate = addDays(new Date(startMonth), 1),
-            endDate = addDays(new Date(endMonth), 1),
-            dates = getDates(startDate, endDate, data),
-            url = '{{ route('edit') }}',
-            urlIncidence= '{{ route('createIncidence') }}';
+        var startDate = addDays(new Date(month.start_date), 1),
+                endDate = addDays(new Date(month.end_date), 1),
+                dates = getDates(startDate, endDate, data),
+                url = '{{ route('edit') }}',
+                urlIncidence= '{{ route('createIncidence') }}';
 
-        //Put text in tabs
-        /*$.each( month, function(key, value ) {
-            var date = moment(value.start_date);
+        @foreach($months as $key=>$m)
+            var date = months[{{$key}}].start_date;
             $tab = $('.tab-month');
-            $tab.eq(key).html(date.format('MMMM').toUpperCase());
-            $tab.attr('href', '');
-            console.log();
-        });*/
-        //put in tabs the name of the period months
+            //Put month text in tabs
+            //$tab.eq({{$key}}).html(date.format('MMMM').toUpperCase());
+            //route about month
+            $tab.attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
+        @endforeach
 
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
