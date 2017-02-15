@@ -14,21 +14,13 @@
             </ul>
         </div>
     </div>
-    <div class="col-xs-5 mrg-text">
+    <div class="col-xs-6 mrg-text">
         <i class="fa fa-graduation-cap" aria="true"></i> CARRERA: {{ $schedule->group->career->name }}
     </div>
     <div class="col-xs-3 mrg-text"><i class="fa fa-calendar" aria="true"></i> PERIODO: {{ $schedule->group->period->description }}</div>
-    <div class="col-xs-3 mrg-text"><i class="fa fa-users" aria="true"></i> GRUPO: {{ $schedule->group->group }}</div>
-    <div class="col-xs-5 mrg-text">
+    <div class="col-xs-2 mrg-text"><i class="fa fa-users" aria="true"></i> GRUPO: {{ $schedule->group->group }}</div>
+    <div class="col-xs-6 mrg-text">
         <i class="fa fa-user" aria="true"></i> PROFESOR: {{ $schedule->teacher->name }} {{ $schedule->teacher->last_name }} {{ $schedule->teacher->second_name }}
-    </div>
-
-    <div class="col-xs-3 mrg-text"><i class="fa fa-clock-o" aria="true"></i> TURNO:
-        @if($schedule->group->shift == 'M')
-            Matutino
-        @else
-            Vespertino
-        @endif
     </div>
 
     <div class="col-xs-3 mrg-text">
@@ -42,6 +34,16 @@
             }
         @endphp
     </div>
-    <div class="col-xs-5 mrg-text"><i class="fa fa-book" aria="true"></i> MATERIA: {{ $schedule->subject->name }} </div>
+
+    <div class="col-xs-2 mrg-text"><i class="fa fa-clock-o" aria="true"></i> TURNO:
+        @if($schedule->group->shift == 'M')
+            Matutino
+        @else
+            Vespertino
+        @endif
+    </div>
+
+
+    <div class="col-xs-6 mrg-text"><i class="fa fa-book" aria="true"></i> MATERIA: {{ $schedule->subject->name }} </div>
     <div class="col-xs-2 mrg-text" id="month-name"></div>
 </div><!--/information-list-->
