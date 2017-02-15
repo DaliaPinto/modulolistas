@@ -18,6 +18,8 @@ class Student extends Model
     */
     public $timestamps = false;
 
+    public $incrementing = false;
+
     /*
      * Bidirectional relationship with GroupStudent class
      */
