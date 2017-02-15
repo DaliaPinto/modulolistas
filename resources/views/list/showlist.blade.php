@@ -7,10 +7,7 @@
         //data: is an array of objects, contains days, and hours of schedules
         //are impart.
         var data = {!! $days !!};
-
-        var months = {!! $months !!}
-
-        var month = {!! $current_month !!};
+        var month = {!! $current_month !!}
 
         //startDate: when the first month starts
         //endDate: when the first month ends
@@ -18,18 +15,24 @@
         //url is the route where the incidence will edit
         //url is the route where the incidence will create
         var startDate = addDays(new Date(month.start_date), 1),
-                endDate = addDays(new Date(month.end_date), 1),
-                dates = getDates(startDate, endDate, data),
-                url = '{{ route('edit') }}',
-                urlIncidence= '{{ route('createIncidence') }}';
+            endDate = addDays(new Date(month.end_date), 1),
+            dates = getDates(startDate, endDate, data),
+            url = '{{ route('edit') }}',
+            urlIncidence= '{{ route('createIncidence') }}';
 
         @foreach($months as $key=>$m)
-            var date = months[{{$key}}].start_date;
+            @php
+                $date = new \Carbon\Carbon();
+                $cur_month = \Carbon\Carbon::parse($m->start_date)->month;
+            @endphp
             $tab = $('.tab-month');
-            //Put month text in tabs
-            //$tab.eq({{$key}}).html(date.format('MMMM').toUpperCase());
+            $tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');
             //route about month
-            $tab.attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
+            $tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
+            $tab.eq({{$key}}).click(function(){
+                $(this).addClass('active');
+                $tab.first().removeClass('active');
+            });
         @endforeach
 
         //make options in select incidence modal
@@ -45,7 +48,7 @@
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
+                <li role="presentation" data-toggle="tooltip" class="active" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
                 <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
                 <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
                 <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
@@ -83,7 +86,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="36">No hay estudiantes asignados a este grupo por el momento</td>
+                                <td colspan="36">No hay estudiantes asignados por el momento</td>
                             </tr>
                         @endforelse
                         </tbody>

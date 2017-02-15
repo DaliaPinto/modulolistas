@@ -12,7 +12,7 @@ class ListTableSeeder extends Seeder
     public function run()
     {
         //1st month
-        /*$list = new \App\ListAssistance();
+        $list = new \App\ListAssistance();
         $list->start_date = '2017-01-04';
         $list->end_date = '2017-01-31';
         $list->save();
@@ -33,6 +33,6 @@ class ListTableSeeder extends Seeder
         $list = new \App\ListAssistance();
         $list->start_date = '2017-04-01';
         $list->end_date = '2017-04-14';
-        $list->save();*/
+        $list->save();
     }
 }
