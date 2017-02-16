@@ -12,17 +12,29 @@ class TeachersTableSeeder extends Seeder
     public function run()
     {
         $teacher = new \App\Teacher();
-        $teacher->name = 'John';
-        $teacher->last_name = 'Smith';
-        $teacher->middle_name = 'G.';
+        $teacher->name = 'Armida';
+        $teacher->last_name = 'Caballero';
+        $teacher->middle_name = 'Barragan';
         $teacher->user_id = 1;
         $teacher->save();
 
         $teacher = new \App\Teacher();
-        $teacher->name = 'Mary';
-        $teacher->last_name = 'Jones';
-        $teacher->middle_name = 'H.';
+        $teacher->name = 'María Rebeca';
+        $teacher->last_name = 'Rivera';
+        $teacher->middle_name = 'Martínez';
         $teacher->user_id = 2;
+        $teacher->save();
+
+        $teacher = new \App\Teacher();
+        $teacher->name = 'Laura';
+        $teacher->last_name = 'Trejo';
+        $teacher->middle_name = 'Medina';
+        $teacher->save();
+
+        $teacher = new \App\Teacher();
+        $teacher->name = 'Cleotilde';
+        $teacher->last_name = 'Tenorio';
+        $teacher->middle_name = 'Hernández';
         $teacher->save();
     }
 }
