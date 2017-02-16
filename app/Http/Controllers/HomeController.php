@@ -107,7 +107,7 @@ class HomeController extends Controller
                     $row->group = $schedule->group->group;
                     $row->career = $schedule->group->career->name;
                     $row->grade = $schedule->group->grade;
-                    $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name;
+                    $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name.' '.$schedule->teacher->middle_name;
                     $row->schedule = $schedule->id;
 
                     //compare the number of day, $hourDay comes to getListHours function and fill with the row empty object

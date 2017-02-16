@@ -58,9 +58,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="user-type" class="col-md-4 control-label">Seleccione Permiso de usuario</label>
+                            <label for="user_type" class="col-md-4 control-label">Seleccione Permiso de usuario</label>
                             <div class="col-md-6">
-                                <select name="user-type" id="user-type" class="form-control">
+                                <select name="user_type" id="user_type" class="form-control">
                                     @foreach($users as $user)
                                         <option value="{{$user->id}}">{{$user->description}}</option>
                                     @endforeach

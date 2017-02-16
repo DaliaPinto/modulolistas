@@ -63,7 +63,7 @@
                                     <i class="fa fa-user-o" aria="true"></i>
                                     @php
                                         $teacher = Auth::user()->teacher;
-                                        echo 'Bienvenido '. $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->second_name;
+                                        echo 'Bienvenido '. $teacher->name. ' ' .$teacher->last_name. ' '.$teacher->middle_name;
                                     @endphp
                                     <span class="caret"></span>
                                 </a>

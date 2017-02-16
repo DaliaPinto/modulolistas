@@ -1,6 +1,6 @@
 <!--obtain all the schedule details-->
 <div id="information-div">
-    <div class="row txt-align-center schedule-head">Lista de Asistencia del grupo  {{ $schedule->group->group }}</div>
+    <div class="row txt-align-center schedule-head">Lista de Asistencia del grupo   {{ $schedule->group->grade}}&ordm;{{ $schedule->group->group }}</div>
     <div class="col-xs-1 margin-bot">
         <div class="dropdown">
             Opciones <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -20,7 +20,7 @@
     <div class="col-xs-3 mrg-text"><i class="fa fa-calendar" aria="true"></i> PERIODO: {{ $schedule->group->period->description }}</div>
     <div class="col-xs-2 mrg-text"><i class="fa fa-users" aria="true"></i> GRUPO: {{ $schedule->group->group }}</div>
     <div class="col-xs-6 mrg-text">
-        <i class="fa fa-user" aria="true"></i> PROFESOR: {{ $schedule->teacher->name }} {{ $schedule->teacher->last_name }} {{ $schedule->teacher->second_name }}
+        <i class="fa fa-user" aria="true"></i> PROFESOR: {{ $schedule->teacher->name }} {{ $schedule->teacher->last_name }} {{ $schedule->teacher->middle_name }}
     </div>
 
     <div class="col-xs-3 mrg-text">
