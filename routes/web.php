@@ -24,6 +24,14 @@ Route::get('/', function () {
 Auth::routes();
 
 /*
+ *
+ */
+Route::get('/register', [
+    'uses' => 'UserController@getUserTypes',
+    'as' => 'register',
+]);
+
+/*
  * Schedules home view
  */
 Route::get('/home', [

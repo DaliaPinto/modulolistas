@@ -41,7 +41,6 @@ class ScheduleController extends Controller
         $student = Student::where('status', 'R')->select('id')->get();
         //obtain the students list by group id where status is regular
         $students = GroupStudent::where('group_id', $schedule->group->id)->
-                                  where('list_assistance_id', $month)->
                                   whereIn('student_id', $student)->get();
 
         //$test = $this->showDataExcel();

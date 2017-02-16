@@ -47,6 +47,29 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="teacher" class="col-md-4 control-label">Asgine Maestro a este usuario</label>
+                            <div class="col-md-6">
+                                <select name="teacher" id="teacher" class="form-control">
+                                    @foreach($teachers as $teacher)
+                                        <option value="{{$teacher->id}}">{{$teacher->name}} {{$teacher->last_name}} {{$teacher->middle_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="user-type" class="col-md-4 control-label">Seleccione Permiso de usuario</label>
+                            <div class="col-md-6">
+                                <select name="user-type" id="user-type" class="form-control">
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->description}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Registrar
