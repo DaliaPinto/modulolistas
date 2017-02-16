@@ -31,3 +31,12 @@ $factory->define(App\Student::class, function (Faker\Generator $faker) {
         'middle_name' => $faker->lastName,
     ];
 });
+
+$factory->define(App\Group::class, function (Faker\Generator $faker) {
+    return [
+        'shift' => $faker->randomElement(['V', 'M']),
+        'group' => $faker->randomElement(['A', 'B', 'C']),
+        'period_id' => 2,
+    ];
+});
+
