@@ -16,9 +16,9 @@ class GeneralSeeder extends Seeder
 
         \App\Career::all()->each(function ($career) use ($faker) {
 
-            //two groups per career
+            //four groups per career
 
-            for($x = 0; $x <= 1; $x++) {
+            for($x = 0; $x <= 3; $x++) {
 
                 $group = factory(\App\Group::class)->create([
                     'grade' => $x + 1,

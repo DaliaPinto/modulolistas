@@ -105,6 +105,8 @@ class HomeController extends Controller
                     $row = new \stdClass();
                     $row->subject = $schedule->subject->name;
                     $row->group = $schedule->group->group;
+                    $row->career = $schedule->group->career->name;
+                    $row->grade = $schedule->group->grade;
                     $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name;
                     $row->schedule = $schedule->id;
 

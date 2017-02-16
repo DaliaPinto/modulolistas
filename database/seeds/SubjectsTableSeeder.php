@@ -23,5 +23,21 @@ class SubjectsTableSeeder extends Seeder
         $subject = new \App\Subject();
         $subject->name = 'Metodología de la Programación';
         $subject->save();
+
+        $subject = new \App\Subject();
+        $subject->name = 'Cálculo';
+        $subject->save();
+
+        $subject = new \App\Subject();
+        $subject->name = 'Matemáticas Aplicadas';
+        $subject->save();
+
+        $subject = new \App\Subject();
+        $subject->name = 'Expresión Oral y Escrita';
+        $subject->save();
+
+        $subject = new \App\Subject();
+        $subject->name = 'Base de Datos';
+        $subject->save();
     }
 }

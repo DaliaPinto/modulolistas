@@ -19,20 +19,20 @@ class CareersTableSeeder extends Seeder
         $career->name = 'Mecatrónica';
         $career->save();
 
-        $career = new \App\Career();
-        $career->name = 'Desarrollo e Innovación Empresarial';
-        $career->save();
-
-        $career = new \App\Career();
-        $career->name = 'Energías Renovables';
-        $career->save();
-
-        $career = new \App\Career();
-        $career->name = 'Logística Comercial Global';
-        $career->save();
-
-        $career = new \App\Career();
-        $career->name = 'Electromecánica Industrial';
-        $career->save();
+//        $career = new \App\Career();
+//        $career->name = 'Desarrollo e Innovación Empresarial';
+//        $career->save();
+//
+//        $career = new \App\Career();
+//        $career->name = 'Energías Renovables';
+//        $career->save();
+//
+//        $career = new \App\Career();
+//        $career->name = 'Logística Comercial Global';
+//        $career->save();
+//
+//        $career = new \App\Career();
+//        $career->name = 'Electromecánica Industrial';
+//        $career->save();
     }
 }
