@@ -23,17 +23,17 @@
         @foreach($months as $key=>$m)
             @php
                 $date = new \Carbon\Carbon();
+                $cur_month = \Carbon\Carbon::parse($m->start_date)->month;
             @endphp
             $tab = $('.tab-month');
             $tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');
             //route about month
             $tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
             $tab.eq({{$key}}).click(function(){
-                $(this).addClass('active');
                 $tab.first().removeClass('active');
+                $(this).addClass('active');
             });
         @endforeach
-
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
         //draw tds in td table
