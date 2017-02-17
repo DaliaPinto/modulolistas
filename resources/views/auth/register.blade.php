@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="teacher" class="col-md-4 control-label">Asgine Maestro a este usuario</label>
+                            <label for="teacher" class="col-md-4 control-label">Seleccione a un docente no registrado</label>
                             <div class="col-md-6">
                                 <select name="teacher" id="teacher" class="form-control">
                                     @foreach($teachers as $teacher)
@@ -71,7 +71,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="save-user">
                                     Registrar
                                 </button>
                             </div>
@@ -82,4 +82,31 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+
+        var url = '{{ route('editTeacher') }}';
+        var token = '{{ Session::token() }}';
+        {{--var user = {{ $teacher = Auth::user()->id }};--}}
+
+        //save in post route, all the values that was obtained on inputs
+        $('#save-user').on('click', function(){
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data:{
+                    //id: made a data-type in html, then pass the attribute to js and this, could named as incidenceId or something like that
+                    teacher : $('#teacher option:selected').val(),
+                    //user_id : user,
+                    _token : token
+                }
+            })
+            .done(function(teacher) {
+                //console.log(JSON.stringify(message));
+            })
+        });
+
+    </script>
 @endsection

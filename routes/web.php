@@ -24,11 +24,19 @@ Route::get('/', function () {
 Auth::routes();
 
 /*
- *
+ *get a catalog of user permissions
  */
 Route::get('/register', [
     'uses' => 'UserController@getUserTypes',
     'as' => 'register',
+]);
+
+/*
+ * Edit an teacher user_id
+ */
+Route::post('/editTeacher',[
+    'uses' => 'UserController@editTeacher',
+    'as' => 'editTeacher'
 ]);
 
 /*
