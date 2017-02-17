@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListAssistancesTable extends Migration
+class CreateSchoolMonthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateListAssistancesTable extends Migration
      */
     public function up()
     {
-        Schema::create('list_assistances', function (Blueprint $table) {
+        Schema::create('school_months', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
+            $table->integer('period_id');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateListAssistancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('list_assistances');
+        Schema::dropIfExists('school_months');
     }
 }

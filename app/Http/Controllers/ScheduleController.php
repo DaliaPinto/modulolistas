@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\ListAssistance;
+use App\SchoolMonth;
 use Carbon\Carbon;
 
 use App\Schedule;
@@ -34,8 +35,8 @@ class ScheduleController extends Controller
             }
         }
 
-        $current_month = ListAssistance::where('id', $month)->first();
-        $months = ListAssistance::all();
+        $current_month = SchoolMonth::where('id', $month)->first();
+        $months = SchoolMonth::all();
 
         //obtain the status of students
         $student = Student::where('status', 'R')->select('id')->get();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ListAssistance;
+use App\SchoolMonth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,7 +83,7 @@ class HomeController extends Controller
         $today = Carbon::today();
 
         //get all the months
-        $month = ListAssistance::where('start_date','<=', $today->toDateString())
+        $month = SchoolMonth::where('start_date','<=', $today->toDateString())
                                 ->where('end_date', '>=', $today->toDateString())->first();
 
 

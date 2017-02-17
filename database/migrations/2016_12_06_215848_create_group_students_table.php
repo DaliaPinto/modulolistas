@@ -14,7 +14,7 @@ class CreateGroupStudentsTable extends Migration
     public function up()
     {
         Schema::create('group_students', function (Blueprint $table) {
-            $table->char('student_id', 10);
+            $table->integer('student_id', 10);
             $table->integer('group_id');
         });
     }
