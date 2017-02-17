@@ -111,12 +111,8 @@ class HomeController extends Controller
                     $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name.' '.$schedule->teacher->middle_name;
                     $row->schedule = $schedule->id;
 
-                    //compare the number of day, $hourDay comes to getListHours function and fill with the row empty object
-                    if($numberDay == 1) $hourDay->mon = $row; //Monday
-                    if($numberDay == 2) $hourDay->tue = $row; //Tuesday
-                    if($numberDay == 3) $hourDay->wed = $row; //Wednesday
-                    if($numberDay == 4) $hourDay->thu = $row; //Thursday
-                    if($numberDay == 5) $hourDay->fri = $row; //Friday
+                    $hourDay->schedules[$numberDay - 1] = $row;
+
                 }
             }
         }
@@ -145,14 +141,8 @@ class HomeController extends Controller
             //put start and end hour in first row
             $row->hour = $hour->start_hour.' - '.$hour->end_hour;
 
-            //it will fill with the subject, group and teacher name depends the hour and day
-            $row->mon = null;
-            $row->tue = null;
-            $row->wed = null;
-            $row->thu = null;
-            $row->fri = null;
+            $row->schedules = array_fill (0, 5, NULL);
 
-            //push row variable in array
             array_push($columns, $row);
         }
         //return array
