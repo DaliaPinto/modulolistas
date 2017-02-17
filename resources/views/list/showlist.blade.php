@@ -77,7 +77,7 @@
                         @forelse($students->sortBy('student.last_name') as $s)
                             <tr class="tr-students">
                                 <td class="student-number"></td>
-                                <td>{{ $s->student_id }}</td>
+                                <td>{{ $s->student->serial_number }}</td>
                                 <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
                                {{-- @for($i=0;$i<36;$i++)
                                     <td class="assistance"></td>
