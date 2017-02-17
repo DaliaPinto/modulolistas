@@ -10,22 +10,28 @@ class Attendance extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'schedule_id',
+        'status',
         'student_id',
-        'attendance_status',
-        'attendance_date'
+        'school_month_id',
+        'hour_schedule_id'
     ];
     /*
-     * Schedule table relationship
+     * HourSchedule table relationship
      */
-    public function schedule(){
-        return $this->belongsTo('App\Schedule');
+    public function hour(){
+        return $this->belongsTo('App\HourSchedule');
     }
     /*
      * Student table relationship
      */
     public function student(){
         return $this->belongsTo('App\Student');
+    }
+    /*
+     * Month table relationship
+     */
+    public function month(){
+        return $this->belongsTo('App\School_Month');
     }
 
 }

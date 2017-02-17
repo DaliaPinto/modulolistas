@@ -10,7 +10,7 @@ class Student extends Model
      * Method, it fill the seeders
      */
     protected $fillable = [
-        'id', 'name', 'last_name', 'middle_name', 'status'
+        'serial_number', 'name', 'last_name', 'middle_name', 'status'
     ];
 
     /*

@@ -21,14 +21,14 @@ class Period extends Model
     /*
      * Bidirectional relationship with Schedule class
      */
-    public function schedules() {
-        return $this->hasMany('App\Schedule');
+    public function groups() {
+        return $this->hasMany('App\Group');
     }
 
     /*
      * Bidirectional relationship with GroupStudent class
      */
-    public function groupStudents() {
-        return $this->hasMany('App\GroupStudent');
+    public function months() {
+        return $this->hasMany('App\School_Months');
     }
 }
