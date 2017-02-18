@@ -3,7 +3,6 @@
     <!--Attendance list-->
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/list/tabs.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         //data: is an array of objects, contains days, and hours of schedules
         //are impart.
