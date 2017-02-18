@@ -22,7 +22,7 @@ for(var i=0;i<tdNumber.length;i++){
  * param : dt - is the date by the month of the list (could be any day)
 */
 function drawThAssistence(dt) {
-    //put month date in div.
+    //put month date in div in information list
     var monthName = moment(new Date(dt));
     $monthDiv = $('#month-name');
     $monthDiv.append('<i class="fa fa-calendar-check-o" aria="true"></i> '+ ' MES: '+ monthName.format("MMMM").toUpperCase());
@@ -208,8 +208,7 @@ function drawTdAssistence(dates, data, dt){
                              // array and dates array
                              $.each( data, function(key, valueData ){
                                 if(value.number_day == valueData.day){
-                                    studentHours(valueData);
-                                    showSelect(div, valueData, date.format('YYYY-MM-DD'));
+                                    showSelect(div, valueData);
                                 }
                              });
                              tdAssistance.appendChild(div);
@@ -231,17 +230,6 @@ function drawTdAssistence(dates, data, dt){
     }
 }
 
-/**
- *
- * @param hours array hours
- */
-function studentHours(data) {
-
-    $.each(data, function (key, value) {
-        //console.log(value);
-    });
-    //$('.tr-students').append('<td class="absence"></td>' + '<td class="attendance"></td>');
-}
 
 /**
  *Create a menu options, to change assistance in list
@@ -249,14 +237,14 @@ function studentHours(data) {
  * @param: dates - array of object dates
  * @param: data - array of object days
  */
-function showSelect(element, data, dt) {
+function showSelect(element, data) {
     //create select element
     var select = document.createElement('select');
     //put class attribute to select.
     select.className = 'select-status';
     //Add function when select is change
     select.onchange = function () {
-        obtainValue(this, dt, data);
+        obtainValue(this, data);
     };
     //put days array to validate status in options
     validateStatus(select, data);

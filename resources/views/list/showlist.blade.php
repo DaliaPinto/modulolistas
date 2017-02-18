@@ -3,6 +3,7 @@
     <!--Attendance list-->
     <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/list/tabs.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         //data: is an array of objects, contains days, and hours of schedules
         //are impart.
@@ -30,10 +31,10 @@
             //route about month
             $tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
             $tab.eq({{$key}}).click(function(){
-                $tab.first().removeClass('active');
-                $(this).addClass('active');
+                $(this).closest( 'li' ).addClass('active');
             });
         @endforeach
+
         //make options in select incidence modal
         document.body.onload = selectIncidence(dates);
         //draw tds in td table
@@ -47,61 +48,57 @@
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li role="presentation" data-toggle="tooltip" class="active" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
-                <li role="presentation" data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a class="tab-month"></a></li>
+                <li data-toggle="tooltip" class="active" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
+                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
+                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
+                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
             </ul>
-            <!--information List-->
-            @include('list.include.informationlist')
-            <div class="row">
-
-                <div class="col-md-12">
-                    <!--students List-->
-                    <table class="table table-bordered" id="listAttendance">
-                        <thead>
-                        <tr>
-                            <th rowspan="2">No.</th>
-                            <th rowspan="2" class="th-id">Matrícula</th>
-                            <th rowspan="2" class="th-name">Nombre</th>
-                            <th colspan="6" class="txt-align-center">Primer Semana</th>
-                            <th colspan="6" class="txt-align-center">Segunda Semana</th>
-                            <th colspan="6" class="txt-align-center">Tercer Semana</th>
-                            <th colspan="6" class="txt-align-center">Cuarta Semana</th>
-                            <th colspan="7" class="txt-align-center">Quinta semana</th>
-                            <th colspan="2">Total</th>
-                        </tr>
-                        <tr id="tr-days"></tr>
-                        </thead>
-                        <tbody>
-                        @forelse($students->sortBy('student.last_name') as $s)
-                            <tr class="tr-students">
-                                <td class="student-number"></td>
-                                <td>{{ $s->student->serial_number }}</td>
-                                <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
-                               {{-- @for($i=0;$i<36;$i++)
-                                    <td class="assistance"></td>
-                                @endfor--}}
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="36">No hay estudiantes asignados por el momento</td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            @if(count($students) != 0)
-                <div class="row">
-                    <div class="col-md-7"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
-                    <div class="col-md-5" id="cur-date"></div>
-                </div>
-                <div class="row" id="messages">
-                </div>
-            @endif
         </div>
-    </div>
+        <!--information List-->
+        @include('list.include.informationlist')
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active">
+                <!--students List-->
+                <table class="table table-bordered" id="listAttendance">
+                    <thead>
+                    <tr>
+                        <th rowspan="2">No.</th>
+                        <th rowspan="2" class="th-id">Matrícula</th>
+                        <th rowspan="2" class="th-name">Nombre</th>
+                        <th colspan="6" class="txt-align-center">Primer Semana</th>
+                        <th colspan="6" class="txt-align-center">Segunda Semana</th>
+                        <th colspan="6" class="txt-align-center">Tercer Semana</th>
+                        <th colspan="6" class="txt-align-center">Cuarta Semana</th>
+                        <th colspan="7" class="txt-align-center">Quinta semana</th>
+                        <th colspan="2">Total</th>
+                    </tr>
+                    <tr id="tr-days"></tr>
+                    </thead>
+                    <tbody>
+                    @forelse($students->sortBy('student.last_name') as $s)
+                        <tr class="tr-students">
+                            <td class="student-number"></td>
+                            <td>{{ $s->student->serial_number}}</td>
+                            <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="36">No hay estudiantes asignados por el momento</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
+                @if(count($students) != 0)
+                    <div class="row">
+                        <div class="col-md-7"><button id="save-list" class="btn btn-primary">Guardar Lista</button></div>
+                        <div class="col-md-5" id="cur-date"></div>
+                    </div>
+                    <div class="row" id="messages">
+                    </div>
+                @endif
+            </div><!--/tabpanel-->
+        </div><!--/tab-content-->
+    </div><!--/container-->
     <!--Modal view-->
     @include('incidence.create')
 @endsection

@@ -15,7 +15,7 @@
     font-family: "Roboto";
     font-style: normal;
     font-weight: 400;
-    src: url("/fonts/Roboto-Condensed.ttf") format('truetype');
+    src: url("/fonts/Roboto-Condensed.regular.ttf") format('truetype');
 }
 body{
     font-family: Roboto;

@@ -97,17 +97,15 @@ $('#form-create-incidence').validate({
  * @param dt:
  * @param data:
  */
-function obtainValue(element, dt, data){
+function obtainValue(element, data){
     $schedule = data.schedule_id;
     $curDate = moment(new Date());
-    $dateAttendance = dt;
     $assistance = element.value;
     $parent = element.closest('tr');
     $idStudent = $parent.children[1].innerText;
 
     totalHours($assistance);
 
-    console.log('date: '+$dateAttendance);
     console.log('schedule_id: '+$schedule);
     console.log('student_id: '+$idStudent);
     console.log('status_attendance: '+$assistance);
