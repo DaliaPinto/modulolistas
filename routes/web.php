@@ -43,7 +43,7 @@ Route::post('/editTeacher',[
  * Schedules home view
  */
 Route::get('/home', [
-    'uses' => 'HomeController@index',
+    'uses' => 'ScheduleController@getScheduleOfTeacher',
     'as' => 'home',
     'middleware' => 'auth'
 ]);
@@ -52,7 +52,7 @@ Route::get('/home', [
  * Attendance List index view
 */
 Route::get('/list/{id}/month/{month}', [
-    'uses' => 'ScheduleController@showList',
+    'uses' => 'AttendanceController@showList',
     'as' => 'list',
     'middleware' => 'auth'
 ]);

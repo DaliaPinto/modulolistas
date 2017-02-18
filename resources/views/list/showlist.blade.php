@@ -1,57 +1,67 @@
 @extends('layouts.app')
 @section('javascript')
-    <!--Attendance list-->
-    <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/list/tabs.js')}}" type="text/javascript"></script>
-    <script type="text/javascript">
-        //data: is an array of objects, contains days, and hours of schedules
-        //are impart.
-        var data = {!! $days !!};
-        var month = {!! $current_month !!}
+    {{--<!--Attendance list-->--}}
+    {{--<script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{URL::to('/js/list/tabs.js')}}" type="text/javascript"></script>--}}
+    {{--<script type="text/javascript">--}}
+        {{--//data: is an array of objects, contains days, and hours of schedules--}}
+        {{--//are impart.--}}
+        {{--var data = {!! $days !!};--}}
+        {{--var month = {!! $current_month !!}--}}
 
-        //startDate: when the first month starts
-        //endDate: when the first month ends
-        //dates: is a function and return a weekdays array.
-        //url is the route where the incidence will edit
-        //url is the route where the incidence will create
-        var startDate = addDays(new Date(month.start_date), 1),
-            endDate = addDays(new Date(month.end_date), 1),
-            dates = getDates(startDate, endDate, data),
-            url = '{{ route('edit') }}',
-            urlIncidence= '{{ route('createIncidence') }}';
+        {{--//startDate: when the first month starts--}}
+        {{--//endDate: when the first month ends--}}
+        {{--//dates: is a function and return a weekdays array.--}}
+        {{--//url is the route where the incidence will edit--}}
+        {{--//url is the route where the incidence will create--}}
+        {{--var startDate = addDays(new Date(month.start_date), 1),--}}
+            {{--endDate = addDays(new Date(month.end_date), 1),--}}
+            {{--dates = getDates(startDate, endDate, data),--}}
+            {{--url = '{{ route('edit') }}',--}}
+            {{--urlIncidence= '{{ route('createIncidence') }}';--}}
 
-        @foreach($months as $key=>$m)
-            @php
-                $date = new \Carbon\Carbon();
-                $cur_month = \Carbon\Carbon::parse($m->start_date)->month;
-            @endphp
-            $tab = $('.tab-month');
-            $tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');
-            //route about month
-            $tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
-            $tab.eq({{$key}}).click(function(){
-                $(this).closest( 'li' ).addClass('active');
-            });
-        @endforeach
+        {{--@foreach($months as $key=>$m)--}}
+            {{--@php--}}
+                {{--$date = new \Carbon\Carbon();--}}
+                {{--$cur_month = \Carbon\Carbon::parse($m->start_date)->month;--}}
+            {{--@endphp--}}
+            {{--$tab = $('.tab-month');--}}
+            {{--$tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');--}}
+            {{--//route about month--}}
+            {{--$tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');--}}
+            {{--$tab.eq({{$key}}).click(function(){--}}
+                {{--$(this).closest( 'li' ).addClass('active');--}}
+            {{--});--}}
+        {{--@endforeach--}}
 
-        //make options in select incidence modal
-        document.body.onload = selectIncidence(dates);
-        //draw tds in td table
-        document.body.onload = drawTdAssistence(dates, data, startDate);
-        //put in header table list, the date day
-        drawThAssistence(startDate);
-    </script>
+        {{--//make options in select incidence modal--}}
+        {{--document.body.onload = selectIncidence(dates);--}}
+        {{--//draw tds in td table--}}
+        {{--document.body.onload = drawTdAssistence(dates, data, startDate);--}}
+        {{--//put in header table list, the date day--}}
+        {{--drawThAssistence(startDate);--}}
+    {{--</script>--}}
 @endsection
 
 @section('content')
     <div class="container">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li data-toggle="tooltip" class="active" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
+                @foreach($months as $month)
+                    @php
+                        $start = \Carbon\Carbon::createFromFormat('Y-m-d', $month->start_date);
+                        $end = \Carbon\Carbon::createFromFormat('Y-m-d', $month->end_date);
+                        $li_class = $month->id == $current_month->id ? 'active' : '';
+                        $month_text = '';
+
+                        if ($start->month == $end->month) $month_text = $spanish_months[$start->month - 1];
+                        else $month_text = $spanish_months[$start->month - 1].' - '.$spanish_months[$end->month- 1];
+                    @endphp
+
+                    <li data-toggle="tooltip" class="{{$li_class}}" title="Seleccione el mes" data-placement="top"><a href="{{route('list', ['list' => $schedule->id, 'month' => $month->id])}}" class="tab-month">{{$month_text}}</a></li>
+
+                @endforeach
             </ul>
         </div>
         <!--information List-->
@@ -72,7 +82,11 @@
                         <th colspan="7" class="txt-align-center">Quinta semana</th>
                         <th colspan="2">Total</th>
                     </tr>
-                    <tr id="tr-days"></tr>
+                    <tr id="tr-days">
+                        @for($t = 0; $t < 30; $t++)
+                            <th></th>
+                        @endfor
+                    </tr>
                     </thead>
                     <tbody>
                     @forelse($students->sortBy('student.last_name') as $s)
