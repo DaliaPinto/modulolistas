@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Attendance;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use App\Schedule;
 use App\Day;
@@ -14,6 +16,7 @@ class AttendanceController extends Controller
 {
 
     public $SPANISH_MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    public $DAYS = ['LU', 'MA', 'MI', 'JU', 'VI'];
     /**
      * Store a newly created resource in storage.
      *
@@ -86,23 +89,41 @@ class AttendanceController extends Controller
         $students = GroupStudent::where('group_id', $schedule->group->id)->
         whereIn('student_id', $student)->get();
 
-        //$test = $this->showDataExcel();
+        $class_days = collect();
+
+        foreach ($days as $d) {
+            $week_days = $this->getDays($d->day + 1, $current_month->start_date, $current_month->end_date);
+            foreach ($week_days as $w) {
+                $class_days->push(['day' => $w->dayOfWeek, 'dayNumber' => $w->day, 'month' => $w->month]);
+            }
+        }
+
         //return view with schedule info and students array
         return view('list.showlist', [
             'schedule' =>$schedule,
             'students' => $students,
-            'days' => $days,
+            'days' => $this->DAYS,
             'months' => $school_months,
             'current_month' => $current_month,
-            'spanish_months' => $this->SPANISH_MONTHS
-            //'test' => $test->toJSON()
+            'spanish_months' => $this->SPANISH_MONTHS,
+            'class_days' => $class_days->sortBy('dayNumber'),
         ]);
+    }
 
-        //return response()->json(['data' => $data], 200);
-        //return a json api for testing
-        /*return response()->json(['schedule' =>$schedule,
-                                 'students' =>$students,
-                                 'days' => $days,
-                                 'status' => 0], 200);*/
+    public function getDays($day, $start, $end)
+    {
+        $start_date = Carbon::createFromFormat('Y-m-d', $start);
+        $end_date = Carbon::createFromFormat('Y-m-d', $end)->addDay();
+        $first_day = $start_date->dayOfWeek;
+        $difference = abs($first_day - $day);
+
+        if($day < $first_day) $start_date->addDays(7 - $difference);
+        if($day > $first_day) $start_date->addDays($difference);
+
+        return new \DatePeriod(
+            $start_date,
+            CarbonInterval::week(),
+            $end_date
+        );
     }
 }

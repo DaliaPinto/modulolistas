@@ -20,6 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->integer('school_month_id');
             $table->integer('hour_schedule_id');
             $table->tinyInteger('day');
+            $table->tinyInteger('month');
             $table->timestamps();
         });
     }

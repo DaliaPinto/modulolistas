@@ -71,22 +71,18 @@
                 <!--students List-->
                 <table class="table table-bordered" id="listAttendance">
                     <thead>
-                    <tr>
-                        <th rowspan="2">No.</th>
-                        <th rowspan="2" class="th-id">Matrícula</th>
-                        <th rowspan="2" class="th-name">Nombre</th>
-                        <th colspan="6" class="txt-align-center">Primer Semana</th>
-                        <th colspan="6" class="txt-align-center">Segunda Semana</th>
-                        <th colspan="6" class="txt-align-center">Tercer Semana</th>
-                        <th colspan="6" class="txt-align-center">Cuarta Semana</th>
-                        <th colspan="7" class="txt-align-center">Quinta semana</th>
-                        <th colspan="2">Total</th>
-                    </tr>
-                    <tr id="tr-days">
-                        @for($t = 0; $t < 30; $t++)
-                            <th></th>
-                        @endfor
-                    </tr>
+                        <tr>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2" class="th-id">Matrícula</th>
+                            <th rowspan="2" class="th-name">Nombre</th>
+                            @foreach($class_days as $cd)
+                                <th class="txt-align-center" style="padding: 0;">
+                                    <div style="padding: 8px; border-bottom: 1px solid #ddd;">{{$days[$cd['day'] - 1]}}</div>
+                                    <div style="padding: 8px;">{{$cd['dayNumber']}}</div>
+                                </th>
+                            @endforeach
+                            <th>Total</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @forelse($students->sortBy('student.last_name') as $s)
@@ -94,6 +90,13 @@
                             <td class="student-number"></td>
                             <td>{{ $s->student->serial_number}}</td>
                             <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
+                            @for($y = 0; $y < count($class_days); $y++)
+                                <td>
+                                </td>
+                            @endfor
+                            <td>
+
+                            </td>
                         </tr>
                     @empty
                         <tr>

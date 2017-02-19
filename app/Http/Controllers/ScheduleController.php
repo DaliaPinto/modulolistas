@@ -57,7 +57,7 @@ class ScheduleController extends Controller
 
                     //get to array hours where index is the id hour less 1
                     $hourDay = $hours[$hour->hour_id - 1];
-                    //numberDay is the day number ex. 1 = mon, 2 = tue, 3 = wed, 4 = thu, 5 = fri
+                    //numberDay is the day number ex. 0 = mon, 1 = tue, 2 = wed, 3 = thu, 4 = fri
                     $numberDay = $day->day;
 
                     //empty object to fill subject, group and teacher
@@ -69,7 +69,7 @@ class ScheduleController extends Controller
                     $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name.' '.$schedule->teacher->middle_name;
                     $row->schedule = $schedule->id;
 
-                    $hourDay->schedules[$numberDay - 1] = $row;
+                    $hourDay->schedules[$numberDay] = $row;
 
                 }
             }
@@ -99,7 +99,7 @@ class ScheduleController extends Controller
             //put start and end hour in first row
             $row->hour = $hour->start_hour.' - '.$hour->end_hour;
 
-            $row->schedules = array_fill (0, 5, NULL);
+            $row->schedules = array_fill (0,5, NULL);
 
             array_push($columns, $row);
         }
