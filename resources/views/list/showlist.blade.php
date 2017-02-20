@@ -13,7 +13,7 @@
         }
 
         .attendance-td {
-            vertical-align: middle; position: relative; cursor: pointer;
+            vertical-align: middle!important; position: relative; cursor: pointer;
         }
     </style>
 @endsection
@@ -90,7 +90,7 @@
         </div><!--/tab-content-->
     </div><!--/container-->
     <script id="popupTemplate" type="text/template">
-        <td v-on:click="showAttendancePopup" class="attendance-td text-center" :class="showPopup ? 'info' : tdClass">
+        <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : tdClass">
             @{{ status }}
             <div id="popupAttendance" v-if="showPopup" class="popover bottom popup-attendance">
                 <div class="arrow"></div>
