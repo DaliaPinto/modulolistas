@@ -27,7 +27,7 @@ class GeneralSeeder extends Seeder
 
                 //two students per group
 
-                factory(\App\Student::class, 2)->create()->each(function ($s) use ($group) {
+                factory(\App\Student::class, 15)->create()->each(function ($s) use ($group) {
                     $gs = new \App\GroupStudent();
                     $gs->student_id = $s->id;
                     $gs->group_id = $group->id;

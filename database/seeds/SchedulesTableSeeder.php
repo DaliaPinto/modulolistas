@@ -26,7 +26,7 @@ class SchedulesTableSeeder extends Seeder
             $s->group_id = $groupId->id;
             $s->save();
 
-            $days = $faker->randomElements([1,2,3,4,5], 2);
+            $days = $faker->randomElements([0,1,2,3,4], 2);
 
             foreach ($days as $dayNumber) {
                 $day= new \App\Day();

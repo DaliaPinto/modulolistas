@@ -1,56 +1,40 @@
 @extends('layouts.app')
-@section('javascript')
-    <!--Attendance list-->
-    <script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>
-    <script type="text/javascript">
-        //data: is an array of objects, contains days, and hours of schedules
-        //are impart.
-        var data = {!! $days !!};
-        var month = {!! $current_month !!}
+@section('head')
+    <script src="{{URL::to('js/vue.js')}}"></script>
+    <style>
+        .popup-attendance {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: block;
+            cursor: default;
+        }
 
-        //startDate: when the first month starts
-        //endDate: when the first month ends
-        //dates: is a function and return a weekdays array.
-        //url is the route where the incidence will edit
-        //url is the route where the incidence will create
-        var startDate = addDays(new Date(month.start_date), 1),
-            endDate = addDays(new Date(month.end_date), 1),
-            dates = getDates(startDate, endDate, data),
-            url = '{{ route('edit') }}',
-            urlIncidence= '{{ route('createIncidence') }}';
-
-        @foreach($months as $key=>$m)
-            @php
-                $date = new \Carbon\Carbon();
-                $cur_month = \Carbon\Carbon::parse($m->start_date)->month;
-            @endphp
-            $tab = $('.tab-month');
-            $tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');
-            //route about month
-            $tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');
-            $tab.eq({{$key}}).click(function(){
-                $(this).closest( 'li' ).addClass('active');
-            });
-        @endforeach
-
-        //make options in select incidence modal
-        document.body.onload = selectIncidence(dates);
-        //draw tds in td table
-        document.body.onload = drawTdAssistence(dates, data, startDate);
-        //put in header table list, the date day
-        drawThAssistence(startDate);
-    </script>
+        .attendance-td {
+            vertical-align: middle!important; position: relative; cursor: pointer;
+        }
+    </style>
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="attendance-app">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
-                <li data-toggle="tooltip" class="active" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
-                <li data-toggle="tooltip" title="Seleccione el mes" data-placement="top"><a href='#' class="tab-month"></a></li>
+                @foreach($months as $month)
+                    @php
+                        $start = \Carbon\Carbon::createFromFormat('Y-m-d', $month->start_date);
+                        $end = \Carbon\Carbon::createFromFormat('Y-m-d', $month->end_date);
+                        $li_class = $month->id == $current_month->id ? 'active' : '';
+                        $month_text = '';
+
+                        if ($start->month == $end->month) $month_text = $spanish_months[$start->month - 1];
+                        else $month_text = $spanish_months[$start->month - 1].' - '.$spanish_months[$end->month- 1];
+                    @endphp
+
+                    <li data-toggle="tooltip" class="{{$li_class}}" title="Seleccione el mes" data-placement="top"><a href="{{route('list', ['list' => $schedule->id, 'month' => $month->id])}}" class="tab-month">{{$month_text}}</a></li>
+
+                @endforeach
             </ul>
         </div>
         <!--information List-->
@@ -58,20 +42,20 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active">
                 <!--students List-->
-                <table class="table table-bordered" id="listAttendance">
+                <table class="table table-bordered table-hover" id="listAttendance">
                     <thead>
-                    <tr>
-                        <th rowspan="2">No.</th>
-                        <th rowspan="2" class="th-id">Matrícula</th>
-                        <th rowspan="2" class="th-name">Nombre</th>
-                        <th colspan="6" class="txt-align-center">Primer Semana</th>
-                        <th colspan="6" class="txt-align-center">Segunda Semana</th>
-                        <th colspan="6" class="txt-align-center">Tercer Semana</th>
-                        <th colspan="6" class="txt-align-center">Cuarta Semana</th>
-                        <th colspan="7" class="txt-align-center">Quinta semana</th>
-                        <th colspan="2">Total</th>
-                    </tr>
-                    <tr id="tr-days"></tr>
+                        <tr>
+                            <th rowspan="2">No.</th>
+                            <th rowspan="2" class="th-id">Matrícula</th>
+                            <th rowspan="2" class="th-name">Nombre</th>
+                            @foreach($class_days as $cd)
+                                <th class="txt-align-center" style="padding: 0;">
+                                    <div style="padding: 8px; border-bottom: 1px solid #ddd;">{{$days[$cd['day'] - 1]}}</div>
+                                    <div style="padding: 8px;">{{$cd['dayNumber']}}</div>
+                                </th>
+                            @endforeach
+                            <th>Total</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @forelse($students->sortBy('student.last_name') as $s)
@@ -79,6 +63,12 @@
                             <td class="student-number"></td>
                             <td>{{ $s->student->serial_number}}</td>
                             <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
+                            @foreach($class_days as $cd)
+                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->serial_number}}'"></td>
+                            @endforeach
+                            <td>
+
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -98,7 +88,57 @@
             </div><!--/tabpanel-->
         </div><!--/tab-content-->
     </div><!--/container-->
+    <script id="popupTemplate" type="text/template">
+        <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : tdClass">
+            @{{ status }}
+            <div id="popupAttendance" v-if="showPopup" class="popover bottom popup-attendance">
+                <div class="arrow"></div>
+                <h3 class="popover-title" style="text-align: center;">Estatus</h3>
+                <div class="popover-content">
+                    <button type="button" @click="setStatus('A')" class="btn btn-success btn-block">A</button>
+                    <button type="button" @click="setStatus('F')" class="btn btn-danger btn-block">F</button>
+                    <button type="button" @click="setStatus('R')" class="btn btn-warning btn-block">R</button>
+                </div>
+            </div>
+        </td>
+    </script>
     <!--Modal view-->
     @include('incidence.create')
+@endsection
+
+@section('javascript')
+
+    <script>
+        let previous = null;
+
+        Vue.component('attendance', {
+            template: '#popupTemplate',
+            data: function () {
+              return {
+                  showPopup: false,
+                  tdClass: '',
+                  status: ''
+              }
+            },
+            props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
+            methods: {
+                showAttendancePopup(ev) {
+                    if (previous && previous !== this) previous.showPopup = false;
+                    this.showPopup = !this.showPopup;
+                    previous = this;
+                },
+                setStatus(status) {
+                    if (status === 'A') this.tdClass = 'success';
+                    if (status === 'F') this.tdClass = 'danger';
+                    if (status === 'R') this.tdClass = 'warning';
+
+                    this.status = status;
+                }
+            }
+        });
+        new Vue({
+            el: '#attendance-app'
+        })
+    </script>
 @endsection
 

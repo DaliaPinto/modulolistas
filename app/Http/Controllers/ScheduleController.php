@@ -4,62 +4,106 @@ namespace App\Http\Controllers;
 use App\ListAssistance;
 use App\SchoolMonth;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 use App\Schedule;
+use App\Period;
 use App\GroupStudent;
 use App\Day;
 use App\Student;
-
+use App\Group;
+use App\Hour;
 
 
 class ScheduleController extends Controller
 {
-     /**
-     * Show a schedule info with schedule id, and student list
-     *         by group id and period id     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function showList($id, $month)
+
+    public function getScheduleOfTeacher()
     {
-        //save in array, hours_schedule data
-        $hours = array();
-        //obtain an array of schedules
-        $schedule= Schedule::where('id', $id)->first();
-        //collections of days and hours schedule
-        $days = Day::where('schedule_id', $schedule->id)->get();
-        //push in $hours array, to get the data in view
-        foreach ($days as $day){
-            foreach ($day->hours as $hour){
-                array_push($hours, $hour);
+        //obtain the teacher login
+        $teacher = Auth::user()->teacher;
+
+        //todays date
+        $today = Carbon::now();
+
+        //compare if date is between to start_date period or end_date period
+        $period = Period::where([['start_date','<=',$today->toDateString()],
+            ['end_date','>=',$today->toDateString()]])
+            ->get()->first();
+
+        //get to group array by actual period
+        $groups = Group::where('period_id', $period->id)->select('id')->get();
+
+        //get schedules by teacher and groups by the actual period.
+        $schedules = Schedule::where('teacher_id', $teacher->id)->whereIn('group_id', $groups)->with(['subject', 'group', 'days', 'days.hours'])->get();
+
+        //get the current day
+        $today = Carbon::today();
+
+        //get all the months
+        $month = SchoolMonth::where('start_date','<=', $today->toDateString())
+            ->where('end_date', '>=', $today->toDateString())
+            ->where('period_id', $period->id)->first();
+
+
+        //hours is an array by hours (this registered in seeds)
+        $hours = $this->getListHours();
+
+        //schedules collection
+        foreach ($schedules as $schedule) {
+            //get the schedule by days
+            foreach ($schedule->days as $day) {
+                //get the schedule by days and hour
+                foreach ($day->hours as $hour) {
+
+                    //get to array hours where index is the id hour less 1
+                    $hourDay = $hours[$hour->hour_id - 1];
+                    //numberDay is the day number ex. 0 = mon, 1 = tue, 2 = wed, 3 = thu, 4 = fri
+                    $numberDay = $day->day;
+
+                    //empty object to fill subject, group and teacher
+                    $row = new \stdClass();
+                    $row->subject = $schedule->subject->name;
+                    $row->group = $schedule->group->group;
+                    $row->career = $schedule->group->career->name;
+                    $row->grade = $schedule->group->grade;
+                    $row->teacher = $schedule->teacher->name.' '.$schedule->teacher->last_name.' '.$schedule->teacher->middle_name;
+                    $row->schedule = $schedule->id;
+
+                    $hourDay->schedules[$numberDay] = $row;
+
+                }
             }
         }
+        //return view with schedule info by teacher and period
+        return view('home', ['hours' => $hours, 'teacher' => $teacher, 'period' => $period, 'month' => $month]);
 
-        $current_month = SchoolMonth::where('id', $month)->first();
-        $months = SchoolMonth::all();
+        //return json for testing
+        //return response()->json(['schedule' => $hours, 'month' => $month], 200);
+    }
+    /**
+     * getListHours return an array of hours
+     * @return array of day rows
+     */
+    public function getListHours() {
+        //all the hours
+        $hours = Hour::all();
 
-        //obtain the status of students
-        $student = Student::where('status', 'R')->select('id')->get();
-        //obtain the students list by group id where status is regular
-        $students = GroupStudent::where('group_id', $schedule->group->id)->
-                                  whereIn('student_id', $student)->get();
+        //where hours will be Will be accommodated
+        $columns = array();
 
-        //$test = $this->showDataExcel();
-        //return view with schedule info and students array
-        return view('list.showlist', [
-            'schedule' =>$schedule,
-            'students' => $students,
-            'days' => $days,
-            'months' => $months,
-            'current_month' => $current_month
-            //'test' => $test->toJSON()
-        ]);
+        //hours collection
+        foreach ($hours as $hour) {
+            //empty object
+            $row = new \stdClass();
 
-        //return response()->json(['data' => $data], 200);
-        //return a json api for testing
-        /*return response()->json(['schedule' =>$schedule,
-                                 'students' =>$students,
-                                 'days' => $days,
-                                 'status' => 0], 200);*/
+            //put start and end hour in first row
+            $row->hour = $hour->start_hour.' - '.$hour->end_hour;
+
+            $row->schedules = array_fill (0,5, NULL);
+
+            array_push($columns, $row);
+        }
+        //return array
+        return $columns;
     }
 }
