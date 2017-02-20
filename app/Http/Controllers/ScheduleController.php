@@ -16,7 +16,10 @@ use App\Hour;
 
 class ScheduleController extends Controller
 {
-
+    /**
+     * Get the Teacher Schedule.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getScheduleOfTeacher()
     {
         //obtain the teacher login
@@ -105,5 +108,33 @@ class ScheduleController extends Controller
         }
         //return array
         return $columns;
+    }/**
+ * Get the Teacher Schedule.
+ * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+ */
+    public function getScheduleOfAdmin()
+    {
+        //obtain the teacher login
+        $teacher = Auth::user()->teacher;
+
+        //todays date
+        $today = Carbon::now();
+
+        //compare if date is between to start_date period or end_date period
+        $period = Period::where([['start_date','<=',$today->toDateString()],
+            ['end_date','>=',$today->toDateString()]])
+            ->get()->first();
+
+
+        //hours is an array by hours (this registered in seeds)
+        $hours = $this->getListHours();
+        //return view with schedule info by teacher and period
+        return view('admin.menuadmin', ['hours' => $hours, 'period' => $period]);
+
+        //return json for testing
+        //return response()->json(['schedule' => $hours, 'month' => $month], 200);
     }
+
+
+
 }

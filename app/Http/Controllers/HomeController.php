@@ -37,7 +37,7 @@ class HomeController extends Controller
                 return view('admin.menuadmin');
                 break;
             case 2:
-                return view('schedule.index');
+                return view('home');
                 break;
             default:
                 return redirect()->route('home');

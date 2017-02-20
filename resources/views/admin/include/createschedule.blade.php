@@ -16,7 +16,11 @@
     @foreach($hours as $i=>$hour)
         <tr>
             <td class="border-div txt-align-center">{{ $hour->hour }}</td>
-            <td class="border-div"></td>
+            <td class="border-div txt-align-center"></td>
+            <td class="border-div txt-align-center"></td>
+            <td class="border-div txt-align-center"></td>
+            <td class="border-div txt-align-center"></td>
+            <td class="border-div txt-align-center"></td>
         </tr>
     @endforeach
     </tbody>
