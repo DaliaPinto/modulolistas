@@ -3,14 +3,17 @@
 @section('head')
     <script src="{{URL::to('js/vue.js')}}"></script>
     <style>
-        .popupAttendance {
+        .popup-attendance {
             position: absolute;
-            top: 50%;
-            left: 100%;
-            transform: translateY(-50%);
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
             display: block;
-            width: 270px;
             cursor: default;
+        }
+
+        .attendance-td {
+            vertical-align: middle; position: relative; cursor: pointer;
         }
     </style>
 @endsection
@@ -87,46 +90,15 @@
         </div><!--/tab-content-->
     </div><!--/container-->
     <script id="popupTemplate" type="text/template">
-        <td v-on:click="showAttendancePopup" style="position: relative; cursor: pointer;">
-            <div id="popupAttendance" v-if="showPopup" class="popover right popupAttendance">
+        <td v-on:click="showAttendancePopup" class="attendance-td text-center" :class="showPopup ? 'info' : tdClass">
+            @{{ status }}
+            <div id="popupAttendance" v-if="showPopup" class="popover bottom popup-attendance">
                 <div class="arrow"></div>
-                <h3 class="popover-title">Horas</h3>
+                <h3 class="popover-title" style="text-align: center;">Estatus</h3>
                 <div class="popover-content">
-                    <form class="form-horizontal">
-                        <div class="form-group form-group-sm">
-                            <label class="col-xs-4 control-label">Todas:</label>
-                            <div class="col-xs-8">
-                                <select class="form-control">
-                                    <option>---</option>
-                                    <option>Asistencia</option>
-                                    <option>Falta</option>
-                                    <option>Retardo</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-xs-4 control-label">7:00-7:50:</label>
-                            <div class="col-xs-8">
-                                <select class="form-control">
-                                    <option>---</option>
-                                    <option>Asistencia</option>
-                                    <option>Falta</option>
-                                    <option>Retardo</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-xs-4 control-label">7:50-8:40:</label>
-                            <div class="col-xs-8">
-                                <select class="form-control">
-                                    <option>---</option>
-                                    <option>Asistencia</option>
-                                    <option>Falta</option>
-                                    <option>Retardo</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
+                    <button type="button" @click="setStatus('A')" class="btn btn-success btn-block">A</button>
+                    <button type="button" @click="setStatus('F')" class="btn btn-danger btn-block">F</button>
+                    <button type="button" @click="setStatus('R')" class="btn btn-warning btn-block">R</button>
                 </div>
             </div>
         </td>
@@ -144,15 +116,24 @@
             template: '#popupTemplate',
             data: function () {
               return {
-                  showPopup: false
+                  showPopup: false,
+                  tdClass: '',
+                  status: ''
               }
             },
             props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
             methods: {
                 showAttendancePopup(ev) {
-                    if (previous) previous.showPopup = false;
-                    this.showPopup = true;
+                    if (previous && previous !== this) previous.showPopup = false;
+                    this.showPopup = !this.showPopup;
                     previous = this;
+                },
+                setStatus(status) {
+                    if (status === 'A') this.tdClass = 'success';
+                    if (status === 'F') this.tdClass = 'danger';
+                    if (status === 'R') this.tdClass = 'warning';
+
+                    this.status = status;
                 }
             }
         });
