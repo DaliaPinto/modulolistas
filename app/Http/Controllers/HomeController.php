@@ -2,19 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ListAssistance;
-use App\SchoolMonth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use Carbon\Carbon;
-
-use App\Schedule;
-use App\Group;
-use App\Hour;
-use App\Period;
-
-
+use App\User;
 
 
 
@@ -37,17 +27,17 @@ class HomeController extends Controller
     public function getInitView()
     {
         //Access to user type
-        $type = Auth::user()->userType()->id;
+        $type = Auth::user()->user_type_id;
 
         /* evaluate the user type, and return the
         *  view.
         */
         switch ($type){
             case 1:
-                return view('list.index');
+                return view('admin.menuadmin');
                 break;
             case 2:
-                return view('schedule.tutor');
+                return view('schedule.index');
                 break;
             default:
                 return redirect()->route('home');
