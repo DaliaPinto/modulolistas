@@ -16,7 +16,7 @@ class AttendanceController extends Controller
 {
 
     public $SPANISH_MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    public $DAYS = ['LU', 'MA', 'MI', 'JU', 'VI'];
+    public $DAYS = ['L', 'M', 'X', 'J', 'V'];
     /**
      * Store a newly created resource in storage.
      *
@@ -94,7 +94,7 @@ class AttendanceController extends Controller
         foreach ($days as $d) {
             $week_days = $this->getDays($d->day + 1, $current_month->start_date, $current_month->end_date);
             foreach ($week_days as $w) {
-                $class_days->push(['day' => $w->dayOfWeek, 'dayNumber' => $w->day, 'month' => $w->month]);
+                $class_days->push(['day' => $w->dayOfWeek, 'dayNumber' => $w->day, 'month' => $w->month, 'dayId' => $d->id]);
             }
         }
 

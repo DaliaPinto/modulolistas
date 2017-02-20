@@ -1,51 +1,22 @@
 @extends('layouts.app')
-@section('javascript')
-    {{--<!--Attendance list-->--}}
-    {{--<script src="{{URL::to('/js/list/list.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/list/assistance.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/list/tabs.js')}}" type="text/javascript"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--//data: is an array of objects, contains days, and hours of schedules--}}
-        {{--//are impart.--}}
-        {{--var data = {!! $days !!};--}}
-        {{--var month = {!! $current_month !!}--}}
 
-        {{--//startDate: when the first month starts--}}
-        {{--//endDate: when the first month ends--}}
-        {{--//dates: is a function and return a weekdays array.--}}
-        {{--//url is the route where the incidence will edit--}}
-        {{--//url is the route where the incidence will create--}}
-        {{--var startDate = addDays(new Date(month.start_date), 1),--}}
-            {{--endDate = addDays(new Date(month.end_date), 1),--}}
-            {{--dates = getDates(startDate, endDate, data),--}}
-            {{--url = '{{ route('edit') }}',--}}
-            {{--urlIncidence= '{{ route('createIncidence') }}';--}}
-
-        {{--@foreach($months as $key=>$m)--}}
-            {{--@php--}}
-                {{--$date = new \Carbon\Carbon();--}}
-                {{--$cur_month = \Carbon\Carbon::parse($m->start_date)->month;--}}
-            {{--@endphp--}}
-            {{--$tab = $('.tab-month');--}}
-            {{--$tab.eq({{$key}}).html('{{$date->parse($m->start_date)->format('F')}}');--}}
-            {{--//route about month--}}
-            {{--$tab.eq({{$key}}).attr('href', '{{route('list', ['list' => $schedule->id, 'month'=> $m->id])}}');--}}
-            {{--$tab.eq({{$key}}).click(function(){--}}
-                {{--$(this).closest( 'li' ).addClass('active');--}}
-            {{--});--}}
-        {{--@endforeach--}}
-
-        {{--//make options in select incidence modal--}}
-        {{--document.body.onload = selectIncidence(dates);--}}
-        {{--//draw tds in td table--}}
-        {{--document.body.onload = drawTdAssistence(dates, data, startDate);--}}
-        {{--//put in header table list, the date day--}}
-        {{--drawThAssistence(startDate);--}}
-    {{--</script>--}}
+@section('head')
+    <script src="{{URL::to('js/vue.js')}}"></script>
+    <style>
+        .popupAttendance {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            display: block;
+            width: 270px;
+            cursor: default;
+        }
+    </style>
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container" id="attendance-app">
         <div class="bs-example" data-example-id="simple-nav-tabs">
             <ul class="nav nav-tabs">
                 @foreach($months as $month)
@@ -90,10 +61,9 @@
                             <td class="student-number"></td>
                             <td>{{ $s->student->serial_number}}</td>
                             <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
-                            @for($y = 0; $y < count($class_days); $y++)
-                                <td>
-                                </td>
-                            @endfor
+                            @foreach($class_days as $cd)
+                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->serial_number}}'"></td>
+                            @endforeach
                             <td>
 
                             </td>
@@ -118,5 +88,68 @@
     </div><!--/container-->
     <!--Modal view-->
     @include('incidence.create')
+@endsection
+
+@section('javascript')
+
+    <script>
+        Vue.component('attendance', {
+            template:
+            '<td v-on:click="showAttendancePopup" style="position: relative; cursor: pointer;">' +
+                '<div v-if="showPopup" class="popover right popupAttendance">' +
+                    '<div class="arrow"></div>' +
+                    '<h3 class="popover-title">Horas</h3>' +
+                    '<div class="popover-content">' +
+                        '<form class="form-horizontal">' +
+                            '<div class="form-group form-group-sm">' +
+                                '<label class="col-xs-4 control-label">Todas:</label>' +
+                                '<div class="col-xs-8">' +
+                                    '<select class="form-control">' +
+                                        '<option>---</option>' +
+                                        '<option>Falta</option>' +
+                                        '<option>Retardo</option>' +
+                                    '</select>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="form-group form-group-sm">' +
+                                '<label class="col-xs-4 control-label">7:00-7:50:</label>' +
+                                '<div class="col-xs-8">' +
+                                    '<select class="form-control">' +
+                                        '<option>---</option>' +
+                                        '<option>Falta</option>' +
+                                        '<option>Retardo</option>' +
+                                    '</select>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="form-group form-group-sm">' +
+                                '<label class="col-xs-4 control-label">7:50-8:40:</label>' +
+                                '<div class="col-xs-8">' +
+                                    '<select class="form-control">' +
+                                        '<option>---</option>' +
+                                        '<option>Falta</option>' +
+                                        '<option>Retardo</option>' +
+                                    '</select>' +
+                                '</div>' +
+                            '</div>' +
+                        '</form>' +
+                    '</div>' +
+                '</div>' +
+            '</td>',
+            data: function () {
+              return {
+                  showPopup: false
+              }
+            },
+            props: ['day', 'month', 'dayNumber', 'dayId', 'studentId'],
+            methods: {
+                showAttendancePopup() {
+                    this.showPopup = true
+                }
+            }
+        })
+        new Vue({
+            el: '#attendance-app'
+        })
+    </script>
 @endsection
 
