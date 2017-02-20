@@ -86,6 +86,51 @@
             </div><!--/tabpanel-->
         </div><!--/tab-content-->
     </div><!--/container-->
+    <script id="popupTemplate" type="text/template">
+        <td v-on:click="showAttendancePopup" style="position: relative; cursor: pointer;">
+            <div id="popupAttendance" v-if="showPopup" class="popover right popupAttendance">
+                <div class="arrow"></div>
+                <h3 class="popover-title">Horas</h3>
+                <div class="popover-content">
+                    <form class="form-horizontal">
+                        <div class="form-group form-group-sm">
+                            <label class="col-xs-4 control-label">Todas:</label>
+                            <div class="col-xs-8">
+                                <select class="form-control">
+                                    <option>---</option>
+                                    <option>Asistencia</option>
+                                    <option>Falta</option>
+                                    <option>Retardo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-xs-4 control-label">7:00-7:50:</label>
+                            <div class="col-xs-8">
+                                <select class="form-control">
+                                    <option>---</option>
+                                    <option>Asistencia</option>
+                                    <option>Falta</option>
+                                    <option>Retardo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-xs-4 control-label">7:50-8:40:</label>
+                            <div class="col-xs-8">
+                                <select class="form-control">
+                                    <option>---</option>
+                                    <option>Asistencia</option>
+                                    <option>Falta</option>
+                                    <option>Retardo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </script>
     <!--Modal view-->
     @include('incidence.create')
 @endsection
@@ -93,60 +138,24 @@
 @section('javascript')
 
     <script>
+        let previous = null;
+
         Vue.component('attendance', {
-            template:
-            '<td v-on:click="showAttendancePopup" style="position: relative; cursor: pointer;">' +
-                '<div v-if="showPopup" class="popover right popupAttendance">' +
-                    '<div class="arrow"></div>' +
-                    '<h3 class="popover-title">Horas</h3>' +
-                    '<div class="popover-content">' +
-                        '<form class="form-horizontal">' +
-                            '<div class="form-group form-group-sm">' +
-                                '<label class="col-xs-4 control-label">Todas:</label>' +
-                                '<div class="col-xs-8">' +
-                                    '<select class="form-control">' +
-                                        '<option>---</option>' +
-                                        '<option>Falta</option>' +
-                                        '<option>Retardo</option>' +
-                                    '</select>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="form-group form-group-sm">' +
-                                '<label class="col-xs-4 control-label">7:00-7:50:</label>' +
-                                '<div class="col-xs-8">' +
-                                    '<select class="form-control">' +
-                                        '<option>---</option>' +
-                                        '<option>Falta</option>' +
-                                        '<option>Retardo</option>' +
-                                    '</select>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="form-group form-group-sm">' +
-                                '<label class="col-xs-4 control-label">7:50-8:40:</label>' +
-                                '<div class="col-xs-8">' +
-                                    '<select class="form-control">' +
-                                        '<option>---</option>' +
-                                        '<option>Falta</option>' +
-                                        '<option>Retardo</option>' +
-                                    '</select>' +
-                                '</div>' +
-                            '</div>' +
-                        '</form>' +
-                    '</div>' +
-                '</div>' +
-            '</td>',
+            template: '#popupTemplate',
             data: function () {
               return {
                   showPopup: false
               }
             },
-            props: ['day', 'month', 'dayNumber', 'dayId', 'studentId'],
+            props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
             methods: {
-                showAttendancePopup() {
-                    this.showPopup = true
+                showAttendancePopup(ev) {
+                    if (previous) previous.showPopup = false;
+                    this.showPopup = true;
+                    previous = this;
                 }
             }
-        })
+        });
         new Vue({
             el: '#attendance-app'
         })
