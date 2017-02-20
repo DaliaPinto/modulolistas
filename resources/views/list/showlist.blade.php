@@ -43,7 +43,7 @@
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active">
                 <!--students List-->
-                <table class="table table-bordered" id="listAttendance">
+                <table class="table table-bordered table-hover" id="listAttendance">
                     <thead>
                         <tr>
                             <th rowspan="2">No.</th>
