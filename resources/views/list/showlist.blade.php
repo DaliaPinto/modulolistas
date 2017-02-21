@@ -4,11 +4,12 @@
     <style>
         .popup-attendance {
             position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
             display: block;
             cursor: default;
+            width: 270px;
         }
 
         .attendance-td {
@@ -91,13 +92,20 @@
     <script id="popupTemplate" type="text/template">
         <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : tdClass">
             @{{ status }}
-            <div id="popupAttendance" v-if="showPopup" class="popover bottom popup-attendance">
+            <div id="popupAttendance" v-if="showPopup" class="popover right popup-attendance">
                 <div class="arrow"></div>
-                <h3 class="popover-title" style="text-align: center;">Estatus</h3>
+                <h3 class="popover-title" style="text-align: center;">Horas</h3>
                 <div class="popover-content">
-                    <button type="button" @click="setStatus('A')" class="btn btn-success btn-block">A</button>
-                    <button type="button" @click="setStatus('F')" class="btn btn-danger btn-block">F</button>
-                    <button type="button" @click="setStatus('R')" class="btn btn-warning btn-block">R</button>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h5 style="text-align: right;">Todas :</h5>
+                        </div>
+                        <div class="col-md-7" style="text-align: right;">
+                            <a type="button" class="btn btn-success disabled">A</a>
+                            <a type="button" class="btn btn-danger disabled">F</a>
+                            <a type="button" class="btn btn-warning disabled">R</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </td>
