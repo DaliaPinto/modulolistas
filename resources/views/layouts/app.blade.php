@@ -88,7 +88,7 @@
         </nav>
         @yield('content')
     </div>
-    <!-- Scripts -->
+    {{--<!-- Scripts -->
     <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
@@ -110,7 +110,7 @@
             var today = moment(new Date());
             $('#is-today').text('Hoy es: '+today.format('dddd, D MMMM YYYY, h:mm:ss a'));
         }
-    </script>
+    </script>--}}
     @yield('javascript')
 </body>
 </html>

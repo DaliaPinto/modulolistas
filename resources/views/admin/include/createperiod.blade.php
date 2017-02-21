@@ -34,8 +34,10 @@
         </div>
     @endif
 @section('javascript')
+    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{URL::to('/js/jquery/jquery-ui.js')}}" type="text/javascript"></script>
+
     <script>
         //datepicker
         $(function() {
