@@ -67,18 +67,11 @@ class AttendanceController extends Controller
      */
     public function showList($id, $month)
     {
-        //save in array, hours_schedule data
-        $hours = array();
         //obtain an array of schedules
         $schedule= Schedule::where('id', $id)->first();
         //collections of days and hours schedule
-        $days = Day::where('schedule_id', $schedule->id)->get();
-        //push in $hours array, to get the data in view
-        foreach ($days as $day){
-            foreach ($day->hours as $hour){
-                array_push($hours, $hour);
-            }
-        }
+        $days = Day::where('schedule_id', $schedule->id)->with('hours.hour')->get();
+
 
         $current_month = SchoolMonth::where('id', $month)->first();
         $school_months = SchoolMonth::where('period_id', $current_month->period_id)->get();
@@ -98,6 +91,16 @@ class AttendanceController extends Controller
             }
         }
 
+        $days_tojson = collect();
+
+        $days->each(function ($d) use ($days_tojson) {
+            $hours = collect();
+            $d->hours->each(function ($h) use ($hours) {
+               $hours->push(['id' => $h->id, 'start_hour' => substr($h->hour->start_hour, 0, -3), 'end_hour' => substr($h->hour->end_hour, 0, -3)]);
+            });
+            $days_tojson->push(['day' => $d->day, 'hours' => $hours->sortBy('start_hour')->values()->all()]);
+        });
+
         //return view with schedule info and students array
         return view('list.showlist', [
             'schedule' =>$schedule,
@@ -107,6 +110,7 @@ class AttendanceController extends Controller
             'current_month' => $current_month,
             'spanish_months' => $this->SPANISH_MONTHS,
             'class_days' => $class_days->sortBy('dayNumber'),
+            'days_hours' => $days_tojson
         ]);
     }
 

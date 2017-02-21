@@ -9,11 +9,16 @@
             transform: translateY(-50%);
             display: block;
             cursor: default;
-            width: 270px;
+            width: 300px;
+            max-width: none;
         }
 
         .attendance-td {
             vertical-align: middle!important; position: relative; cursor: pointer;
+        }
+
+        .status-buttons {
+            opacity: 0.65;
         }
     </style>
 @endsection
@@ -98,12 +103,24 @@
                 <div class="popover-content">
                     <div class="row">
                         <div class="col-md-5">
-                            <h5 style="text-align: right;">Todas :</h5>
+                            <h5 style="text-align: right;">Para todas :</h5>
                         </div>
-                        <div class="col-md-7" style="text-align: right;">
-                            <a type="button" class="btn btn-success disabled">A</a>
-                            <a type="button" class="btn btn-danger disabled">F</a>
-                            <a type="button" class="btn btn-warning disabled">R</a>
+                        {{--display: flex; flex-direction: row; justify-content: space-between;--}}
+                        <div class="col-md-7" style="text-align: left;">
+                            <a type="button" class="btn btn-success status-buttons">A</a>
+                            <a type="button" class="btn btn-danger status-buttons">F</a>
+                            <a type="button" class="btn btn-warning status-buttons">R</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row" v-for="hour in hours">
+                        <div class="col-md-5">
+                            <h5 style="text-align: right;">@{{hour.start_hour + ' - ' + hour.end_hour}} :</h5>
+                        </div>
+                        <div class="col-md-7" style="text-align: left;">
+                            <a type="button" class="btn btn-success status-buttons">A</a>
+                            <a type="button" class="btn btn-danger status-buttons">F</a>
+                            <a type="button" class="btn btn-warning status-buttons">R</a>
                         </div>
                     </div>
                 </div>
@@ -117,6 +134,7 @@
 @section('javascript')
 
     <script>
+        let days_hours = {!! $days_hours->toJSON() !!};
         let previous = null;
 
         Vue.component('attendance', {
@@ -125,13 +143,17 @@
               return {
                   showPopup: false,
                   tdClass: '',
-                  status: ''
+                  status: '',
+                  hours: []
               }
             },
             props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
             methods: {
                 showAttendancePopup(ev) {
                     if (previous && previous !== this) previous.showPopup = false;
+
+                    this.hours = (days_hours.find(x => x.day === this.day - 1)).hours;
+
                     this.showPopup = !this.showPopup;
                     previous = this;
                 },
