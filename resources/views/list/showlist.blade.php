@@ -20,6 +20,14 @@
         .status-buttons {
             opacity: 0.65;
         }
+
+        .close-popup {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-top: -2px;
+            right: 10px;
+        }
     </style>
 @endsection
 
@@ -99,7 +107,10 @@
             @{{ status }}
             <div id="popupAttendance" v-if="showPopup" class="popover right popup-attendance">
                 <div class="arrow"></div>
-                <h3 class="popover-title" style="text-align: center;">Horas</h3>
+                <h3 class="popover-title" style="position: relative;">
+                    Horas
+                    <button type="button" @click.stop="showPopup = false" class="close close-popup"><span>&times;</span></button>
+                </h3>
                 <div class="popover-content">
                     <div class="row">
                         <div class="col-md-5">
@@ -107,9 +118,9 @@
                         </div>
                         {{--display: flex; flex-direction: row; justify-content: space-between;--}}
                         <div class="col-md-7" style="text-align: left;">
-                            <a type="button" class="btn btn-success status-buttons">A</a>
-                            <a type="button" class="btn btn-danger status-buttons">F</a>
-                            <a type="button" class="btn btn-warning status-buttons">R</a>
+                            <a type="button" @click.stop="setStatus('A')" class="btn btn-success" :class="allStatus === 'A' ? 'active' : 'status-buttons'">A</a>
+                            <a type="button" @click.stop="setStatus('F')" class="btn btn-danger" :class="allStatus === 'F' ? 'active' : 'status-buttons'">F</a>
+                            <a type="button" @click.stop="setStatus('R')" class="btn btn-warning" :class="allStatus === 'R' ? 'active' : 'status-buttons'">R</a>
                         </div>
                     </div>
                     <hr>
@@ -139,12 +150,13 @@
 
         Vue.component('attendance', {
             template: '#popupTemplate',
-            data: function () {
+            data() {
               return {
                   showPopup: false,
                   tdClass: '',
                   status: '',
-                  hours: []
+                  hours: [],
+                  allStatus: ''
               }
             },
             props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
@@ -156,13 +168,15 @@
 
                     this.showPopup = !this.showPopup;
                     previous = this;
+                    console.log('UNO')
                 },
                 setStatus(status) {
                     if (status === 'A') this.tdClass = 'success';
                     if (status === 'F') this.tdClass = 'danger';
                     if (status === 'R') this.tdClass = 'warning';
-
+                    this.allStatus = status;
                     this.status = status;
+                    this.showPopup = false
                 }
             }
         });
