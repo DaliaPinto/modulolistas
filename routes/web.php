@@ -47,6 +47,12 @@ Route::get('/home', [
     'as' => 'home',
     'middleware' => 'auth'
 ]);
+/*
+Route::get('/home', [
+    'uses' => 'ScheduleController@getScheduleOfAdmin',
+    'as' => 'home',
+    'middleware' => 'auth'
+]);*/
 
 /*
  * Attendance List index view
