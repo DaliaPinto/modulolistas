@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('head')
+    <script src="{{URL::to('js/axios.js')}}"></script>
     <script src="{{URL::to('js/vue.js')}}"></script>
     <style>
         .popup-attendance {
@@ -86,7 +87,7 @@
                                         ['day', '=', $cd['dayNumber']]
                                     ])->select('id', 'status', 'hour_schedule_id as hour')->get();
                                 @endphp
-                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->serial_number}}'" :attendances='{!! $attendances->toJson() !!}'></td>
+                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->id}}'" :attendances='{!! $attendances->toJson() !!}'></td>
                             @endforeach
                             <td>
 
@@ -112,7 +113,8 @@
     </div><!--/container-->
     <script id="popupTemplate" type="text/template">
         <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : tdClass">
-            @{{ status }}
+            <span v-if="!loading">@{{ status }}</span>
+            <img v-if="loading" src="{{URL::to('images/rolling.svg')}}" alt="">
             <div id="popupAttendance" v-if="showPopup" class="popover right popup-attendance">
                 <div class="arrow"></div>
                 <h3 class="popover-title" style="position: relative;">
@@ -137,9 +139,9 @@
                             <h5 style="text-align: right;">@{{hour.start_hour + ' - ' + hour.end_hour}} :</h5>
                         </div>
                         <div class="col-md-7" style="text-align: left;">
-                            <a type="button" :class="checkAttendance(hour, 'A')" class="btn btn-success">A</a>
-                            <a type="button" :class="checkAttendance(hour, 'F')" class="btn btn-danger">F</a>
-                            <a type="button" :class="checkAttendance(hour, 'R')" class="btn btn-warning">R</a>
+                            <a type="button" @click.stop="setAttendance(hour, 'A')" :class="checkAttendance(hour, 'A')" class="btn btn-success">A</a>
+                            <a type="button" @click.stop="setAttendance(hour, 'F')" :class="checkAttendance(hour, 'F')" class="btn btn-danger">F</a>
+                            <a type="button" @click.stop="setAttendance(hour, 'R')" :class="checkAttendance(hour, 'R')" class="btn btn-warning">R</a>
                         </div>
                     </div>
                 </div>
@@ -155,6 +157,7 @@
     <script>
         let days_hours = {!! $days_hours->toJSON() !!};
         let previous = null;
+        let school_month = {{$current_month->id}};
 
         Vue.component('attendance', {
             template: '#popupTemplate',
@@ -164,7 +167,8 @@
                   tdClass: '',
                   status: '',
                   allStatus: '',
-                  hours: []
+                  hours: [],
+                  loading: false
               }
             },
             props: ['day', 'month', 'day-number', 'day-id', 'student-id', 'attendances'],
@@ -187,12 +191,26 @@
                     let att = this.attendances.find(x => x.hour === hour.id);
                     if(att && att.status === stat) return 'active';
                     return 'status-buttons';
+                },
+                setAttendance(hour, stat) {
+                    let self = this;
+                    this.loading = true;
+                    axios.post('/storeAttendance', {
+                        status: stat,
+                        student: this.studentId,
+                        school_month: school_month,
+                        hour_schedule: hour.id,
+                        day: this.dayNumber,
+                        month: this.month
+                    }).then(function (response) {
+                        self.loading = false;
+                        console.log(response)
+                    });
                 }
             },
             created() {
                 if(this.attendances.length > 0) {
                     let found = this.attendances.filter(x => x.status === 'A' || x.status === 'R');
-                    console.log(found)
                     let attCount = found ? found.length : 0;
                     let hoursCount = (days_hours.find(x => x.day === this.day - 1)).hours.length;
                     this.status = attCount + '/' + hoursCount;
