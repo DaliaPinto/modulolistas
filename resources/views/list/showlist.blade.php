@@ -76,9 +76,17 @@
                         <tr class="tr-students">
                             <td class="student-number"></td>
                             <td>{{ $s->student->serial_number}}</td>
-                            <td>{{ $s->student->last_name }} {{ $s->student->middle_name }} {{ $s->student->name }} </td>
+                            <td>{{ $s->student->last_name.' '.$s->student->middle_name.' '.$s->student->name }}</td>
                             @foreach($class_days as $cd)
-                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->serial_number}}'"></td>
+                                @php
+                                    $attendances = \App\Attendance::where([
+                                        ['student_id', '=', $s->student_id],
+                                        ['school_month_id', '=', $current_month->id],
+                                        ['month', '=', $cd['month']],
+                                        ['day', '=', $cd['dayNumber']]
+                                    ])->select('id', 'status', 'hour_schedule_id as hour')->get();
+                                @endphp
+                                <td is="attendance" :day="{{$cd['day']}}" :day-number="{{$cd['dayNumber']}}" :month="{{$cd['month']}}" :day-id="{{$cd['dayId']}}" :student-id="'{{$s->student->serial_number}}'" :attendances='{!! $attendances->toJson() !!}'></td>
                             @endforeach
                             <td>
 
@@ -129,9 +137,9 @@
                             <h5 style="text-align: right;">@{{hour.start_hour + ' - ' + hour.end_hour}} :</h5>
                         </div>
                         <div class="col-md-7" style="text-align: left;">
-                            <a type="button" class="btn btn-success status-buttons">A</a>
-                            <a type="button" class="btn btn-danger status-buttons">F</a>
-                            <a type="button" class="btn btn-warning status-buttons">R</a>
+                            <a type="button" :class="checkAttendance(hour, 'A')" class="btn btn-success">A</a>
+                            <a type="button" :class="checkAttendance(hour, 'F')" class="btn btn-danger">F</a>
+                            <a type="button" :class="checkAttendance(hour, 'R')" class="btn btn-warning">R</a>
                         </div>
                     </div>
                 </div>
@@ -155,20 +163,17 @@
                   showPopup: false,
                   tdClass: '',
                   status: '',
-                  hours: [],
-                  allStatus: ''
+                  allStatus: '',
+                  hours: []
               }
             },
-            props: ['day', 'month', 'day-number', 'day-id', 'student-id'],
+            props: ['day', 'month', 'day-number', 'day-id', 'student-id', 'attendances'],
             methods: {
-                showAttendancePopup(ev) {
+                showAttendancePopup() {
                     if (previous && previous !== this) previous.showPopup = false;
-
                     this.hours = (days_hours.find(x => x.day === this.day - 1)).hours;
-
                     this.showPopup = !this.showPopup;
                     previous = this;
-                    console.log('UNO')
                 },
                 setStatus(status) {
                     if (status === 'A') this.tdClass = 'success';
@@ -177,6 +182,20 @@
                     this.allStatus = status;
                     this.status = status;
                     this.showPopup = false
+                },
+                checkAttendance(hour, stat) {
+                    let att = this.attendances.find(x => x.hour === hour.id);
+                    if(att && att.status === stat) return 'active';
+                    return 'status-buttons';
+                }
+            },
+            created() {
+                if(this.attendances.length > 0) {
+                    let found = this.attendances.filter(x => x.status === 'A' || x.status === 'R');
+                    console.log(found)
+                    let attCount = found ? found.length : 0;
+                    let hoursCount = (days_hours.find(x => x.day === this.day - 1)).hours.length;
+                    this.status = attCount + '/' + hoursCount;
                 }
             }
         });
