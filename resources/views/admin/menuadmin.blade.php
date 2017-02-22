@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
-    <script src="{{URL::to('js/vue.js')}}"></script>
+    <script src="{{URL::to('js/vue.min.js')}}"></script>
     <style>
         .navigation{
             width: 100%;
@@ -9,6 +9,12 @@
             background-color: #FCFCFC;
             margin-bottom: 20px;
             border-bottom: solid 1px #E9E9E9;
+        }
+        .font-awe {
+            font-family: 'Roboto', FontAwesome, sans-serif;
+            border: 0px;
+            width: 120px;
+            font-size: 9pt;
         }
     </style>
 @endsection
@@ -28,3 +34,4 @@
     @include('admin.include.createschedule')
 </div>
 @endsection
+

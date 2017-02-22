@@ -108,15 +108,14 @@ class ScheduleController extends Controller
         }
         //return array
         return $columns;
-    }/**
- * Get the Teacher Schedule.
- * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
- */
+    }
+
+    /**
+     * Get the Teacher Schedule.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getScheduleOfAdmin()
     {
-        //obtain the teacher login
-        $teacher = Auth::user()->teacher;
-
         //todays date
         $today = Carbon::now();
 
@@ -135,6 +134,23 @@ class ScheduleController extends Controller
         //return response()->json(['schedule' => $hours, 'month' => $month], 200);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response Json
+     */
+    public function store(Request $request)
+    {
+        $schedule = new Schedule();
+        $schedule->teacher_id = $request['hour_schedule_id'];
+        $schedule->subject_id = $request['student_id'];
+        $schedule->group_id = $request['attendance_status'];
+        $schedule->save();
+
+        return response()->json(['status' => 0,
+            'message' => 'Hora guardada'], 200);
+    }
 
 
 }
