@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\ListAssistance;
 use App\SchoolMonth;
+use App\Subject;
+use App\Teacher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
@@ -124,11 +126,21 @@ class ScheduleController extends Controller
             ['end_date','>=',$today->toDateString()]])
             ->get()->first();
 
+        $teachers = Teacher::all();
+        $subjects = Subject::all();
+        $groups = Group::where('career_id', 1)->get();
+
 
         //hours is an array by hours (this registered in seeds)
         $hours = $this->getListHours();
         //return view with schedule info by teacher and period
-        return view('admin.menuadmin', ['hours' => $hours, 'period' => $period]);
+        return view('admin.menuadmin', [
+            'hours' => $hours,
+            'period' => $period,
+            'teachers' => $teachers,
+            'subjects' => $subjects,
+            'groups' =>$groups
+        ]);
 
         //return json for testing
         //return response()->json(['schedule' => $hours, 'month' => $month], 200);
