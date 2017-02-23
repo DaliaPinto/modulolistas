@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attendance;
+use App\HourSchedule;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
@@ -25,17 +26,60 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $attendance = new Attendance();
-        $attendance->status = $request['status'];
-        $attendance->student_id = $request['student'];
-        $attendance->school_month_id = $request['school_month'];
-        $attendance->hour_schedule_id = $request['hour_schedule'];
-        $attendance->day = $request['day'];
-        $attendance->month = $request['month'];
-        $attendance->save();
+        $attendance = Attendance::where([
+            'student_id' => $request['student'],
+            'school_month_id' => $request['school_month'],
+            'hour_schedule_id' => $request['hour_schedule'],
+            'day' => $request['day'],
+            'month' => $request['month']
+        ])->first();
 
-        return response()->json(['status' => 0,
-            'message' => 'Asistencias guardada'], 200);
+        if($attendance) {
+            $attendance->status = $request['status'];
+            $attendance->save();
+            return response()->json(['status' => 0, 'id' => $attendance->id], 200);
+        }
+        else {
+            $attendance = new Attendance();
+            $attendance->status = $request['status'];
+            $attendance->student_id = $request['student'];
+            $attendance->school_month_id = $request['school_month'];
+            $attendance->hour_schedule_id = $request['hour_schedule'];
+            $attendance->day = $request['day'];
+            $attendance->month = $request['month'];
+            $attendance->save();
+
+            return response()->json(['status' => 0,
+                'attendance' => [
+                    'id' => $attendance->id,
+                    'status' => $attendance->status,
+                    'hour' => $attendance->hour_schedule_id
+                ]], 200);
+        }
+    }
+
+    public function storeAttendances(Request $request)
+    {
+        $hoursIds = HourSchedule::where('day_id', $request['day_id'])->select('id');
+
+        $attendances = Attendance::where([
+            'student_id' => $request['student'],
+            'school_month_id' => $request['school_month'],
+            'day' => $request['day'],
+            'month' => $request['month']
+        ])->whereIn('hour_schedule_id', $hoursIds)->get();
+
+        $attendances->each(function ($att) use ($request){
+           $att->status = $request['status'];
+           $att->save();
+        });
+
+//        return response()->json(['status' => 0,
+//            'attendance' => [
+//                'id' => $attendance->id,
+//                'status' => $attendance->status,
+//                'hour' => $attendance->hour_schedule_id
+//            ]], 200);
     }
 
     /**

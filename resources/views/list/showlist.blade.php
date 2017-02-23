@@ -128,9 +128,9 @@
                         </div>
                         {{--display: flex; flex-direction: row; justify-content: space-between;--}}
                         <div class="col-md-7" style="text-align: left;">
-                            <a type="button" @click.stop="setStatus('A')" class="btn btn-success" :class="allStatus === 'A' ? 'active' : 'status-buttons'">A</a>
-                            <a type="button" @click.stop="setStatus('F')" class="btn btn-danger" :class="allStatus === 'F' ? 'active' : 'status-buttons'">F</a>
-                            <a type="button" @click.stop="setStatus('R')" class="btn btn-warning" :class="allStatus === 'R' ? 'active' : 'status-buttons'">R</a>
+                            <a type="button" @click.stop="setAllAttendance('A')" class="btn btn-success" :class="allStatus === 'A' ? 'active' : 'status-buttons'">A</a>
+                            <a type="button" @click.stop="setAllAttendance('F')" class="btn btn-danger" :class="allStatus === 'F' ? 'active' : 'status-buttons'">F</a>
+                            <a type="button" @click.stop="setAllAttendance('R')" class="btn btn-warning" :class="allStatus === 'R' ? 'active' : 'status-buttons'">R</a>
                         </div>
                     </div>
                     <hr>
@@ -179,7 +179,22 @@
                     this.showPopup = !this.showPopup;
                     previous = this;
                 },
-                setStatus(status) {
+                setAllAttendance(status) {
+                    let self = this;
+                    this.loading = true;
+                    axios.post('/storeAttendances', {
+                        day_id: self.dayId,
+                        status: status,
+                        student: this.studentId,
+                        school_month: school_month,
+                        day: this.dayNumber,
+                        month: this.month
+                    }).then(function (response) {
+                        this.loading = false;
+                        let data = response.data;
+                        console.log(data);
+                    });
+
                     if (status === 'A') this.tdClass = 'success';
                     if (status === 'F') this.tdClass = 'danger';
                     if (status === 'R') this.tdClass = 'warning';
@@ -204,7 +219,13 @@
                         month: this.month
                     }).then(function (response) {
                         self.loading = false;
-                        console.log(response)
+                        let data = response.data;
+                        if(data.attendance) self.attendances.push(data.attendance);
+                        else {
+                            let att = self.attendances.find(x => x.id === data.id);
+                            att.status = stat;
+                        }
+
                     });
                 }
             },

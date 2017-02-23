@@ -86,6 +86,12 @@ Route::post('/storeAttendance', [
     'middleware' => 'auth'
 ]);
 
+Route::post('/storeAttendances', [
+    'uses' => 'AttendanceController@storeAttendances',
+    'as' => 'storeAttendances',
+    'middleware' => 'auth'
+]);
+
 /*
  * Api excel route
  */
