@@ -185,12 +185,12 @@
                     axios.post('/storeAttendances', {
                         day_id: self.dayId,
                         status: status,
-                        student: this.studentId,
+                        student: self.studentId,
                         school_month: school_month,
-                        day: this.dayNumber,
-                        month: this.month
+                        day: self.dayNumber,
+                        month: self.month
                     }).then(function (response) {
-                        this.loading = false;
+                        self.loading = false;
                         let data = response.data;
                         console.log(data);
                     });

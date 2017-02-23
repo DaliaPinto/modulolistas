@@ -43,7 +43,7 @@ Route::post('/editTeacher',[
  * Schedules home view
  */
 Route::get('/home', [
-    'uses' => 'ScheduleController@getScheduleOfAdmin',
+    'uses' => 'ScheduleController@getScheduleOfTeacher',
     'as' => 'home',
     'middleware' => 'auth'
 ]);
