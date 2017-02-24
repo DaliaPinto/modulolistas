@@ -182,6 +182,7 @@
                 setAllAttendance(status) {
                     let self = this;
                     this.loading = true;
+                    console.log(this.attendances);
                     axios.post('/storeAttendances', {
                         day_id: self.dayId,
                         status: status,
@@ -192,7 +193,7 @@
                     }).then(function (response) {
                         self.loading = false;
                         let data = response.data;
-                        console.log(data);
+                        Array.prototype.push.apply(self.attendances, data.attendances);
                     });
 
                     if (status === 'A') this.tdClass = 'success';

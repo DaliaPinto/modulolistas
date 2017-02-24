@@ -39,8 +39,9 @@ class AttendanceController extends Controller
 
     public function storeAttendances(Request $request)
     {
+        $attendances = collect();
         $hoursIds = HourSchedule::where('day_id', $request['day_id'])->select('id')->get();
-        $hoursIds->each(function ($h) use ($request){
+        $hoursIds->each(function ($h) use ($request, $attendances){
             $r = collect([
                 'student' => $request['student'],
                 'school_month' => $request['school_month'],
@@ -49,8 +50,11 @@ class AttendanceController extends Controller
                 'month' => $request['month'],
                 'status' => $request['status']
             ]);
-            $this->saveOrEdit($r);
+            $result = $this->saveOrEdit($r);
+            $attendance = $result['attendance'];
+            if(!$result['found']) $attendances->push(['id' => $attendance->id, 'status' => $request['status'], 'hour' => $attendance->hour_schedule_id]);
         });
+        return response()->json(['status' => 0, 'attendances' => $attendances]);
     }
 
     public function saveOrEdit($request) {
