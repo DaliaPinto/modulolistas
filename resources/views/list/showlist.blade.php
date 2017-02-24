@@ -159,6 +159,7 @@
         let previous = null;
         let school_month = {{$current_month->id}};
         let att_status = ['A', 'B', 'C', 'D', 'E'];
+        let as_re = true;
 
         Vue.component('attendance', {
             template: '#popupTemplate',
@@ -174,7 +175,6 @@
             methods: {
                 showAttendancePopup() {
                     if (previous && previous !== this) previous.showPopup = false;
-                    this.hours = (days_hours.find(x => x.day === this.day - 1)).hours;
                     this.showPopup = !this.showPopup;
                     previous = this;
                 },
@@ -237,10 +237,17 @@
                     else if(r === this.hours.length && this.hours.length > 0) this.allStatus = 'R';
                     else this.allStatus = '';
 
-                    if(a > 0) return att_status[a - 1];
+                    if(a > 0 && r === 0) return att_status[a - 1];
                     else if(f === this.hours.length && this.hours.length > 0) return 'F';
-
+                    else if(r === this.hours.length && this.hours.length > 0) return 'R';
+                    else if(a > 0 && r > 0) {
+                        if(as_re) return att_status[a - 1];
+                        else return 'R';
+                    }
                 }
+            },
+            created() {
+                this.hours = (days_hours.find(x => x.day === this.day - 1)).hours;
             }
         });
         new Vue({
