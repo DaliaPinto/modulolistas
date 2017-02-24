@@ -1,6 +1,7 @@
 @include('admin.include.createperiod')
 @section('head')
     <link href="/css/jquery/jquery-ui.css" rel="stylesheet">
+    <script src="{{URL::to('js/vue.js')}}"></script>
     <style>
         .font-awe {
             font-family: 'Roboto', FontAwesome, sans-serif;
@@ -9,6 +10,12 @@
             border: 0px;
             width: 120px;
             font-size: 9pt;
+        }
+        .hide {
+            display: none;
+        }
+        .show{
+            display: inline;
         }
     </style>
 @endsection
@@ -20,7 +27,13 @@
 <!--Header table schedules-->
 <div class="col-xs-10">
     <div id='group' class="row" style="margin-bottom: 20px">
-        Horario asignado al grupo <input type="text" placeholder="&#xF002; Elija Grupo" class="font-awe input-txt"/>
+        Horario asignado al grupo
+        <input type="text" @keyup="search" placeholder="&#xF002; Elija Grupo" class="font-awe input-txt"/>
+        <ul>
+            <li v-for="s in subjects">
+                @{{ s.name }}
+            </li>
+        </ul>
     </div>
     <table id="schedule-table" class="table">
     <thead>
@@ -38,10 +51,10 @@
         <tr>
             <td class="border-div txt-align-center">{{ $hour->hour }}</td>
             @for($i=0; $i<5; $i++)
-                    <td class="border-div txt-align-center">
-                        <input type="text" placeholder="&#xF002; Elija Docente" class="font-awe teacher input-txt"/>
-                        <input type="text" placeholder="&#xF002; Elija Materia" class="font-awe subject input-txt"/>
-                    </td>
+                <td class="border-div txt-align-center">
+                    <input type="text" placeholder="&#xF002; Elija Docente" class="font-awe teacher input-txt"/>
+                    <input type="text" placeholder="&#xF002; Elija Materia" class="font-awe subject input-txt"/>
+                </td>
             @endfor
         </tr>
     @endforeach
@@ -61,8 +74,6 @@
             });
         });
 
-
-
         let subjects = {!! $subjects !!};
         let teachers = {!! $teachers !!};
         let groups = {!! $groups !!};
@@ -70,10 +81,19 @@
         new Vue({
             el: '#group',
             data:{
-
+                subject: subjects,
+                teacher: teachers,
+                group: groups
             },
-            methods:{
-
+            methods: {
+                search: function (event) {
+                    var that = this; //data
+                    var value = event.target.value;
+                    console.log(value);
+                    return this.subject.filter(function (value) {
+                        return value.name.indexOf(that.name) >= 0;
+                    })
+                }
             }
 
         });
