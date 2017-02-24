@@ -227,6 +227,8 @@
                 },
                 status() {
                     let attendances = this.attendances.filter(x => x.status === 'A');
+                    if (attendances.length === this.hours.length && this.hours.length > 0) this.allStatus = 'A';
+                    else this.allStatus = '';
                     return attendances ? att_status[attendances.length - 1] : '';
                 }
             }
