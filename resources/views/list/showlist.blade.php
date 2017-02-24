@@ -112,8 +112,8 @@
         </div><!--/tab-content-->
     </div><!--/container-->
     <script id="popupTemplate" type="text/template">
-        <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : tdClass">
-            <span v-if="!loading">@{{ status }}</span>
+        <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : ''">
+            <span v-if="!loading">@{{ status() }}</span>
             <img v-if="loading" src="{{URL::to('images/rolling.svg')}}" alt="">
             <div id="popupAttendance" v-if="showPopup" class="popover right popup-attendance">
                 <div class="arrow"></div>
@@ -158,14 +158,13 @@
         let days_hours = {!! $days_hours->toJSON() !!};
         let previous = null;
         let school_month = {{$current_month->id}};
+        let att_status = ['A', 'B', 'C', 'D', 'E'];
 
         Vue.component('attendance', {
             template: '#popupTemplate',
             data() {
               return {
                   showPopup: false,
-                  tdClass: '',
-                  status: '',
                   allStatus: '',
                   hours: [],
                   loading: false
@@ -182,7 +181,6 @@
                 setAllAttendance(status) {
                     let self = this;
                     this.loading = true;
-                    console.log(this.attendances);
                     axios.post('/storeAttendances', {
                         day_id: self.dayId,
                         status: status,
@@ -193,19 +191,18 @@
                     }).then(function (response) {
                         self.loading = false;
                         let data = response.data;
+                        self.attendances.forEach((a) => {
+                            a.status = status;
+                        });
                         Array.prototype.push.apply(self.attendances, data.attendances);
                     });
 
-                    if (status === 'A') this.tdClass = 'success';
-                    if (status === 'F') this.tdClass = 'danger';
-                    if (status === 'R') this.tdClass = 'warning';
                     this.allStatus = status;
-                    this.status = status;
                     this.showPopup = false
                 },
                 checkAttendance(hour, stat) {
                     let att = this.attendances.find(x => x.hour === hour.id);
-                    if(att && att.status === stat) return 'active';
+                    if (att && att.status === stat) return 'active';
                     return 'status-buttons';
                 },
                 setAttendance(hour, stat) {
@@ -221,21 +218,16 @@
                     }).then(function (response) {
                         self.loading = false;
                         let data = response.data;
-                        if(data.attendance) self.attendances.push(data.attendance);
+                        if (data.attendance) self.attendances.push(data.attendance);
                         else {
                             let att = self.attendances.find(x => x.id === data.id);
                             att.status = stat;
                         }
-
                     });
-                }
-            },
-            created() {
-                if(this.attendances.length > 0) {
-                    let found = this.attendances.filter(x => x.status === 'A' || x.status === 'R');
-                    let attCount = found ? found.length : 0;
-                    let hoursCount = (days_hours.find(x => x.day === this.day - 1)).hours.length;
-                    this.status = attCount + '/' + hoursCount;
+                },
+                status() {
+                    let attendances = this.attendances.filter(x => x.status === 'A');
+                    return attendances ? att_status[attendances.length - 1] : '';
                 }
             }
         });
