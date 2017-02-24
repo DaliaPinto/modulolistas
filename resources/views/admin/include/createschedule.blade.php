@@ -28,12 +28,11 @@
 <div class="col-xs-10">
     <div id='group' class="row" style="margin-bottom: 20px">
         Horario asignado al grupo
-        <input type="text" v-on:keydown="search" placeholder="&#xF002; Elija Grupo" class="font-awe input-txt"/>
-        <ul class="dropdown-menu">
-            <li v-for="s in subjects" v-bind:value="s.id">
+        <input type="text" @keyup="search" placeholder="&#xF002; Elija Grupo" class="font-awe input-txt"/>
+        <ul>
+            <li v-for="s in subjects">
                 @{{ s.name }}
             </li>
-            <li role="separator" class="divider"></li>
         </ul>
     </div>
     <table id="schedule-table" class="table">
@@ -82,12 +81,15 @@
         new Vue({
             el: '#group',
             data:{
-                subject: subjects
+                subject: subjects,
+                teacher: teachers,
+                group: groups
             },
             methods: {
-                search: function () {
-                    console.log(this);
-                    var that = this;
+                search: function (event) {
+                    var that = this; //data
+                    var value = event.target.value;
+                    console.log(value);
                     return this.subject.filter(function (value) {
                         return value.name.indexOf(that.name) >= 0;
                     })
