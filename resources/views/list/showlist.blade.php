@@ -226,10 +226,20 @@
                     });
                 },
                 status() {
-                    let attendances = this.attendances.filter(x => x.status === 'A');
-                    if (attendances.length === this.hours.length && this.hours.length > 0) this.allStatus = 'A';
+                    let a = 0, f = 0, r = 0;
+                    this.attendances.forEach((att) => {
+                        if(att.status === 'A') a++;
+                        if(att.status === 'F') f++;
+                        if(att.status === 'R') r++;
+                    });
+                    if(a === this.hours.length && this.hours.length > 0) this.allStatus = 'A';
+                    else if(f === this.hours.length && this.hours.length > 0) this.allStatus = 'F';
+                    else if(r === this.hours.length && this.hours.length > 0) this.allStatus = 'R';
                     else this.allStatus = '';
-                    return attendances ? att_status[attendances.length - 1] : '';
+
+                    if(a > 0) return att_status[a - 1];
+                    else if(f === this.hours.length && this.hours.length > 0) return 'F';
+
                 }
             }
         });
