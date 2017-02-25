@@ -129,7 +129,7 @@
                         {{--display: flex; flex-direction: row; justify-content: space-between;--}}
                         <div class="col-md-7" style="text-align: left;">
                             <a type="button" @click.stop="setAllAttendance('A')" class="btn btn-success" :class="allStatus === 'A' ? 'active' : 'status-buttons'">A</a>
-                            <a type="button" @click.stop="setAllAttendance('F')" class="btn btn-danger" :class="allStatus === 'F' ? 'active' : 'status-buttons'">F</a>
+                            <a type="button" @click.stop="setAllAttendance('F')" class="btn btn-danger" :class="allStatus === 'F' ? 'active' : 'status-buttons'">/</a>
                             <a type="button" @click.stop="setAllAttendance('R')" class="btn btn-warning" :class="allStatus === 'R' ? 'active' : 'status-buttons'">R</a>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="col-md-7" style="text-align: left;">
                             <a type="button" @click.stop="setAttendance(hour, 'A')" :class="checkAttendance(hour, 'A')" class="btn btn-success">A</a>
-                            <a type="button" @click.stop="setAttendance(hour, 'F')" :class="checkAttendance(hour, 'F')" class="btn btn-danger">F</a>
+                            <a type="button" @click.stop="setAttendance(hour, 'F')" :class="checkAttendance(hour, 'F')" class="btn btn-danger">/</a>
                             <a type="button" @click.stop="setAttendance(hour, 'R')" :class="checkAttendance(hour, 'R')" class="btn btn-warning">R</a>
                         </div>
                     </div>
@@ -160,6 +160,8 @@
         let school_month = {{$current_month->id}};
         let att_status = ['A', 'B', 'C', 'D', 'E'];
         let as_re = true;
+        let un_re = false;
+        let as_un_re = 'A';
 
         Vue.component('attendance', {
             template: '#popupTemplate',
@@ -196,7 +198,6 @@
                         });
                         Array.prototype.push.apply(self.attendances, data.attendances);
                     });
-
                     this.allStatus = status;
                     this.showPopup = false
                 },
@@ -238,11 +239,24 @@
                     else this.allStatus = '';
 
                     if(a > 0 && r === 0) return att_status[a - 1];
-                    else if(f === this.hours.length && this.hours.length > 0) return 'F';
+                    else if(f === this.hours.length && this.hours.length > 0) return '/';
                     else if(r === this.hours.length && this.hours.length > 0) return 'R';
                     else if(a > 0 && r > 0) {
                         if(as_re) return att_status[a - 1];
                         else return 'R';
+                    }
+                    else if(a === 0 && r > 0 && f > 0) {
+                        if(un_re) return '/';
+                        else return 'R';
+                    }
+                    else if(a > 0 && r > 0 && f > 0) {
+                        return as_un_re;
+                    }
+                    else if(a === 0 && r > 0 && f === 0) {
+                        return 'R';
+                    }
+                    else if(a === 0 && r === 0 && f > 0) {
+                        return '/';
                     }
                 }
             },
