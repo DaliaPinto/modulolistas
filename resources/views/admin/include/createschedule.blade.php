@@ -87,11 +87,10 @@
             },
             methods: {
                 search: function (event) {
-                    var that = this; //data
-                    var value = event.target.value;
-                    console.log(value);
+                    let self = this; //data
+                    let value = event.target.value;
                     return this.subject.filter(function (value) {
-                        return value.name.indexOf(that.name) >= 0;
+                        return value.name.indexOf(self.name) >= 0;
                     })
                 }
             }

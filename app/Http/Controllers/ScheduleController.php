@@ -128,7 +128,7 @@ class ScheduleController extends Controller
 
         $teachers = Teacher::all();
         $subjects = Subject::all();
-        $groups = Group::where('career_id', 1)->get();
+        $groups = Group::where([['career_id', 1],['period_id', $period->id]])->get();
 
 
         //hours is an array by hours (this registered in seeds)
