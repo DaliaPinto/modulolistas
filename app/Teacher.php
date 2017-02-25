@@ -31,4 +31,8 @@ class Teacher extends Model
     public function user() {
         return $this->hasOne('App\User');
     }
+
+    public function configuration() {
+        return $this->hasOne('App\TeacherConfiguration');
+    }
 }

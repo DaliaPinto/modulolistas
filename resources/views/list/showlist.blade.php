@@ -153,15 +153,17 @@
 @endsection
 
 @section('javascript')
-
+    @php
+        $config = \Illuminate\Support\Facades\Auth::user()->teacher->configuration;
+    @endphp
     <script>
         let days_hours = {!! $days_hours->toJSON() !!};
         let previous = null;
         let school_month = {{$current_month->id}};
         let att_status = ['A', 'B', 'C', 'D', 'E'];
-        let as_re = true;
-        let un_re = false;
-        let as_un_re = 'A';
+        let at_de = {{$config->at_de ? 'true' : 'false'}};
+        let no_de = {{$config->no_de ? 'true' : 'false'}};
+        let at_no_de = '{{$config->at_no_de}}';
 
         Vue.component('attendance', {
             template: '#popupTemplate',
@@ -242,15 +244,15 @@
                     else if(f === this.hours.length && this.hours.length > 0) return '/';
                     else if(r === this.hours.length && this.hours.length > 0) return 'R';
                     else if(a > 0 && r > 0) {
-                        if(as_re) return att_status[a - 1];
+                        if(at_de) return att_status[a - 1];
                         else return 'R';
                     }
                     else if(a === 0 && r > 0 && f > 0) {
-                        if(un_re) return '/';
+                        if(no_de) return '/';
                         else return 'R';
                     }
                     else if(a > 0 && r > 0 && f > 0) {
-                        return as_un_re;
+                        return at_no_de;
                     }
                     else if(a === 0 && r > 0 && f === 0) {
                         return 'R';
