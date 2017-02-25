@@ -110,6 +110,38 @@
                 @endif
             </div><!--/tabpanel-->
         </div><!--/tab-content-->
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Cuando asistencia y retraso, poner asistencia?</label>
+                <div class="col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" v-model="at_de"> @{{ at_de ? 'Si' : 'No' }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Cuando falta y retraso, poner falta?</label>
+                <div class="col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" v-model="no_de"> @{{ no_de ? 'Si' : 'No' }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">Cuando falta, retraso y asistencia, poner</label>
+                <div class="col-sm-10">
+                    <select class="form-control" v-model="at_no_de">
+                        <option value="A">A</option>
+                        <option value="/">/</option>
+                        <option value="R">R</option>
+                    </select>
+                </div>
+            </div>
+        </form>
     </div><!--/container-->
     <script id="popupTemplate" type="text/template">
         <td v-on:click="showAttendancePopup" class="text-center attendance-td" :class="showPopup ? 'info' : ''">
@@ -164,6 +196,8 @@
         let at_de = {{$config->at_de ? 'true' : 'false'}};
         let no_de = {{$config->no_de ? 'true' : 'false'}};
         let at_no_de = '{{$config->at_no_de}}';
+
+        let event_bus = new Vue();
 
         Vue.component('attendance', {
             template: '#popupTemplate',
@@ -243,7 +277,7 @@
                     if(a > 0 && r === 0) return att_status[a - 1];
                     else if(f === this.hours.length && this.hours.length > 0) return '/';
                     else if(r === this.hours.length && this.hours.length > 0) return 'R';
-                    else if(a > 0 && r > 0) {
+                    else if(a > 0 && r > 0 && f === 0) {
                         if(at_de) return att_status[a - 1];
                         else return 'R';
                     }
@@ -264,10 +298,35 @@
             },
             created() {
                 this.hours = (days_hours.find(x => x.day === this.day - 1)).hours;
+                let self = this;
+                event_bus.$on('changed', function () {
+                    self.status();
+                });
             }
         });
         new Vue({
-            el: '#attendance-app'
+            el: '#attendance-app',
+            data() {
+                return {
+                    at_de: at_de,
+                    no_de: no_de,
+                    at_no_de: at_no_de
+                }
+            },
+            watch: {
+                'at_de': function (val) {
+                    at_de = val;
+                    event_bus.$emit('changed');
+                },
+                'no_de': function (val) {
+                    no_de = val;
+                    event_bus.$emit('changed');
+                },
+                'at_no_de': function (val) {
+                    at_no_de = val;
+                    event_bus.$emit('changed');
+                }
+            }
         })
     </script>
 @endsection
