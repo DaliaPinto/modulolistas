@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
+    <script src="{{URL::to('js/axios.js')}}"></script>
     <script src="{{URL::to('js/vue.min.js')}}"></script>
     <style>
         .navigation{

@@ -1,7 +1,5 @@
 @include('admin.include.createperiod')
 @section('head')
-    <link href="/css/jquery/jquery-ui.css" rel="stylesheet">
-    <script src="{{URL::to('js/vue.js')}}"></script>
     <style>
         .font-awe {
             font-family: 'Roboto', FontAwesome, sans-serif;
@@ -25,8 +23,8 @@
     </div>
 </div>
 <!--Header table schedules-->
-<div class="col-xs-10">
-    <div id='group' class="row" style="margin-bottom: 20px">
+<div class="col-xs-10" id='schedules'>
+    <div class="row" style="margin-bottom: 20px">
         Horario asignado al grupo
         <input type="text" @keyup="search" placeholder="&#xF002; Elija Grupo" class="font-awe input-txt"/>
         <ul>
@@ -51,35 +49,74 @@
         <tr>
             <td class="border-div txt-align-center">{{ $hour->hour }}</td>
             @for($i=0; $i<5; $i++)
-                <td class="border-div txt-align-center">
-                    <input type="text" placeholder="&#xF002; Elija Docente" class="font-awe teacher input-txt"/>
-                    <input type="text" placeholder="&#xF002; Elija Materia" class="font-awe subject input-txt"/>
-                </td>
+                <td is="search-schedule"></td>
             @endfor
         </tr>
     @endforeach
     </tbody>
 </table>
 </div>
-@section('javascript')
-    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
-    <script src="{{URL::to('/js/jquery/jquery-ui.js')}}" type="text/javascript"></script>
 
+<script id="searchTemplate" type="text/template">
+    <td class="border-div txt-align-center">
+        <div v-if="search">Cargando...</div>
+        <input type="text" placeholder="&#xF002; Elija Docente" v-model="teacher" class="font-awe teacher input-txt"/>
+        <input type="text" placeholder="&#xF002; Elija Materia" class="font-awe subject input-txt"/>
+        <ul>
+            <li v-for="teach in teachers" @click="showTeacher(teach)">
+                @{{teach.name + teach.last_name}}
+            </li>
+        </ul>
+    </td>
+</script>
+@section('javascript')
+    {{--<script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>--}}
+    {{--<script src="{{URL::to('/js/jquery/jquery-ui.js')}}" type="text/javascript"></script>--}}
     <script>
         //datepicker
-        $(function() {
+        /*$(function() {
             $("#datepicker-start, #datepicker-end").datepicker({
                 dateFormat: 'yy-mm-dd'
             });
-        });
+        });*/
 
         let subjects = {!! $subjects !!};
         let teachers = {!! $teachers !!};
         let groups = {!! $groups !!};
 
+
+        Vue.component('search-schedule', {
+            template: '#searchTemplate',
+            data() {
+                return {
+                    search: false,
+                    teacher: '',
+                    teachers: []
+                }
+            },
+            methods: {
+                showTeacher(t) {
+                    this.teacher = t.name + ' ' + t.last_name + ' ' + t.middle_name;
+                }
+            },
+            watch: {
+                'teacher': function (val) {
+                    let self = this;
+                    console.log(val);
+                    axios.post('/getTeachersByName', {
+                        valor: val
+                    }).then((response) => {
+                        console.log(response.data);
+                        self.teachers = response.data.teachers;
+                    });
+                }
+            }
+        });
+
+
         new Vue({
-            el: '#group',
+            el: '#schedules',
             data:{
                 subject: subjects,
                 teacher: teachers,

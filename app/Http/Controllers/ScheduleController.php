@@ -6,6 +6,7 @@ use App\SchoolMonth;
 use App\Subject;
 use App\Teacher;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Schedule;
 use App\Period;
@@ -162,6 +163,13 @@ class ScheduleController extends Controller
 
         return response()->json(['status' => 0,
             'message' => 'Hora guardada'], 200);
+    }
+
+    public function getTeacherByName(Request $request) {
+        $teachers = Teacher::where('name', 'LIKE', '%'.$request['valor'].'%')->orWhere('last_name', 'LIKE', '%'.$request['valor'].'%')
+            ->orWhere('middle_name', 'LIKE', '%'.$request['valor'].'%')->get();
+
+        return response()->json(['status' => 0, 'teachers' => $teachers]);
     }
 
 
