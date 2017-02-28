@@ -17,7 +17,7 @@ class AttendanceController extends Controller
 {
 
     public $SPANISH_MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-    public $DAYS = ['L', 'M', 'X', 'J', 'V'];
+    public $DAYS = ['Lun', 'Mar', 'Mier', 'Jue', 'Vie'];
     /**
      * Store a newly created resource in storage.
      *

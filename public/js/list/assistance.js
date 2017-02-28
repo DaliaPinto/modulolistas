@@ -10,6 +10,8 @@
 $('#new-incidence').on('click', function (){
     $('#myModal').modal();
 });
+
+
 /**
  *onload dates in select
  */

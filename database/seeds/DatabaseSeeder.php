@@ -23,10 +23,11 @@ class DatabaseSeeder extends Seeder
         //$this->call(GroupStudentTableSeeder::class);
         //$this->call(DaysTableSeeder::class);
         //$this->call(HourSchedulesTableSeeder::class);
-        $this->call(CareersTableSeeder::class);
+        //$this->call(CareersTableSeeder::class);
         $this->call(SchoolMonthsSeeder::class);
-        $this->call(GeneralSeeder::class);
+        //$this->call(GeneralSeeder::class);
         $this->call(SchedulesTableSeeder::class);
+        $this->call(ConfigurationTableSeeder::class);
 
     }
 }

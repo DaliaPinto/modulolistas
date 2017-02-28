@@ -19,7 +19,7 @@ class StudentController extends Controller
 
         $students->each(function ($row){
             $n_students = new Student();
-            $n_students->id = $row->matricula;
+            $n_students->serial_number = $row->matricula;
             $n_students->name = $row->nombre;
             $n_students->last_name = $row->primer_apellido;
             $n_students->middle_name = $row->segundo_apellido;

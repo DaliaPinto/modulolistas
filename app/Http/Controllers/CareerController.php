@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\GroupStudent;
-use App\ListAssistance;
+use App\Student;
 use Illuminate\Http\Request;
 use App\Career;
 use App\Group;
@@ -28,10 +28,6 @@ class CareerController extends Controller
         //get the actual period
         $actual_period = Period::where('start_date','<=', $today->toDateString())
                                 ->where('end_date', '>=', $today->toDateString())->first();
-
-        //get the actual period
-        $actual_month = ListAssistance::where('start_date','<=', $today->toDateString())
-                                      ->where('end_date', '>=', $today->toDateString())->first();
 
         //group data by career
         $careers = $students->groupBy('carrera');
@@ -60,18 +56,36 @@ class CareerController extends Controller
                         $n_group->shift = 'V';
                     }
                     $n_group->grade = $group_array[0];
-                    $n_group->group = $keyG;
+                    $n_group->group = $group_array[2];
                     $n_group->period_id = $actual_period->id;
                     $n_group->career_id = $n_career->id;
                     $n_group->save();
                 }
                 //get the student id
-                $n_id = $group->pluck('matricula');
+                $n_serial = $group->pluck('matricula');
+                $n_status = $group->pluck('situacion');
+                $n_name = $group->pluck('nombre');
+                $n_first = $group->pluck('primer_apellido');
+                $n_middle = $group->pluck('segundo_apellido');
+
                 for ($i=0; $i< count($group); $i++){
+
+                    $n_students = new Student();
+                    $n_students->serial_number = $n_serial[$i];
+                    $n_students->name = $n_name[$i];
+                    $n_students->last_name = $n_first[$i];
+                    $n_students->middle_name = $n_middle[$i];
+                    if($n_status[$i] == 'Regular'){
+                        $n_students->status = 'R';
+                    }else{
+                        $n_students->status = 'I';
+                    }
+                    $n_students->save();
+
+
                     $n_student = new GroupStudent();
                     $n_student->group_id = $n_group->id;
-                    $n_student->student_id = $n_id[$i];
-                    $n_student->list_assistance_id = $actual_month->id;
+                    $n_student->student_id = $n_students->id;
                     $n_student->save();
                     //echo collect(['group'=> $keyG, 'num_student' => $n_id[$i]])->toJson();
                 }

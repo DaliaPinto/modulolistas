@@ -89,19 +89,19 @@
         @yield('content')
     </div>
     <!-- Scripts -->
-    {{--<script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>--}}
+    <script src="{{URL::to('/js/jquery-min/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery/jquery-1.10.2.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/jquery-min/jquery-migrate-1.2.1.min.js')}}" type="text/javascript"></script>
 
-    {{--<!--Script for validation form-->--}}
-    {{--<script src="{{URL::to('/js/jquery.validate.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>--}}
-    {{--<!--Script for date format-->--}}
-    {{--<script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{URL::to('/js/locale.js')}}" type="text/javascript"></script>--}}
+    <!--Script for validation form-->
+    <script src="{{URL::to('/js/jquery.validate.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/validation.js')}}" type="text/javascript"></script>
+    <!--Script for date format-->
+    <script src="{{URL::to('/js/moment.min.js')}}" type="text/javascript"></script>
+    <script src="{{URL::to('/js/locale.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
-        /*$(document).ready(function() {
+        $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
             curDate();
         });
@@ -109,7 +109,7 @@
         function curDate(){
             var today = moment(new Date());
             $('#is-today').text('Hoy es: '+today.format('dddd, D MMMM YYYY, h:mm:ss a'));
-        }*/
+        }
     </script>
     @yield('javascript')
 </body>
